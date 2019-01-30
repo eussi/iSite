@@ -1,0 +1,20 @@
+server:
+  port: 8080
+spring:
+  profiles:
+    active: @profileActive@
+
+
+# 注入给SiteOptions
+# site.options.theme: [default|classic]
+site:
+    version: 1.0
+    theme: classic
+    controls:
+        register: true
+        comment: true
+    # 系统默认配置, 启动后 mto_options 的配置将覆盖此属性
+    options:
+        theme: classic
+        storage_max_width: 800
+        storage_limit_size: 2
