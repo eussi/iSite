@@ -13,8 +13,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commons.lang>2.6</commons.lang>
         <commons.lang3>3.6</commons.lang3>
+        <commons.io>1.3.2</commons.io>
+        <commons.text>1.3</commons.text>
+        <coobird.thumbnailator>0.4.8</coobird.thumbnailator>
         <lombok.version>1.18.4</lombok.version>
         <mysql.connector>5.1.38</mysql.connector>
+        <shiro>1.4.0</shiro>
         <druid.spring.boot>1.1.10</druid.spring.boot>
         <mybaits.version>3.4.4</mybaits.version>
         <mybatis.spring.boot>1.3.2</mybatis.spring.boot>
@@ -49,6 +53,22 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons.lang3}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>${commons.text}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>${coobird.thumbnailator}</version>
+        </dependency>
 
         <!-- database -->
         <dependency>
@@ -74,6 +94,28 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+        <!-- shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>${shiro}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring-boot-web-starter</artifactId>
+            <version>${shiro}</version>
         </dependency>
 
         <dependency>

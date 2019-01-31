@@ -29,6 +29,10 @@ public class Page<T> extends BaseDomain implements Serializable {
 		this(0, DEFAULT_PAGE_SIZE, 0, 0, new ArrayList());
 	}
 
+    public Page(int pageNo, int pageSize) {
+        this((pageNo-1) * pageSize, pageSize, 0, 0, new ArrayList());
+    }
+
     /**
      * 构造方法
      *

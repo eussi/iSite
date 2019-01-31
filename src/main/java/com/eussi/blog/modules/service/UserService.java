@@ -1,6 +1,7 @@
 package com.eussi.blog.modules.service;
 
 import com.eussi.blog.base.modules.Page;
+import com.eussi.blog.modules.vo.AccountProfile;
 import com.eussi.blog.modules.vo.UserVO;
 
 import java.util.Map;
