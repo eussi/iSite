@@ -27,13 +27,17 @@ spring:
 # 注入给SiteOptions
 # site.options.theme: [default|classic]
 site:
-    version: 1.0
-    theme: classic
+    version: 1.0.0
+    theme: default
     controls:
         register: true
         comment: true
     # 系统默认配置, 启动后 mto_options 的配置将覆盖此属性
     options:
-        theme: classic
+        theme: default
+        site_name: wangxueming's site
+        site_keywords: blog
+        site_metas:
+        site_description: A freewheeling website
         storage_max_width: 800
         storage_limit_size: 2
