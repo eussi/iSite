@@ -1,6 +1,7 @@
 package com.eussi.blog.config;
 
 
+import com.eussi.blog.modules.freemarker.directive.ContentsDirective;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateModelException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,6 @@ public class FreemarkerConfig {
 
     @PostConstruct
     public void setSharedVariable() throws TemplateModelException {
+        configuration.setSharedVariable("contents", applicationContext.getBean(ContentsDirective.class));
     }
 }
