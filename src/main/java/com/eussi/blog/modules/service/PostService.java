@@ -10,7 +10,7 @@ import java.util.Set;
 
 /**
  * 文章管理
- * @author langhsu
+ * @author wangxm 2019-2-7
  *
  */
 public interface PostService {

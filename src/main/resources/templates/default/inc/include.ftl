@@ -25,7 +25,7 @@ ${options['site_metas']}
 
 
 <script type="text/javascript">
-    var _base_path = '${base}';
+    var _base_path = '${base}';<!-- sea.config.js用于加载相关模块-->
 
     window.app = {
         base: '${base}',

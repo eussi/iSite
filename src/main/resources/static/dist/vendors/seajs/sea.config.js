@@ -1,6 +1,7 @@
 seajs.config({
     alias: {
-        'plugins': 'dist/js/plugins',
+        /* jquery plugin */
+        'plugins': 'dist/vendors/jquery/plugins',
 
             /* modules */
         'main': 'dist/js/modules/main',
@@ -16,18 +17,19 @@ seajs.config({
 
         /* vendors */
         'pace': 'vendors/pace/pace.min',
-        'pjax': 'vendors/pjax/jquery.pjax',
-        'validate': 'vendors/validate/jquery-validate',
-        'lazyload': 'vendors/lazyload/jquery.lazyload',
+        /*'pjax': 'vendors/pjax/jquery.pjax',*/
+        'validate': 'vendors/jquery/jquery-validate',
+        'lazyload': 'vendors/jquery/jquery.lazyload',
         'share': 'vendors/share.js/js/social-share.min.js',
 
         'highlight':'vendors/highlight/highlight.pack',
         "tinymce": "vendors/tinymce/tinymce.min",
-        "form": "dist/js/jquery.form.min"
+        "form": "vendors/jquery/jquery.form.min"
     },
 
     // 路径配置
     paths: {
+        /*当目录比较深，或需要跨目录调用模块时，可以使用 paths 来简化书写。*/
         'vendors': _base_path + '/dist/vendors',
         'dist': _base_path + '/dist',
         'default': _base_path + '/theme/default'
