@@ -2,6 +2,7 @@ package com.eussi.blog;
 
 import com.eussi.blog.base.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableCaching
 @EnableTransactionManagement
+@MapperScan("com.eussi.blog.modules.repository")
 public class BootApplication {
 
     /**

@@ -1,7 +1,9 @@
 package com.eussi.blog.modules.service.impl;
 
 import com.eussi.blog.modules.po.Channel;
+import com.eussi.blog.modules.repository.ChannelRepository;
 import com.eussi.blog.modules.service.ChannelService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,9 +17,11 @@ import java.util.Map;
 @Service
 @Transactional(readOnly = true)
 public class ChannelServiceImpl implements ChannelService {
+    @Autowired
+    private ChannelRepository channelRepository;
     @Override
     public List<Channel> findAll(int status) {
-        return null;
+        return channelRepository.findAllByStatus(status);
     }
 
     @Override
