@@ -13,7 +13,7 @@
                         var _hmt = _hmt || [];
                         (function() {
                             var hm = document.createElement("script");
-                            hm.src = "//hm.baidu.com/hm.js?a029e6c6dddf427f4cbfb2b00d7d5311";
+                            hm.src = "";
                             var s = document.getElementsByTagName("script")[0];
                             s.parentNode.insertBefore(hm, s);
                         })();
