@@ -1,10 +1,12 @@
 package com.eussi.blog.modules.vo;
 
+import com.eussi.blog.base.modules.BaseDomain;
+
 /**
  * 第三方开发授权登录
  * @author wangxm on 2019/1/30.
  */
-public class OpenOauthVO {
+public class OpenOauthVO extends BaseDomain {
     private long id;
 
     private long userId; // 系统中的用户ID

@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableCaching
 @EnableTransactionManagement
-@MapperScan("com.eussi.blog.modules.repository")
+@MapperScan("com.eussi.blog.modules.dao")
 public class BootApplication {
 
     /**

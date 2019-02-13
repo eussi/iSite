@@ -1,52 +1,43 @@
 package com.eussi.blog.modules.po;
 
+public class Options {
+    private Long id;
 
-import com.eussi.blog.base.modules.BaseDomain;
+    private String key;
 
-/**
- * 系统配置
- * @author wangxm
- *
- */
-public class Options extends BaseDomain {
-	private long id;
-	
-	private int type;
-	
-	private String key;
-	
-	private String value;
+    private String type;
 
-	public long getId() {
-		return id;
-	}
+    private String value;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public int getType() {
-		return type;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setType(int type) {
-		this.type = type;
-	}
+    public String getKey() {
+        return key;
+    }
 
-	public String getKey() {
-		return key;
-	}
+    public void setKey(String key) {
+        this.key = key == null ? null : key.trim();
+    }
 
-	public void setKey(String key) {
-		this.key = key;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public String getValue() {
-		return value;
-	}
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
+    }
 
-	public void setValue(String value) {
-		this.value = value;
-	}
-	
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value == null ? null : value.trim();
+    }
 }

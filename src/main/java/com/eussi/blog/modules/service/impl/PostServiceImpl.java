@@ -1,15 +1,16 @@
 package com.eussi.blog.modules.service.impl;
 
+import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.modules.Page;
+import com.eussi.blog.modules.dao.PostMapper;
+import com.eussi.blog.modules.po.Post;
 import com.eussi.blog.modules.service.PostService;
 import com.eussi.blog.modules.vo.PostVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by wangxueming on 2019/2/7.
@@ -17,8 +18,51 @@ import java.util.Set;
 @Service
 @Transactional(readOnly = true)
 public class PostServiceImpl implements PostService {
+    @Autowired
+    private PostMapper postMapper;
+
     @Override
     public Page<PostVO> paging(Page page, int channelId, Set<Integer> excludeChannelIds, String ord) {
+        Post postQuery = new Post();
+
+        StringBuilder orderBySb = new StringBuilder();
+        if (Consts.order.FAVOR.equals(ord)) {
+            orderBySb.append(" favors desc");
+        } else if (Consts.order.HOTTEST.equals(ord)) {
+            orderBySb.append(" comments desc");
+        } else {
+            orderBySb.append(" weight desc");
+        }
+        orderBySb.append(", created desc");
+
+        if (Consts.order.HOTTEST.equals(ord)) {
+            orderBySb.append(", views desc");
+        }
+
+        postQuery.setOrderBy(orderBySb.toString());
+
+        if (channelId > Consts.ZERO) {
+            postQuery.setChannelId(channelId);
+        }
+
+        if (null != excludeChannelIds && !excludeChannelIds.isEmpty()) {
+            StringBuilder notInSb = new StringBuilder(" channelId not in (");
+            for(Integer chanelId : excludeChannelIds) {
+                notInSb.append(chanelId + ", ");
+            }
+            postQuery.setNotIn(notInSb.toString().
+                    substring(0, notInSb.toString().length() - 1).
+                    concat(") "));
+        }
+
+        //得到总记录数
+        Long totalCount = postMapper.getTotalCount(postQuery);
+
+        //得到总页数
+
+        //得到记录数
+
+
         return null;
     }
 

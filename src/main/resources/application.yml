@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
 spring:
   profiles:
     active: @profileActive@
@@ -46,3 +46,7 @@ site:
         site_description: A freewheeling website
         storage_max_width: 800
         storage_limit_size: 2
+
+logging:
+    level:
+        com.eussi.blog.modules.dao: DEBUG

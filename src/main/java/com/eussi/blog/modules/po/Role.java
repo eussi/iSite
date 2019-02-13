@@ -1,17 +1,8 @@
 package com.eussi.blog.modules.po;
 
-import com.eussi.blog.base.modules.BaseDomain;
-
-import java.io.Serializable;
 import java.util.List;
 
-/**
- * 角色
- * @author wangxm
- *
- */public class Role extends BaseDomain implements Serializable {
-    private static final long serialVersionUID = -1153854616385727165L;
-
+public class Role {
     public static int STATUS_NORMAL = 0;
     public static int STATUS_CLOSED = 1;
 
@@ -19,30 +10,22 @@ import java.util.List;
 
     public static long ADMIN_ID = 1;
 
-    private long id;
-
-    private String name;
+    private Long id;
 
     private String description;
 
-    private int status;
+    private String name;
+
+    private Integer status;
 
     private List<Permission> permissions;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
@@ -50,7 +33,23 @@ import java.util.List;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description == null ? null : description.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public List<Permission> getPermissions() {
@@ -60,13 +59,4 @@ import java.util.List;
     public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
     }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
 }

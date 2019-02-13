@@ -1,92 +1,75 @@
 package com.eussi.blog.modules.po;
 
-import com.eussi.blog.base.modules.BaseDomain;
-
 import java.util.Date;
 
-/**
- * 评论
- * @author wangxm
- *
- */
-public class Comment extends BaseDomain {
-	private long id;
+public class Comment {
+    private Long id;
 
-	/**
-	 * 所属内容ID
-	 */
-	private long toId;
+    private Long authorId;
 
-	/**
-	 * 父评论ID
-	 */
-	private long pid;
+    private String content;
 
-	/**
-	 * 评论内容
-	 */
-	private String content;
-	
-	private Date created;
-	
-	private long authorId;
-	
-	private int status;
+    private Date created;
 
-	public long getId() {
-		return id;
-	}
+    private Long pid;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    private Integer status;
 
-	public long getToId() {
-		return toId;
-	}
+    private Long toId;
 
-	public void setToId(long toId) {
-		this.toId = toId;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
-	
-	public Date getCreated() {
-		return created;
-	}
+    public Long getAuthorId() {
+        return authorId;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
 
-	public long getAuthorId() {
-		return authorId;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setAuthorId(long authorId) {
-		this.authorId = authorId;
-	}
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
 
-	public int getStatus() {
-		return status;
-	}
+    public Date getCreated() {
+        return created;
+    }
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
-	public long getPid() {
-		return pid;
-	}
+    public Long getPid() {
+        return pid;
+    }
 
-	public void setPid(long pid) {
-		this.pid = pid;
-	}
+    public void setPid(Long pid) {
+        this.pid = pid;
+    }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Long getToId() {
+        return toId;
+    }
+
+    public void setToId(Long toId) {
+        this.toId = toId;
+    }
 }

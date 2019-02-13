@@ -49,7 +49,7 @@ public class ContentsDirective extends TemplateDirective {
             }
         }
 
-        Page page = new Page(pn - 1, size);
+        Page page = new Page(pn, size);
         Page<PostVO> result = postService.paging(page, channelId, excludeChannelIds, order);
 
         handler.put(RESULTS, result).render();

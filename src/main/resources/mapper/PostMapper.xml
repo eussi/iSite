@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eussi.blog.modules.dao.PostMapper">
+  <resultMap id="BaseResultMap" type="com.eussi.blog.modules.po.Post">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="author_id" jdbcType="BIGINT" property="authorId" />
+    <result column="channel_id" jdbcType="INTEGER" property="channelId" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="favors" jdbcType="INTEGER" property="favors" />
+    <result column="featured" jdbcType="INTEGER" property="featured" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="views" jdbcType="INTEGER" property="views" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, author_id, channel_id, created, favors, featured, status, summary, tags, thumbnail, 
+    title, views, weight
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_post
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from blog_post
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.eussi.blog.modules.po.Post">
+    insert into blog_post (id, author_id, channel_id, 
+      created, favors, featured, 
+      status, summary, tags, 
+      thumbnail, title, views, 
+      weight)
+    values (#{id,jdbcType=BIGINT}, #{authorId,jdbcType=BIGINT}, #{channelId,jdbcType=INTEGER}, 
+      #{created,jdbcType=TIMESTAMP}, #{favors,jdbcType=INTEGER}, #{featured,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{thumbnail,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{views,jdbcType=INTEGER}, 
+      #{weight,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eussi.blog.modules.po.Post">
+    insert into blog_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="authorId != null">
+        author_id,
+      </if>
+      <if test="channelId != null">
+        channel_id,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="favors != null">
+        favors,
+      </if>
+      <if test="featured != null">
+        featured,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+      <if test="thumbnail != null">
+        thumbnail,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="views != null">
+        views,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="authorId != null">
+        #{authorId,jdbcType=BIGINT},
+      </if>
+      <if test="channelId != null">
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="favors != null">
+        #{favors,jdbcType=INTEGER},
+      </if>
+      <if test="featured != null">
+        #{featured,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnail != null">
+        #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="views != null">
+        #{views,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eussi.blog.modules.po.Post">
+    update blog_post
+    <set>
+      <if test="authorId != null">
+        author_id = #{authorId,jdbcType=BIGINT},
+      </if>
+      <if test="channelId != null">
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="favors != null">
+        favors = #{favors,jdbcType=INTEGER},
+      </if>
+      <if test="featured != null">
+        featured = #{featured,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnail != null">
+        thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="views != null">
+        views = #{views,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eussi.blog.modules.po.Post">
+    update blog_post
+    set author_id = #{authorId,jdbcType=BIGINT},
+      channel_id = #{channelId,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      favors = #{favors,jdbcType=INTEGER},
+      featured = #{featured,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      summary = #{summary,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      views = #{views,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getTotalCount" parameterType="com.eussi.blog.modules.po.Post" resultType="java.lang.Long">
+      select
+        count(*)
+      from blog_post
+      <where>
+          <if test="id != null">
+              and id=#{id,jdbcType=BIGINT}
+          </if>
+          <if test="authorId != null">
+              and author_id=#{authorId,jdbcType=BIGINT}
+          </if>
+          <if test="channelId != null">
+              and channel_id=#{channelId,jdbcType=INTEGER}
+          </if>
+          <if test="created != null">
+              and created= #{created,jdbcType=TIMESTAMP}
+          </if>
+          <if test="favors != null">
+              and favors= #{favors,jdbcType=INTEGER}
+          </if>
+          <if test="featured != null">
+              and featured= #{featured,jdbcType=INTEGER}
+          </if>
+          <if test="status != null">
+              and status= #{status,jdbcType=INTEGER}
+          </if>
+          <if test="summary != null">
+              and summary= #{summary,jdbcType=VARCHAR}
+          </if>
+          <if test="tags != null">
+              and tags= #{tags,jdbcType=VARCHAR}
+          </if>
+          <if test="thumbnail != null">
+              and thumbnail= #{thumbnail,jdbcType=VARCHAR}
+          </if>
+          <if test="title != null">
+              and title= #{title,jdbcType=VARCHAR}
+          </if>
+          <if test="views != null">
+              and views= #{views,jdbcType=INTEGER}
+          </if>
+          <if test="weight != null">
+              and weight= #{weight,jdbcType=INTEGER}
+          </if>
+          <if test="notIn != null">
+              and #{weight,jdbcType=VARCHAR}
+          </if>
+      </where>
+      <if test="orderBy != null">
+          order by #{orderBy,jdbcType=VARCHAR}
+      </if>
+  </select>
+</mapper>

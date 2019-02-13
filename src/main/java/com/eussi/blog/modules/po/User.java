@@ -1,154 +1,155 @@
 package com.eussi.blog.modules.po;
 
-import com.eussi.blog.base.modules.BaseDomain;
-
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * 用户信息
- *
- * @author wangxm
- *
- */
-public class User extends BaseDomain implements Serializable {
-	private static final long serialVersionUID = -3629784071225214858L;
+public class User {
+    private Long id;
 
-	private long id;
+    private String username;
 
-	private String username; // 用户名
+    private String name;
 
-	private String password; // 密码
+    private String avatar;
 
-	private String avatar;  // 头像
+    private String email;
 
-	private String name;  // 昵称
+    private String password;
 
-	private int gender;   // 性别
+    private Integer status;
 
-	private String email;  // 邮箱
+    private Date created;
 
-	private int posts; // 文章数
+    private Date updated;
 
-	private int comments; // 发布评论数
+    private Date lastLogin;
 
-	private Date created;  // 注册时间
+    private Integer gender;
 
-	private Date lastLogin;
+    private Integer roleId;
 
-	private String signature; // 个性签名
+    private Integer comments;
 
-	private int status; // 用户状态
+    private Integer posts;
 
-	public User() {
+    private String signature;
 
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public User(long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getAvatar() {
+        return avatar;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setAvatar(String avatar) {
+        this.avatar = avatar == null ? null : avatar.trim();
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
 
-	public Date getCreated() {
-		return created;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
 
-	public int getStatus() {
-		return status;
-	}
+    public Integer getStatus() {
+        return status;
+    }
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Date getCreated() {
+        return created;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
-	public Date getLastLogin() {
-		return lastLogin;
-	}
+    public Date getUpdated() {
+        return updated;
+    }
 
-	public void setLastLogin(Date lastLogin) {
-		this.lastLogin = lastLogin;
-	}
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 
-	public String getAvatar() {
-		return avatar;
-	}
+    public Date getLastLogin() {
+        return lastLogin;
+    }
 
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
 
-	public int getGender() {
-		return gender;
-	}
+    public Integer getGender() {
+        return gender;
+    }
 
-	public void setGender(int gender) {
-		this.gender = gender;
-	}
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
 
-	public int getPosts() {
-		return posts;
-	}
+    public Integer getRoleId() {
+        return roleId;
+    }
 
-	public void setPosts(int posts) {
-		this.posts = posts;
-	}
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
 
-	public int getComments() {
-		return comments;
-	}
+    public Integer getComments() {
+        return comments;
+    }
 
-	public void setComments(int comments) {
-		this.comments = comments;
-	}
+    public void setComments(Integer comments) {
+        this.comments = comments;
+    }
 
-	public String getSignature() {
-		return signature;
-	}
+    public Integer getPosts() {
+        return posts;
+    }
 
-	public void setSignature(String signature) {
-		this.signature = signature;
-	}
+    public void setPosts(Integer posts) {
+        this.posts = posts;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature == null ? null : signature.trim();
+    }
 }

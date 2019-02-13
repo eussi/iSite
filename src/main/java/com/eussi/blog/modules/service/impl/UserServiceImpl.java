@@ -1,7 +1,6 @@
 package com.eussi.blog.modules.service.impl;
 
 import com.eussi.blog.base.modules.Page;
-import com.eussi.blog.modules.repository.UserRepository;
 import com.eussi.blog.modules.service.UserService;
 import com.eussi.blog.modules.vo.AccountProfile;
 import com.eussi.blog.modules.vo.UserVO;

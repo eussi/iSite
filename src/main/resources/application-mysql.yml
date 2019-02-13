@@ -8,7 +8,7 @@ spring:
         driver-class-name: com.mysql.jdbc.Driver
         url: jdbc:mysql://localhost:3306/db_blog?useUnicode=true&characterEncoding=UTF-8
         username: root
-        password: mysql.0912
+        password: root
         type: com.alibaba.druid.pool.DruidDataSource
         #最大活跃数
         #maxActive: 20

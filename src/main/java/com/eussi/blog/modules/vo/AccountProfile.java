@@ -1,5 +1,7 @@
 package com.eussi.blog.modules.vo;
 
+import com.eussi.blog.base.modules.BaseDomain;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,7 +9,7 @@ import java.util.Date;
  * @author wangxm
  *
  */
-public class AccountProfile implements Serializable {
+public class AccountProfile extends BaseDomain implements Serializable {
     private static final long serialVersionUID = 1748764917028425871L;
     private long id;
     private String username;

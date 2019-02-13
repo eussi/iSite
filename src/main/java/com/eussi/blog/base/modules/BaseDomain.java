@@ -3,11 +3,43 @@ package com.eussi.blog.base.modules;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangxueming on 2018/1/2.
  */
 public class BaseDomain implements Serializable{
+    private String orderBy;
+
+    private String in;
+
+    private String notIn;
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public String getIn() {
+        return in;
+    }
+
+    public void setIn(String in) {
+        this.in = in;
+    }
+
+    public String getNotIn() {
+        return notIn;
+    }
+
+    public void setNotIn(String notIn) {
+        this.notIn = notIn;
+    }
+
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
         /*

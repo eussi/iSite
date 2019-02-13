@@ -1,6 +1,7 @@
 package com.eussi.blog.modules.vo;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.eussi.blog.base.modules.BaseDomain;
 import com.eussi.blog.modules.po.Role;
 
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UserVO implements Serializable {
+public class UserVO extends BaseDomain implements Serializable {
 	private static final long serialVersionUID = 107193816173103116L;
 
 	private long id;

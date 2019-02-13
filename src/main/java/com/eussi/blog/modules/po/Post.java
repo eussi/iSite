@@ -2,186 +2,136 @@ package com.eussi.blog.modules.po;
 
 import com.eussi.blog.base.modules.BaseDomain;
 
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * 内容表
- * @author wangxm
- *
- */public class Post extends BaseDomain implements Serializable {
-	private static final long serialVersionUID = 7144425803920583495L;
+public class Post extends BaseDomain{
+    private Long id;
 
-	private long id;
+    private Long authorId;
 
-	/**
-	 * 分组/模块ID
-	 */
-	private int channelId;
+    private Integer channelId;
 
-	/**
-	 * 标题
-	 */
-	private String title;
+    private Date created;
 
-	/**
-	 * 摘要
-	 */
-	private String summary;
+    private Integer favors;
 
-	/**
-	 * 预览图
-	 */
-	private String thumbnail;
+    private Integer featured;
 
-	/**
-	 * 标签, 多个逗号隔开
-	 */
-	private String tags;
+    private Integer status;
 
-	private long authorId; // 作者
+    private String summary;
 
-	private Date created;
+    private String tags;
 
-	/**
-	 * 收藏数
-	 */
-	private int favors;
+    private String thumbnail;
 
-	/**
-	 * 评论数
-	 */
-	private int comments;
+    private String title;
 
-	/**
-	 * 阅读数
-	 */
-	private int views;
+    private Integer views;
 
-	/**
-	 * 文章状态
-	 */
-	private int status;
+    private Integer weight;
 
-	/**
-	 * 推荐状态
-	 */
-	private int featured;
+    public Long getId() {
+        return id;
+    }
 
-	/**
-	 * 置顶状态
-	 */
-	private int weight;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public Long getAuthorId() {
+        return authorId;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
 
-	public int getChannelId() {
-		return channelId;
-	}
+    public Integer getChannelId() {
+        return channelId;
+    }
 
-	public void setChannelId(int channelId) {
-		this.channelId = channelId;
-	}
+    public void setChannelId(Integer channelId) {
+        this.channelId = channelId;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public Date getCreated() {
+        return created;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
-	public String getSummary() {
-		return summary;
-	}
+    public Integer getFavors() {
+        return favors;
+    }
 
-	public void setSummary(String summary) {
-		this.summary = summary;
-	}
+    public void setFavors(Integer favors) {
+        this.favors = favors;
+    }
 
-	public String getTags() {
-		return tags;
-	}
+    public Integer getFeatured() {
+        return featured;
+    }
 
-	public void setTags(String tags) {
-		this.tags = tags;
-	}
+    public void setFeatured(Integer featured) {
+        this.featured = featured;
+    }
 
-	public Date getCreated() {
-		return created;
-	}
+    public Integer getStatus() {
+        return status;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-	public long getAuthorId() {
-		return authorId;
-	}
+    public String getSummary() {
+        return summary;
+    }
 
-	public void setAuthorId(long authorId) {
-		this.authorId = authorId;
-	}
+    public void setSummary(String summary) {
+        this.summary = summary == null ? null : summary.trim();
+    }
 
-	public int getStatus() {
-		return status;
-	}
+    public String getTags() {
+        return tags;
+    }
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
+    public void setTags(String tags) {
+        this.tags = tags == null ? null : tags.trim();
+    }
 
-	public int getFeatured() {
-		return featured;
-	}
+    public String getThumbnail() {
+        return thumbnail;
+    }
 
-	public void setFeatured(int featured) {
-		this.featured = featured;
-	}
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail == null ? null : thumbnail.trim();
+    }
 
-	public int getFavors() {
-		return favors;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setFavors(int favors) {
-		this.favors = favors;
-	}
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
+    }
 
-	public int getComments() {
-		return comments;
-	}
+    public Integer getViews() {
+        return views;
+    }
 
-	public void setComments(int comments) {
-		this.comments = comments;
-	}
+    public void setViews(Integer views) {
+        this.views = views;
+    }
 
-	public int getViews() {
-		return views;
-	}
+    public Integer getWeight() {
+        return weight;
+    }
 
-	public void setViews(int views) {
-		this.views = views;
-	}
-
-	public int getWeight() {
-		return weight;
-	}
-
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-
-	public String getThumbnail() {
-		return thumbnail;
-	}
-
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
-	}
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
 }

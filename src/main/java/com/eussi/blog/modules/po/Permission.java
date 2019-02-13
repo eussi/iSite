@@ -1,50 +1,24 @@
 package com.eussi.blog.modules.po;
 
-import com.eussi.blog.base.modules.BaseDomain;
-
-import java.io.Serializable;
-
-/**
- * 权限值
- * @author wangxm
- *
- */public class Permission extends BaseDomain implements Serializable {
-    private static final long serialVersionUID = -5979636077639378677L;
-
-    private long id;
-
-    private long parentId;
-    
-    private String name;
+public class Permission {
+    private Long id;
 
     private String description;
 
-    private int weight;
+    private String name;
+
+    private Long parentId;
 
     private Integer version;
 
-    public long getId() {
+    private Integer weight;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(long parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
@@ -52,15 +26,23 @@ import java.io.Serializable;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description == null ? null : description.trim();
     }
 
-    public int getWeight() {
-        return weight;
+    public String getName() {
+        return name;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public Integer getVersion() {
@@ -71,4 +53,11 @@ import java.io.Serializable;
         this.version = version;
     }
 
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
 }

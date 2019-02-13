@@ -1,6 +1,7 @@
 package com.eussi.blog.modules.vo;
 
 
+import com.eussi.blog.base.modules.BaseDomain;
 import com.eussi.blog.modules.po.Favorite;
 
 /**

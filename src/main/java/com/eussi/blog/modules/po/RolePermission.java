@@ -1,44 +1,33 @@
 package com.eussi.blog.modules.po;
 
-import com.eussi.blog.base.modules.BaseDomain;
+public class RolePermission {
+    private Long id;
 
-import java.io.Serializable;
+    private Long permissionId;
 
-/**
- * 角色-权限值
- * @author wangxm
- *
- */
-public class RolePermission extends BaseDomain implements Serializable {
-    private static final long serialVersionUID = -5979636077649378677L;
+    private Long roleId;
 
-    private long id;
-
-    private long roleId;
-
-    private long permissionId;
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(long roleId) {
-        this.roleId = roleId;
-    }
-
-    public long getPermissionId() {
+    public Long getPermissionId() {
         return permissionId;
     }
 
-    public void setPermissionId(long permissionId) {
+    public void setPermissionId(Long permissionId) {
         this.permissionId = permissionId;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 }
