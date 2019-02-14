@@ -16,6 +16,8 @@ public class BaseDomain implements Serializable{
 
     private String notIn;
 
+    private String limit;
+
     public String getOrderBy() {
         return orderBy;
     }
@@ -38,6 +40,14 @@ public class BaseDomain implements Serializable{
 
     public void setNotIn(String notIn) {
         this.notIn = notIn;
+    }
+
+    public String getLimit() {
+        return limit;
+    }
+
+    public void setLimit(String limit) {
+        this.limit = limit;
     }
 
     public String toString() {

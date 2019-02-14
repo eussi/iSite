@@ -1,6 +1,5 @@
 package com.eussi.blog.modules.dao;
 
-import com.eussi.blog.base.modules.Page;
 import com.eussi.blog.modules.po.Post;
 
 import java.util.Collection;
@@ -26,6 +25,8 @@ public interface PostMapper {
      */
     Long getTotalCount(Post postQuery);
 
+    List<Post> findAllByQuery(Post postQuery);
+
     // findLatests
     List<Post> findTop10ByOrderByCreatedDesc();
 
@@ -37,5 +38,7 @@ public interface PostMapper {
     List<Post> findTop5ByFeaturedGreaterThanOrderByCreatedDesc(int featured);
 
     int maxWeight();
+
+
 
 }

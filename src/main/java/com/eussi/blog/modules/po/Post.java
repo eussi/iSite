@@ -1,8 +1,7 @@
 package com.eussi.blog.modules.po;
 
-import com.eussi.blog.base.modules.BaseDomain;
-
 import java.util.Date;
+import com.eussi.blog.base.modules.BaseDomain;
 
 public class Post extends BaseDomain{
     private Long id;
@@ -10,6 +9,8 @@ public class Post extends BaseDomain{
     private Long authorId;
 
     private Integer channelId;
+
+    private Integer comments;
 
     private Date created;
 
@@ -30,6 +31,8 @@ public class Post extends BaseDomain{
     private Integer views;
 
     private Integer weight;
+
+    private Integer isMarkdown;
 
     public Long getId() {
         return id;
@@ -53,6 +56,14 @@ public class Post extends BaseDomain{
 
     public void setChannelId(Integer channelId) {
         this.channelId = channelId;
+    }
+
+    public Integer getComments() {
+        return comments;
+    }
+
+    public void setComments(Integer comments) {
+        this.comments = comments;
     }
 
     public Date getCreated() {
@@ -133,5 +144,13 @@ public class Post extends BaseDomain{
 
     public void setWeight(Integer weight) {
         this.weight = weight;
+    }
+
+    public Integer getIsMarkdown() {
+        return isMarkdown;
+    }
+
+    public void setIsMarkdown(Integer isMarkdown) {
+        this.isMarkdown = isMarkdown;
     }
 }

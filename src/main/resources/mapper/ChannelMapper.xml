@@ -79,11 +79,10 @@
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
-  <select id="findAllByStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from blog_channel
-    where status = #{status,jdbcType=INTEGER}
-  </select>
+    <select id="findAllByStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from blog_channel
+        where status = #{status,jdbcType=INTEGER}
+    </select>
 </mapper>

@@ -1499,7 +1499,7 @@ abbr[data-original-title], abbr[title] {
     z-index: 999;
     width: 46px;
     height: 46px;
-    background: url(../images/icon_top.png) no-repeat;
+    background: url(../images/icon_top.png) no-repeat;/* 回到顶部图片 */
     bottom: 45px;
     right: 20px;
     border-radius: 2px;

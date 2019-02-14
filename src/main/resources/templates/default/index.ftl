@@ -5,7 +5,7 @@
 <!-- top -->
 <div class="row">
     <@contents channelId=topId size=8>
-        <#list results.content as row>
+        <#list results.data as row>
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                 <div class="block">
                     <a class="block-thumbnail" href="${base}/view/${row.id}">
@@ -41,7 +41,7 @@
     <div class="panel-body ">
         <@contents size=30>
             <ul class="list-group row topic-list">
-                <#list results.content as row>
+                <#list results.data as row>
                     <li class="list-group-item media col-md-6" style="margin-top: 0px;">
                         <a class="reply_last_time hidden-xs meta" href="${base}/view/${row.id}">
                             <span class="stress">${row.views}</span> 浏览<span> ⋅ </span>${row.comments} 回复

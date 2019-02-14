@@ -2,9 +2,12 @@ package com.eussi.blog.modules.service.impl;
 
 import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.modules.Page;
+import com.eussi.blog.modules.dao.PostAttributeMapper;
 import com.eussi.blog.modules.dao.PostMapper;
 import com.eussi.blog.modules.po.Post;
+import com.eussi.blog.modules.po.PostAttribute;
 import com.eussi.blog.modules.service.PostService;
+import com.eussi.blog.modules.utils.BeanMapUtils;
 import com.eussi.blog.modules.vo.PostVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,25 +24,12 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostMapper postMapper;
 
+    @Autowired
+    private PostAttributeMapper postAttributeMapper;
+
     @Override
     public Page<PostVO> paging(Page page, int channelId, Set<Integer> excludeChannelIds, String ord) {
         Post postQuery = new Post();
-
-        StringBuilder orderBySb = new StringBuilder();
-        if (Consts.order.FAVOR.equals(ord)) {
-            orderBySb.append(" favors desc");
-        } else if (Consts.order.HOTTEST.equals(ord)) {
-            orderBySb.append(" comments desc");
-        } else {
-            orderBySb.append(" weight desc");
-        }
-        orderBySb.append(", created desc");
-
-        if (Consts.order.HOTTEST.equals(ord)) {
-            orderBySb.append(", views desc");
-        }
-
-        postQuery.setOrderBy(orderBySb.toString());
 
         if (channelId > Consts.ZERO) {
             postQuery.setChannelId(channelId);
@@ -57,13 +47,47 @@ public class PostServiceImpl implements PostService {
 
         //得到总记录数
         Long totalCount = postMapper.getTotalCount(postQuery);
+        page.setTotalCount(totalCount);
 
         //得到总页数
+        page.setTotalPage(totalCount/page.getPageSize() + 1);
 
-        //得到记录数
+        //得到记录
+        StringBuilder orderBySb = new StringBuilder();
+        if (Consts.order.FAVOR.equals(ord)) {
+            orderBySb.append(" favors desc");
+        } else if (Consts.order.HOTTEST.equals(ord)) {
+            orderBySb.append(" comments desc");
+        } else {
+            orderBySb.append(" weight desc");
+        }
+        orderBySb.append(", created desc");
 
+        if (Consts.order.HOTTEST.equals(ord)) {
+            orderBySb.append(", views desc");
+        }
 
-        return null;
+        postQuery.setOrderBy(orderBySb.toString());
+
+        postQuery.setLimit(page.getStartIndex() + "," + page.getPageSize());
+
+        List<Post> queryResults = postMapper.findAllByQuery(postQuery);
+
+        // 填充对象数据
+        List<PostVO> results = new ArrayList<PostVO>();
+        for(Post post : queryResults) {
+            PostVO postVO = BeanMapUtils.copy(post);
+            //文章内容
+            Long postVOId = post.getId();
+            PostAttribute postAttribute = postAttributeMapper.selectByPrimaryKey(postVOId);
+            postVO.setContent(postAttribute.getContent());
+
+            //获取作者
+            results.add(postVO);
+        }
+
+        page.setData(results);
+        return page;
     }
 
     @Override
