@@ -27,6 +27,8 @@ public interface PostMapper {
 
     List<Post> findAllByQuery(Post postQuery);
 
+    void updateViews(Post post);
+
     // findLatests
     List<Post> findTop10ByOrderByCreatedDesc();
 

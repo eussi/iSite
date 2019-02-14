@@ -4,6 +4,7 @@ package com.eussi.blog.config;
 import com.eussi.blog.modules.freemarker.directive.ContentsDirective;
 import com.eussi.blog.modules.freemarker.directive.ControlsDirective;
 import com.eussi.blog.modules.freemarker.directive.ResourceDirective;
+import com.eussi.blog.modules.freemarker.method.TimeAgoMethod;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateModelException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,7 @@ public class FreemarkerConfig {
         configuration.setSharedVariable("contents", applicationContext.getBean(ContentsDirective.class));
         configuration.setSharedVariable("controls", applicationContext.getBean(ControlsDirective.class));
         configuration.setSharedVariable("resource", applicationContext.getBean(ResourceDirective.class));
+
+        configuration.setSharedVariable("timeAgo", new TimeAgoMethod());
     }
 }

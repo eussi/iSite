@@ -264,7 +264,7 @@
             </if>
         </where>
     </select>
-    <select id="findAllByQuery" parameterType="com.eussi.blog.modules.po.Post" resultType="com.eussi.blog.modules.po.Post">
+    <select id="findAllByQuery" parameterType="com.eussi.blog.modules.po.Post" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from blog_post
@@ -325,4 +325,10 @@
             limit ${limit}
         </if>
     </select>
+    <update id="updateViews" parameterType="com.eussi.blog.modules.po.Post">
+        update blog_post
+        set
+        views = views + ${steps}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

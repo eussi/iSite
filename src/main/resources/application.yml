@@ -47,6 +47,6 @@ site:
         storage_max_width: 800
         storage_limit_size: 2
 
-logging:
-    level:
-        com.eussi.blog.modules.dao: DEBUG
+#logging:
+#    level:
+#        com.eussi.blog.modules.dao: DEBUG

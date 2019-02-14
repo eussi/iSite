@@ -4,28 +4,39 @@ import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.modules.Page;
 import com.eussi.blog.modules.dao.PostAttributeMapper;
 import com.eussi.blog.modules.dao.PostMapper;
+import com.eussi.blog.modules.dao.UserMapper;
+import com.eussi.blog.modules.po.Channel;
 import com.eussi.blog.modules.po.Post;
 import com.eussi.blog.modules.po.PostAttribute;
+import com.eussi.blog.modules.po.User;
 import com.eussi.blog.modules.service.PostService;
 import com.eussi.blog.modules.utils.BeanMapUtils;
 import com.eussi.blog.modules.vo.PostVO;
+import com.eussi.blog.modules.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.ServletContext;
 import java.util.*;
 
 /**
  * Created by wangxueming on 2019/2/7.
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class PostServiceImpl implements PostService {
     @Autowired
     private PostMapper postMapper;
 
     @Autowired
     private PostAttributeMapper postAttributeMapper;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private ServletContext servletContext;
 
     @Override
     public Page<PostVO> paging(Page page, int channelId, Set<Integer> excludeChannelIds, String ord) {
@@ -77,12 +88,10 @@ public class PostServiceImpl implements PostService {
         List<PostVO> results = new ArrayList<PostVO>();
         for(Post post : queryResults) {
             PostVO postVO = BeanMapUtils.copy(post);
-            //文章内容
-            Long postVOId = post.getId();
-            PostAttribute postAttribute = postAttributeMapper.selectByPrimaryKey(postVOId);
-            postVO.setContent(postAttribute.getContent());
 
-            //获取作者
+            //文章内容
+            fillPostPO(post, postVO);
+
             results.add(postVO);
         }
 
@@ -127,7 +136,12 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostVO get(long id) {
-        return null;
+        Post post = postMapper.selectByPrimaryKey(id);
+        PostVO postVO = BeanMapUtils.copy(post);
+
+        fillPostPO(post, postVO);
+
+        return postVO;
     }
 
     @Override
@@ -162,7 +176,11 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void identityViews(long id) {
-
+        // 次数不清理缓存, 等待文章缓存自动过期
+        Post post = new Post();
+        post.setId(id);
+        post.setSteps(Consts.IDENTITY_STEP);
+        postMapper.updateViews(post);
     }
 
     @Override
@@ -183,5 +201,33 @@ public class PostServiceImpl implements PostService {
     @Override
     public long count() {
         return 0;
+    }
+
+    /**
+     * 根据post填充PO
+     * @param post
+     * @param postVO
+     */
+    private void fillPostPO(Post post, PostVO postVO) {
+        //文章内容
+        Long postVOId = post.getId();
+        PostAttribute postAttribute = postAttributeMapper.selectByPrimaryKey(postVOId);
+        postVO.setContent(postAttribute.getContent());
+
+        //获取作者
+        Long authorId = post.getAuthorId();
+        User user = userMapper.selectByPrimaryKey(authorId);
+        UserVO userVO = BeanMapUtils.copy(user);
+        postVO.setAuthor(userVO);
+
+        //获取channel
+        Integer postChannelId = post.getChannelId();
+        List<Channel> channels = (List<Channel>) servletContext.getAttribute("channels");
+        for(Channel channel : channels) {
+            if(channel.getId()==postChannelId) {
+                postVO.setChannel(channel);
+                break;
+            }
+        }
     }
 }

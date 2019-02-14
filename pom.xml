@@ -161,6 +161,7 @@
                 <excludes>
                     <exclude>static/**</exclude>
                     <exclude>templates/**</exclude>
+                    <exclude>mybatis-generator/**</exclude>
                 </excludes>
             </resource>
             <resource>

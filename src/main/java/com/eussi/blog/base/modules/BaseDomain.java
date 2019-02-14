@@ -18,6 +18,8 @@ public class BaseDomain implements Serializable{
 
     private String limit;
 
+    private Integer steps;
+
     public String getOrderBy() {
         return orderBy;
     }
@@ -48,6 +50,14 @@ public class BaseDomain implements Serializable{
 
     public void setLimit(String limit) {
         this.limit = limit;
+    }
+
+    public Integer getSteps() {
+        return steps;
+    }
+
+    public void setSteps(Integer steps) {
+        this.steps = steps;
     }
 
     public String toString() {
