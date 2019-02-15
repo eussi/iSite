@@ -106,7 +106,24 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Page<PostVO> pagingByAuthorId(Page page, long userId) {
-        return null;
+        Post postQuery = new Post();
+        postQuery.setAuthorId(userId);
+        postQuery.setOrderBy(" created desc");
+
+        List<Post> queryResults = postMapper.findAllByQuery(postQuery);
+        // 填充对象数据
+        List<PostVO> results = new ArrayList<PostVO>();
+        for(Post post : queryResults) {
+            PostVO postVO = BeanMapUtils.copy(post);
+
+            //文章内容
+            fillPostPO(post, postVO);
+
+            results.add(postVO);
+        }
+
+        page.setData(results);
+        return page;
     }
 
     @Override

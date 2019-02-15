@@ -29,6 +29,8 @@ drop table if exists shiro_role_permission;
 
 drop table if exists shiro_user_role;
 
+drop table if exists blog_message;
+
 /*==============================================================*/
 /* Table: blog_channel                                          */
 /*==============================================================*/
@@ -182,6 +184,21 @@ create table shiro_user_role
    id                   bigint(20) not null,
    role_id              bigint(20),
    user_id              bigint(20),
+   primary key (id)
+);
+
+/*==============================================================*/
+/* Table: blog_message                                          */
+/*==============================================================*/
+create table blog_message
+(
+   id                   int(20) not null,
+   created              datetime,
+   event                int(11),
+   from_id              int(20),
+   own_id               int(20),
+   post_id              int(20),
+   status               int(11),
    primary key (id)
 );
 

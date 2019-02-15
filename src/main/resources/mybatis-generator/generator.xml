@@ -32,7 +32,7 @@
 
 		<!-- 生成模型的包名和位置 -->
 		<javaModelGenerator
-                targetPackage="com.eussi.blog.modules.po"
+                targetPackage="com.temp.po"
                 targetProject="${project}">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
@@ -40,14 +40,14 @@
 
 		<!-- 生成的映射文件包名和位置 -->
 		<sqlMapGenerator
-                targetPackage="mapper"
+                targetPackage="mapperTemp"
                 targetProject="${resources}">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<!-- 生成DAO的包名和位置 -->
 		<javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.eussi.blog.modules.dao"
+                             targetPackage="com.temp.dao"
                              targetProject="${project}">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
@@ -84,6 +84,12 @@
                enableSelectByExample="false"
                selectByExampleQueryId="false" />
         <table tableName="blog_post_attribute" domainObjectName="PostAttribute"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" />
+        <table tableName="blog_message" domainObjectName="Message"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

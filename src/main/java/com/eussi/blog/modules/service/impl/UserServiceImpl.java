@@ -1,8 +1,13 @@
 package com.eussi.blog.modules.service.impl;
 
 import com.eussi.blog.base.modules.Page;
+import com.eussi.blog.modules.dao.UserMapper;
+import com.eussi.blog.modules.po.User;
+import com.eussi.blog.modules.service.MessageService;
 import com.eussi.blog.modules.service.UserService;
+import com.eussi.blog.modules.utils.BeanMapUtils;
 import com.eussi.blog.modules.vo.AccountProfile;
+import com.eussi.blog.modules.vo.BadgesCount;
 import com.eussi.blog.modules.vo.UserVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -21,6 +26,12 @@ import java.util.*;
 @CacheConfig(cacheNames = "usersCaches")
 public class UserServiceImpl implements UserService {
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private MessageService messageService;
+
     @Override
     public Page<UserVO> paging(Page page, String name) {
         return null;
@@ -33,7 +44,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AccountProfile login(String username, String password) {
-        return null;
+        User po = userMapper.findByUsername(username);
+        AccountProfile u = null;
+
+        Assert.notNull(po, "账户不存在");
+
+//		Assert.state(po.getStatus() != Const.STATUS_CLOSED, "您的账户已被封禁");
+
+        Assert.state(StringUtils.equals(po.getPassword(), password), "密码错误");
+
+        po.setLastLogin(Calendar.getInstance().getTime());
+        userMapper.updateByPrimaryKeySelective(po);
+        u = BeanMapUtils.copyPassport(po);
+
+        BadgesCount badgesCount = new BadgesCount();
+        badgesCount.setMessages(messageService.unread4Me(u.getId()));
+
+        u.setBadgesCount(badgesCount);
+        return u;
+
     }
 
     @Override

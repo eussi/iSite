@@ -209,4 +209,10 @@
       signature = #{signature,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="findByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from blog_user
+        where username = #{username,jdbcType=VARCHAR}
+    </select>
 </mapper>

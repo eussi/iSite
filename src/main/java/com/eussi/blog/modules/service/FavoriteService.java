@@ -20,7 +20,7 @@ public interface FavoriteService {
     void delete(long userId, long postId);
 
 
-//    Page<FavoriteVO> pagingByOwnId(Pageable pageable, long ownId);
+    Page<FavoriteVO> pagingByOwnId(Page page, long ownId);
     /**
      * 分页查询用户的喜欢记录
      * @param currentNo

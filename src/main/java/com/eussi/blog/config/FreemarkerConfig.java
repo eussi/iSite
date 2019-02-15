@@ -5,6 +5,7 @@ import com.eussi.blog.modules.freemarker.directive.ContentsDirective;
 import com.eussi.blog.modules.freemarker.directive.ControlsDirective;
 import com.eussi.blog.modules.freemarker.directive.ResourceDirective;
 import com.eussi.blog.modules.freemarker.method.TimeAgoMethod;
+import com.eussi.blog.shiro.ShiroTags;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateModelException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,6 @@ public class FreemarkerConfig {
         configuration.setSharedVariable("resource", applicationContext.getBean(ResourceDirective.class));
 
         configuration.setSharedVariable("timeAgo", new TimeAgoMethod());
+        configuration.setSharedVariable("shiro", new ShiroTags());
     }
 }

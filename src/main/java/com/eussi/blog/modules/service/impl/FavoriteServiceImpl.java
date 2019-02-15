@@ -23,6 +23,11 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
+    public Page<FavoriteVO> pagingByOwnId(Page page, long ownId) {
+        return null;
+    }
+
+    @Override
     public Page<FavoriteVO> pageQuery(long currentNo, int pageSize, long ownId) {
         return null;
     }

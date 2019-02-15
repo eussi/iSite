@@ -81,7 +81,7 @@ public class BaseController {
 		return new UsernamePasswordToken(username, MD5.md5(password));
 	}
 
-	protected Page wrapPageable() {
+	protected Page wrapPage() {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		int pageSize = ServletRequestUtils.getIntParameter(request, "pageSize", 10);
 		int pageNo = ServletRequestUtils.getIntParameter(request, "pn", 1);
