@@ -249,7 +249,7 @@ INSERT INTO `shiro_role_permission` VALUES ('17', '9', '1');
 INSERT INTO `shiro_role_permission` VALUES ('18', '8', '1');
 INSERT INTO `shiro_role_permission` VALUES ('19', '11', '1');
 
-INSERT INTO `blog_user` VALUES ('1', 'admin', 'wangxm', '/dist/images/ava/default.jpg', 'example@eussi.com', '3TGCQF25BLHU9R7IQUITN0FCC5', '0', '2019-02-14 17:52:41', '2019-02-14 11:08:36', '2019-02-14 13:24:13', '0', '1', '0', '0', '');
+INSERT INTO `blog_user` VALUES ('1', 'admin', 'wangxm', '/dist/images/ava/default.jpg', 'example@eussi.com', '3TGCQF25BLHU9R7IQUITN0FCC5', '0', '2019-02-14 17:52:41', '2019-02-14 11:08:36', '2019-02-14 13:24:13', '0', '1', '0', '2', '');
 
 INSERT INTO `blog_post` (`id`, `author_id`, `channel_id`, `comments`, `created`, `favors`, `featured`, `status`, `summary`, `tags`, `thumbnail`, `title`, `views`, `weight`) VALUES ('1', '1', '1', '0', '2019-02-14 23:18:10', '0', '0', '0', '&nbsp; &nbsp; &nbsp; &nbsp; 我喜欢出发。 &nbsp; &nbsp; &nbsp; &nbsp; 凡是到达了的地方，都属于昨天。哪怕那山再青，那水再秀，那风再温柔。太深的流连便成了一种羁绊，绊住的不仅有双脚，还有未来。...', '汪国真,我喜欢出发,散文', '/storage/thumbnails/2019/0214/14232223hnhp.jpg', '我喜欢出发', '6', '0');
 INSERT INTO `blog_post` (`id`, `author_id`, `channel_id`, `comments`, `created`, `favors`, `featured`, `status`, `summary`, `tags`, `thumbnail`, `title`, `views`, `weight`) VALUES ('2', '1', '1', '0', '2019-02-14 23:25:41', '0', '0', '0', '　　我与父亲不相见已二年余了，我最不能忘记的是他的背影。那年冬天，祖母死了，父亲的差使也交卸了，正是祸不单行的日子，我从北京到徐州，打算跟着父亲奔丧回家。到徐州见着父亲，看见满院狼藉的东西，又想起祖母，不禁簌簌地流下眼泪。父亲说，“事已如此，不必...', '朱自清,背影,散文', '/storage/thumbnails/2019/0214/14232528txqe.jpg', '背影', '1', '0');

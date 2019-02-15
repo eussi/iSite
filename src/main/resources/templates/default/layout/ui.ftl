@@ -65,9 +65,9 @@
             <#local cURL = (url + "?pn=") />
         </#if>
 
-    <ul class="pagination">
-        <#assign pageNo = p.number + 1/>
-        <#assign pageCount = p.totalPages />
+        <ul class="pagination">
+        <#assign pageNo = p.currentPage/>
+        <#assign pageCount = p.totalPage />
         <#if (pageNo > 1)>
             <li><a href="${cURL}${pageNo - 1}" pageNo="${pageNo - 1}" class="prev">上一页</a></li>
         <#else>

@@ -31,7 +31,7 @@ public class ChannelServiceImpl implements ChannelService {
 
     @Override
     public Channel getById(int id) {
-        return null;
+        return channelMapper.selectByPrimaryKey(id);
     }
 
     @Override
