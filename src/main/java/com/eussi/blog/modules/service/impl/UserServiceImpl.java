@@ -1,6 +1,8 @@
 package com.eussi.blog.modules.service.impl;
 
+import com.eussi.blog.base.lang.EntityStatus;
 import com.eussi.blog.base.modules.Page;
+import com.eussi.blog.base.utils.MD5;
 import com.eussi.blog.modules.dao.UserMapper;
 import com.eussi.blog.modules.po.User;
 import com.eussi.blog.modules.service.MessageService;
@@ -72,7 +74,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO register(UserVO user) {
-        return null;
+        Assert.notNull(user, "Parameter user can not be null!");
+
+        Assert.hasLength(user.getUsername(), "用户名不能为空!");
+        Assert.hasLength(user.getPassword(), "密码不能为空!");
+
+        User check = userMapper.findByUsername(user.getUsername());
+
+        Assert.isNull(check, "用户名已经存在!");
+
+        User po = new User();
+
+        BeanUtils.copyProperties(user, po);
+
+        if (StringUtils.isBlank(po.getName())) {
+            po.setName(user.getUsername());
+        }
+
+        Date now = Calendar.getInstance().getTime();
+        po.setPassword(MD5.md5(user.getPassword()));
+        po.setStatus(EntityStatus.ENABLED);
+        po.setCreated(now);
+
+        userMapper.insert(po);
+
+        return BeanMapUtils.copy(po);
     }
 
     @Override
@@ -89,7 +115,6 @@ public class UserServiceImpl implements UserService {
     public UserVO get(long id) {
         User po = userMapper.selectByPrimaryKey(id);
         UserVO userVO = BeanMapUtils.copy(po);
-
         return userVO;
     }
 

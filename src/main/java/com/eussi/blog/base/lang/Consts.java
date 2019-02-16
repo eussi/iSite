@@ -19,7 +19,7 @@ public interface Consts {
 	/**
 	 * 默认头像
 	 */
-	String AVATAR = "/dist/images/ava/default.png";
+	String AVATAR = "/dist/images/ava/default.jpg";
 	
 	/**
 	 * 分隔符

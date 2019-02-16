@@ -36,7 +36,7 @@ drop table if exists blog_message;
 /*==============================================================*/
 create table blog_channel
 (
-   id                   int(11) not null,
+   id                   int(11) not null auto_increment,
    key_                 varchar(255),
    name                 varchar(255),
    status               int(11),
@@ -48,7 +48,7 @@ create table blog_channel
 /*==============================================================*/
 create table blog_comment
 (
-   id                   bigint(20) not null,
+   id                   bigint(20) not null auto_increment,
    author_id            bigint(20),
    content              varchar(255),
    created              datetime,
@@ -63,7 +63,7 @@ create table blog_comment
 /*==============================================================*/
 create table blog_favorite
 (
-   id                   bigint(20) not null,
+   id                   bigint(20) not null auto_increment,
    created              datetime,
    own_id               bigint(20),
    post_id              bigint(20),
@@ -75,7 +75,7 @@ create table blog_favorite
 /*==============================================================*/
 create table blog_options
 (
-   id                   bigint(20) not null,
+   id                   bigint(20) not null auto_increment,
    key_                 varchar(255),
    type                 varchar(255),
    value                varchar(255),
@@ -87,7 +87,7 @@ create table blog_options
 /*==============================================================*/
 create table blog_post
 (
-   id                   bigint(20) not null,
+   id                   bigint(20) not null auto_increment,
    author_id            bigint(20),
    channel_id           int(11),
    comments             int(11),
@@ -111,7 +111,7 @@ create table blog_post
 /*==============================================================*/
 create table blog_post_attribute
 (
-   id                   bigint(20) not null,
+   id                   bigint(20) not null auto_increment,
    content              longtext,
    primary key (id)
 );
@@ -121,7 +121,7 @@ create table blog_post_attribute
 /*==============================================================*/
 create table blog_user
 (
-   id                   bigint(20) not null,
+   id                   bigint(20) not null auto_increment,
    username             varchar(32),
    name                 varchar(32),
    avatar               varchar(128),
@@ -144,7 +144,7 @@ create table blog_user
 /*==============================================================*/
 create table shiro_permission
 (
-   id                   bigint(20) not null,
+   id                   bigint(20) not null auto_increment,
    description          varchar(255),
    name                 varchar(255),
    parent_id            bigint(11),
@@ -158,7 +158,7 @@ create table shiro_permission
 /*==============================================================*/
 create table shiro_role
 (
-   id                   bigint(20) not null,
+   id                   bigint(20) not null auto_increment,
    description          varchar(255),
    name                 varchar(255),
    status               int(11),
@@ -170,7 +170,7 @@ create table shiro_role
 /*==============================================================*/
 create table shiro_role_permission
 (
-   id                   bigint(20) not null,
+   id                   bigint(20) not null auto_increment,
    permission_id        bigint(20),
    role_id              bigint(20),
    primary key (id)
@@ -181,7 +181,7 @@ create table shiro_role_permission
 /*==============================================================*/
 create table shiro_user_role
 (
-   id                   bigint(20) not null,
+   id                   bigint(20) not null auto_increment,
    role_id              bigint(20),
    user_id              bigint(20),
    primary key (id)
@@ -192,7 +192,7 @@ create table shiro_user_role
 /*==============================================================*/
 create table blog_message
 (
-   id                   int(20) not null,
+   id                   int(20) not null auto_increment,
    created              datetime,
    event                int(11),
    from_id              int(20),
@@ -266,7 +266,8 @@ INSERT INTO `shiro_role_permission` VALUES ('17', '9', '1');
 INSERT INTO `shiro_role_permission` VALUES ('18', '8', '1');
 INSERT INTO `shiro_role_permission` VALUES ('19', '11', '1');
 
-INSERT INTO `blog_user` VALUES ('1', 'admin', 'wangxm', '/dist/images/ava/default.jpg', 'example@eussi.com', '3TGCQF25BLHU9R7IQUITN0FCC5', '0', '2019-02-14 17:52:41', '2019-02-14 11:08:36', '2019-02-14 13:24:13', '0', '1', '0', '2', '');
+INSERT INTO `blog_user` (`id`, `username`, `name`, `avatar`, `email`, `password`, `status`, `created`, `updated`, `last_login`, `gender`, `role_id`, `comments`, `posts`, `signature`) VALUES ('1', 'admin', 'wangxm', '/dist/images/ava/default.jpg', 'example@eussi.com', '3TGCQF25BLHU9R7IQUITN0FCC5', '0', '2019-02-14 17:52:41', '2019-02-14 11:08:36', '2019-02-16 16:43:17', '0', '1', '0', '0', '');
+
 
 INSERT INTO `shiro_user_role` (`id`, `role_id`, `user_id`) VALUES ('1', '1', '1');
 
