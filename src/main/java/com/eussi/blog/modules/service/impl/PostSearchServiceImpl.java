@@ -6,6 +6,9 @@ import com.eussi.blog.modules.vo.PostVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by wangxueming on 2019/2/7.
  */
@@ -14,7 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostSearchServiceImpl implements PostSearchService {
     @Override
     public Page<PostVO> search(Page page, String q) throws Exception {
-        return null;
+        List<PostVO> data = new ArrayList<PostVO>();
+        //deal 暂时未实现
+
+
+        page.setData(data);
+        return page;
     }
 
     @Override

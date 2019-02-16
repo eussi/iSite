@@ -79,4 +79,9 @@
       value = #{value,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from blog_options
+    </select>
 </mapper>

@@ -1,7 +1,9 @@
 package com.eussi.blog.modules.service.impl;
 
+import com.eussi.blog.modules.dao.OptionsMapper;
 import com.eussi.blog.modules.po.Options;
 import com.eussi.blog.modules.service.OptionsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,9 +17,12 @@ import java.util.Map;
 @Service
 @Transactional(readOnly = true)
 public class OptionsServiceImpl implements OptionsService {
+    @Autowired
+    private OptionsMapper optionsMapper;
+
     @Override
     public List<Options> findAll() {
-        return null;
+        return optionsMapper.findAll();
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.eussi.blog.modules.dao;
 
 import com.eussi.blog.modules.po.Options;
 
+import java.util.List;
+
 public interface OptionsMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -16,4 +18,6 @@ public interface OptionsMapper {
     int updateByPrimaryKey(Options record);
 
     Options findByKey(String key);
+
+    List<Options> findAll();
 }
