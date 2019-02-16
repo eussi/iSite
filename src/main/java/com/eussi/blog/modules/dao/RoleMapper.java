@@ -21,10 +21,10 @@ public interface RoleMapper {
     /**
      * 根据角色名称查询角色
      *
-     * @param ids 角色名称
+     * @param inQuery 角色名称
      * @return 角色列表
      */
-    List<Role> findAllByIdIsIn(Set<Long> ids);
+    List<Role> findAllByIdIsIn(String inQuery);
 
     List<Role> findAllByStatusOrderByIdDesc(int status);
 }

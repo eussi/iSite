@@ -68,4 +68,10 @@
       user_id = #{userId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="findAllByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from shiro_user_role
+        where user_id = #{userId,jdbcType=BIGINT}
+    </select>
 </mapper>

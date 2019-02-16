@@ -83,6 +83,9 @@ public interface Consts {
 	 */
 	int READED = 1;
 
+    int IN = 0;
+    int NOTIN = 1;
+
 	int MESSAGE_EVENT_FAVOR_POST = 1; // 有人喜欢了你的文章
 
 	int MESSAGE_EVENT_COMMENT = 3; // 有人评论了你

@@ -87,7 +87,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO get(long id) {
-        return null;
+        User po = userMapper.selectByPrimaryKey(id);
+        UserVO userVO = BeanMapUtils.copy(po);
+
+        return userVO;
     }
 
     @Override

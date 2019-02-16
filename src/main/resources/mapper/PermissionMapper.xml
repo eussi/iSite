@@ -103,4 +103,14 @@
       weight = #{weight,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="findAllByIdIsIn" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from shiro_permission
+        <where>
+            <if test="_parameter != null">
+                and ${_parameter}
+            </if>
+        </where>
+    </select>
 </mapper>

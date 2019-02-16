@@ -315,11 +315,11 @@
                 is_markdown = #{isMarkdown,jdbcType=INTEGER},
             </if>
             <if test="notIn != null">
-                and #{weight,jdbcType=VARCHAR}
+                and ${weight,jdbcType=VARCHAR}
             </if>
         </where>
         <if test="orderBy != null">
-            order by #{orderBy}
+            order by ${orderBy}
         </if>
         <if test="limit != null">
             limit ${limit}

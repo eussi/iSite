@@ -1,6 +1,7 @@
 package com.eussi.blog.shiro;
 
 import com.eussi.blog.base.lang.Consts;
+import com.eussi.blog.modules.po.Permission;
 import com.eussi.blog.modules.po.Role;
 import com.eussi.blog.modules.service.UserRoleService;
 import com.eussi.blog.modules.service.UserService;
@@ -42,12 +43,13 @@ public class AccountRealm extends AuthorizingRealm {
                 List<Role> roles = userRoleService.listRoles(user.getId());
 
                 //赋予角色
-                roles.forEach(role -> {
+                for(Role role : roles){
                     info.addRole(role.getName());
-
                     //赋予权限
-                    role.getPermissions().forEach(permission -> info.addStringPermission(permission.getName()));
-                });
+                    for(Permission permission : role.getPermissions()) {
+                        info.addStringPermission(permission.getName());
+                    }
+                }
                 return info;
             }
         }

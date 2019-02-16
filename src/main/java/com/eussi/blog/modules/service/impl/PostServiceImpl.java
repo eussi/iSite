@@ -2,6 +2,7 @@ package com.eussi.blog.modules.service.impl;
 
 import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.modules.Page;
+import com.eussi.blog.base.utils.CommonUtils;
 import com.eussi.blog.modules.dao.PostAttributeMapper;
 import com.eussi.blog.modules.dao.PostMapper;
 import com.eussi.blog.modules.dao.UserMapper;
@@ -46,15 +47,7 @@ public class PostServiceImpl implements PostService {
             postQuery.setChannelId(channelId);
         }
 
-        if (null != excludeChannelIds && !excludeChannelIds.isEmpty()) {
-            StringBuilder notInSb = new StringBuilder(" channelId not in (");
-            for(Integer chanelId : excludeChannelIds) {
-                notInSb.append(chanelId + ", ");
-            }
-            postQuery.setNotIn(notInSb.toString().
-                    substring(0, notInSb.toString().length() - 1).
-                    concat(") "));
-        }
+        postQuery.setNotIn(CommonUtils.concatInQuery("channelId", excludeChannelIds, Consts.NOTIN));
 
         //得到总记录数
         Long totalCount = postMapper.getTotalCount(postQuery);

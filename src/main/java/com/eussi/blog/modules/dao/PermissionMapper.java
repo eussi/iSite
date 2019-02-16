@@ -18,7 +18,7 @@ public interface PermissionMapper {
 
     int updateByPrimaryKey(Permission record);
 
-    List<Permission> findAllByIdIsIn(Set<Long> id);
+    List<Permission> findAllByIdIsIn(String inQuery);
 
 
     int countUsed(long permId);

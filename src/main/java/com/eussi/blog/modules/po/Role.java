@@ -1,8 +1,10 @@
 package com.eussi.blog.modules.po;
 
+import com.eussi.blog.base.modules.BaseDomain;
+
 import java.util.List;
 
-public class Role {
+public class Role extends BaseDomain{
     public static int STATUS_NORMAL = 0;
     public static int STATUS_CLOSED = 1;
 

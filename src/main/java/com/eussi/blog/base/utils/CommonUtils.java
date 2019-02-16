@@ -4,12 +4,41 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.UnknownHostException;
+import java.util.Collection;
 import java.util.Enumeration;
+import java.util.List;
 
 /**
  * Created by wangxueming on 2019/1/30.
  */
 public class CommonUtils {
+    /**
+     * 拼接in or not in 查询字符串
+     * @param field
+     * @param collection
+     * @param type 0|1 in|not in
+     * @return
+     */
+    public static String concatInQuery(String field, Collection collection, int type) {
+        if (null != collection && !collection.isEmpty()) {
+            StringBuilder sb = new StringBuilder(" " + field);
+            if(type==0) {
+                sb.append(" in (");
+            }
+            else {
+                sb.append(" not in (");
+            }
+
+            for(Object obj : collection) {
+                sb.append(obj + ",");
+            }
+            return sb.toString().
+                    substring(0, sb.toString().length() - 1).
+                    concat(") ");
+        }
+        return null;
+    }
+
     public static String getHostName() {
         try {
             return InetAddress.getLocalHost().getHostName();

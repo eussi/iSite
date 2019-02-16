@@ -68,4 +68,10 @@
       role_id = #{roleId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="findAllByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from shiro_role_permission
+        where role_id = #{roleId,jdbcType=BIGINT}
+    </select>
 </mapper>
