@@ -22,4 +22,6 @@ public interface CommentMapper {
     List<Comment> findByIdIn(Set<Long> ids);
     List<Comment> findAllByAuthorIdAndToIdOrderByCreatedDesc(long authorId, long toId);
     int deleteAllByIdIn(Collection<Long> ids);
+
+    List<Comment> findAllByQuery(Comment commentQuery);
 }

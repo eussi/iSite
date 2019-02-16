@@ -1,8 +1,10 @@
 package com.eussi.blog.modules.po;
 
+import com.eussi.blog.base.modules.BaseDomain;
+
 import java.util.Date;
 
-public class Comment {
+public class Comment extends BaseDomain{
     private Long id;
 
     private Long authorId;

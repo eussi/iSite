@@ -315,7 +315,7 @@
                 is_markdown = #{isMarkdown,jdbcType=INTEGER},
             </if>
             <if test="notIn != null">
-                and ${weight,jdbcType=VARCHAR}
+                and ${notIn,jdbcType=VARCHAR}
             </if>
         </where>
         <if test="orderBy != null">

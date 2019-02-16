@@ -1,9 +1,15 @@
 package com.eussi.blog.modules.service.impl;
 
 import com.eussi.blog.base.modules.Page;
+import com.eussi.blog.modules.dao.CommentMapper;
 import com.eussi.blog.modules.po.Comment;
+import com.eussi.blog.modules.po.Post;
 import com.eussi.blog.modules.service.CommentService;
+import com.eussi.blog.modules.utils.BeanMapUtils;
 import com.eussi.blog.modules.vo.CommentVO;
+import com.eussi.blog.modules.vo.PostVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +24,9 @@ import java.util.Set;
 @Service
 @Transactional(readOnly = true)
 public class CommentServiceImpl implements CommentService {
+    @Autowired
+    private CommentMapper commentMapper;
+
     @Override
     public Page<CommentVO> paging4Admin(Page page) {
         return null;
@@ -60,7 +69,20 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentVO> latests(int maxResults) {
-        return null;
+        Comment commentQuery = new Comment();
+        commentQuery.setOrderBy(" created desc");
+        commentQuery.setLimit("0," + maxResults);
+        List<Comment> queryResults = commentMapper.findAllByQuery(commentQuery);
+        // 填充对象数据
+        List<CommentVO> results = new ArrayList<CommentVO>();
+        for(Comment comment : queryResults) {
+            CommentVO commentVO = new CommentVO();
+            BeanUtils.copyProperties(comment, commentVO);
+
+            results.add(commentVO);
+        }
+
+        return results;
     }
 
     @Override

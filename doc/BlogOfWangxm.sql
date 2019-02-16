@@ -266,7 +266,7 @@ INSERT INTO `shiro_role_permission` VALUES ('17', '9', '1');
 INSERT INTO `shiro_role_permission` VALUES ('18', '8', '1');
 INSERT INTO `shiro_role_permission` VALUES ('19', '11', '1');
 
-INSERT INTO `blog_user` (`id`, `username`, `name`, `avatar`, `email`, `password`, `status`, `created`, `updated`, `last_login`, `gender`, `role_id`, `comments`, `posts`, `signature`) VALUES ('1', 'admin', 'wangxm', '/dist/images/ava/default.jpg', 'example@eussi.com', '3TGCQF25BLHU9R7IQUITN0FCC5', '0', '2019-02-14 17:52:41', '2019-02-14 11:08:36', '2019-02-16 16:43:17', '0', '1', '0', '0', '');
+INSERT INTO `blog_user` (`id`, `username`, `name`, `avatar`, `email`, `password`, `status`, `created`, `updated`, `last_login`, `gender`, `role_id`, `comments`, `posts`, `signature`) VALUES ('1', 'admin', 'wangxm', '/dist/images/ava/default.jpg', 'example@eussi.com', '3TGCQF25BLHU9R7IQUITN0FCC5', '0', '2019-02-14 17:52:41', '2019-02-14 11:08:36', '2019-02-16 16:43:17', '0', '1', '0', '2', '');
 
 
 INSERT INTO `shiro_user_role` (`id`, `role_id`, `user_id`) VALUES ('1', '1', '1');

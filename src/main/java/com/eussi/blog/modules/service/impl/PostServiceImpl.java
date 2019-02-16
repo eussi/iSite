@@ -126,12 +126,46 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostVO> findLatests(int maxResults, long ignoreUserId) {
-        return null;
+        Post postQuery = new Post();
+
+        postQuery.setOrderBy(" created desc");
+        postQuery.setLimit("0," + maxResults);
+
+        List<Post> queryResults = postMapper.findAllByQuery(postQuery);
+        // 填充对象数据
+        List<PostVO> results = new ArrayList<PostVO>();
+        for(Post post : queryResults) {
+            PostVO postVO = BeanMapUtils.copy(post);
+
+            //文章内容
+//            fillPostPO(post, postVO);
+
+            results.add(postVO);
+        }
+
+        return results;
     }
 
     @Override
     public List<PostVO> findHots(int maxResults, long ignoreUserId) {
-        return null;
+        Post postQuery = new Post();
+
+        postQuery.setOrderBy(" views desc");
+        postQuery.setLimit("0," + maxResults);
+
+        List<Post> queryResults = postMapper.findAllByQuery(postQuery);
+        // 填充对象数据
+        List<PostVO> results = new ArrayList<PostVO>();
+        for(Post post : queryResults) {
+            PostVO postVO = BeanMapUtils.copy(post);
+
+            //文章内容
+//            fillPostPO(post, postVO);
+
+            results.add(postVO);
+        }
+
+        return results;
     }
 
     @Override
