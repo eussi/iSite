@@ -42,5 +42,5 @@ public interface PostMapper {
     int maxWeight();
 
 
-
+    Long insertAndGetId(Post po);
 }

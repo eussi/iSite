@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by wangxueming on 2019/2/7.
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class UserEventServiceImpl implements UserEventService {
     @Autowired
     private UserMapper userMapper;

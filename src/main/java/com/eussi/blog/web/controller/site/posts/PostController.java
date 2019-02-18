@@ -64,7 +64,7 @@ public class PostController extends BaseController {
 		post.setAuthorId(profile.getId());
 
 		// 修改时, 验证归属
-		if (post.getId() > 0) {
+		if (post.getId() !=null ) {
 			PostVO exist = postService.get(post.getId());
 			Assert.notNull(exist, "文章不存在");
 			Assert.isTrue(exist.getAuthorId() == profile.getId(), "该文章不属于你");

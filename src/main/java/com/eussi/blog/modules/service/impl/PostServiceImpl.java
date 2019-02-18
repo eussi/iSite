@@ -197,7 +197,7 @@ public class PostServiceImpl implements PostService {
             po.setSummary(post.getSummary());
         }
 
-        postMapper.insert(po);
+        postMapper.insertAndGetId(po);
 
         PostAttribute attr = new PostAttribute();
         attr.setContent(post.getContent());

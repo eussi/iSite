@@ -331,4 +331,21 @@
         views = views + ${steps}
         where id = #{id,jdbcType=BIGINT}
     </update>
+    <insert id="insertAndGetId" parameterType="com.eussi.blog.modules.po.Post">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into blog_post (id, author_id, channel_id,
+        comments, created, favors,
+        featured, status, summary,
+        tags, thumbnail, title,
+        views, weight, is_markdown
+        )
+        values (#{id,jdbcType=BIGINT}, #{authorId,jdbcType=BIGINT}, #{channelId,jdbcType=INTEGER},
+        #{comments,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{favors,jdbcType=INTEGER},
+        #{featured,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR},
+        #{tags,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+        #{views,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, #{isMarkdown,jdbcType=INTEGER}
+        )
+    </insert>
 </mapper>
