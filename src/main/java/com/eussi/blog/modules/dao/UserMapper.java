@@ -23,4 +23,6 @@ public interface UserMapper {
     User findByEmail(String email);
 
     List<User> findAllByIdIn(Set<Long> ids);
+
+    void updateUserPosts(User upUser);
 }

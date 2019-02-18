@@ -1,11 +1,14 @@
 package com.eussi.blog.modules.service.impl;
 
 import com.eussi.blog.base.lang.Consts;
+import com.eussi.blog.base.lang.EntityStatus;
 import com.eussi.blog.base.modules.Page;
 import com.eussi.blog.base.utils.CommonUtils;
+import com.eussi.blog.base.utils.PreviewTextUtils;
 import com.eussi.blog.modules.dao.PostAttributeMapper;
 import com.eussi.blog.modules.dao.PostMapper;
 import com.eussi.blog.modules.dao.UserMapper;
+import com.eussi.blog.modules.event.PostUpdateEvent;
 import com.eussi.blog.modules.po.Channel;
 import com.eussi.blog.modules.po.Post;
 import com.eussi.blog.modules.po.PostAttribute;
@@ -14,7 +17,10 @@ import com.eussi.blog.modules.service.PostService;
 import com.eussi.blog.modules.utils.BeanMapUtils;
 import com.eussi.blog.modules.vo.PostVO;
 import com.eussi.blog.modules.vo.UserVO;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +44,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private ServletContext servletContext;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Override
     public Page<PostVO> paging(Page page, int channelId, Set<Integer> excludeChannelIds, String ord) {
@@ -175,7 +184,49 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public long post(PostVO post) {
-        return 0;
+        Post po = new Post();
+        BeanUtils.copyProperties(post, po);
+
+        po.setCreated(new Date());
+        po.setStatus(EntityStatus.ENABLED);
+
+        // 处理摘要
+        if (StringUtils.isBlank(post.getSummary())) {
+            po.setSummary(trimSummary(post.getContent()));
+        } else {
+            po.setSummary(post.getSummary());
+        }
+
+        postMapper.insert(po);
+
+        PostAttribute attr = new PostAttribute();
+        attr.setContent(post.getContent());
+        attr.setId(po.getId());
+        submitAttr(attr);
+
+        onPushEvent(po, PostUpdateEvent.ACTION_PUBLISH);
+        return po.getId();
+    }
+
+    private void submitAttr(PostAttribute attr) {
+        postAttributeMapper.insert(attr);
+    }
+
+    private void onPushEvent(Post post, int action) {
+        PostUpdateEvent event = new PostUpdateEvent(System.currentTimeMillis());
+        event.setPostId(post.getId());
+        event.setUserId(post.getAuthorId());
+        event.setAction(action);
+        applicationContext.publishEvent(event);
+    }
+
+    /**
+     * 截取文章内容
+     * @param text
+     * @return
+     */
+    private String trimSummary(String text){
+        return PreviewTextUtils.getText(text, 126);
     }
 
     @Override

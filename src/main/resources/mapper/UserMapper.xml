@@ -215,4 +215,10 @@
         from blog_user
         where username = #{username,jdbcType=VARCHAR}
     </select>
+    <update id="updateUserPosts" parameterType="com.eussi.blog.modules.po.User">
+        update blog_user
+        set
+        views = posts + ${steps}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>
