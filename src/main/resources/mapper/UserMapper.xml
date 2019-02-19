@@ -218,7 +218,7 @@
     <update id="updateUserPosts" parameterType="com.eussi.blog.modules.po.User">
         update blog_user
         set
-        views = posts + ${steps}
+          posts = posts + ${steps}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

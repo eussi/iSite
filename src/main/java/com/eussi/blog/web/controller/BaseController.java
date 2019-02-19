@@ -85,7 +85,7 @@ public class BaseController {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		int pageSize = ServletRequestUtils.getIntParameter(request, "pageSize", 10);
 		int pageNo = ServletRequestUtils.getIntParameter(request, "pn", 1);
-		return new Page(pageNo - 1, pageSize);
+		return new Page(pageNo, pageSize);
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class BaseController {
 		if (pageSize == null || pageSize == 0) {
 			pageSize = 10;
 		}
-		return new Page(pn - 1, pageSize);
+		return new Page(pn, pageSize);
 	}
 
 	protected String getSuffix(String name) {

@@ -9,7 +9,7 @@ public interface UserEventService {
      * @param userId
      * @param postId
      */
-    void identityPost(Long userId, long postId);
+    void identityPost(Long userId, long postId, boolean addOne);
 
     /**
      * 自增评论数

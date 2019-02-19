@@ -17,10 +17,14 @@ public class UserEventServiceImpl implements UserEventService {
     @Autowired
     private UserMapper userMapper;
     @Override
-    public void identityPost(Long userId, long postId) {
+    public void identityPost(Long userId, long postId, boolean addOne) {
         User upUser = new User();
         upUser.setId(userId);
-        upUser.setSteps(Consts.IDENTITY_STEP);
+        if(addOne) {
+            upUser.setSteps(Consts.IDENTITY_STEP);
+        } else {
+            upUser.setSteps(Consts.DECREASE_STEP);
+        }
         userMapper.updateUserPosts(upUser);
     }
 

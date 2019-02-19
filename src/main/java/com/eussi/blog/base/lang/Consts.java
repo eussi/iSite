@@ -26,6 +26,8 @@ public interface Consts {
 	 */
 	String SEPARATOR = ",";
 
+    int DEFAULT_POST_WEIGHT = 0;
+
 	String ROLE_ADMIN = "admin";
 
 	int IDENTITY_STEP = 1; // 自增步进

@@ -25,11 +25,11 @@ public class PostCountEventHandler implements ApplicationListener<PostUpdateEven
 
         switch (event.getAction()) {
             case PostUpdateEvent.ACTION_PUBLISH:
-                userEventService.identityPost(event.getUserId(), event.getPostId());
+                userEventService.identityPost(event.getUserId(), event.getPostId(), true);
                 break;
             case PostUpdateEvent.ACTION_DELETE:
                 //需要减一
-//                userEventService.identityPost(event.getUserId(), event.getPostId());
+                userEventService.identityPost(event.getUserId(), event.getPostId(), false);
                 break;
         }
     }

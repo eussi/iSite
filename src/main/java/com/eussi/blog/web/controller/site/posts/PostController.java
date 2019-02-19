@@ -71,6 +71,9 @@ public class PostController extends BaseController {
 			postService.update(post);
 		} else {
             //新增
+            //涉及到weight排序，设置weight为默认值0
+            if(post.getWeight()==null)
+                post.setWeight(Consts.DEFAULT_POST_WEIGHT);
 			postService.post(post);
 		}
 		return Views.REDIRECT_USER_POSTS;

@@ -110,7 +110,17 @@ public class PostServiceImpl implements PostService {
     public Page<PostVO> pagingByAuthorId(Page page, long userId) {
         Post postQuery = new Post();
         postQuery.setAuthorId(userId);
+
+        //得到总记录数
+        Long totalCount = postMapper.getTotalCount(postQuery);
+        page.setTotalCount(totalCount);
+
+        //得到总页数
+        page.setTotalPage(totalCount/page.getPageSize() + 1);
+
         postQuery.setOrderBy(" created desc");
+
+        postQuery.setLimit(page.getStartIndex() + "," + page.getPageSize());
 
         List<Post> queryResults = postMapper.findAllByQuery(postQuery);
         // 填充对象数据

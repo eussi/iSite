@@ -13,7 +13,7 @@
 
             <div class="panel-body">
                 <ul class="list-group">
-					<#list page.content as row>
+					<#list page.data as row>
                         <li class="list-group-item" el="loop-${row.id}">
 							<a href="${base}/view/${row.id}" class="remove-padding-left">${row.title}</a>
                             <span class="meta">
