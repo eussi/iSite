@@ -2,6 +2,7 @@ package com.eussi.blog.web.controller.site.auth;
 
 import com.eussi.blog.base.data.Data;
 import com.eussi.blog.base.lang.Consts;
+import com.eussi.blog.base.utils.DomainUtils;
 import com.eussi.blog.modules.service.UserService;
 import com.eussi.blog.modules.vo.AccountProfile;
 import com.eussi.blog.modules.vo.UserVO;
@@ -40,6 +41,7 @@ public class RegisterController extends BaseController {
 
 		try {
 			post.setAvatar(Consts.AVATAR);
+            DomainUtils.fillZero(post);
 			userService.register(post);
 			data = Data.success("恭喜您! 注册成功", Data.NOOP);
 			data.addLink("login", "前往登录");

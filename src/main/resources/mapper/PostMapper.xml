@@ -257,7 +257,7 @@
                 and weight= #{weight,jdbcType=INTEGER}
             </if>
             <if test="isMarkdown != null">
-                is_markdown = #{isMarkdown,jdbcType=INTEGER},
+                is_markdown = #{isMarkdown,jdbcType=INTEGER}
             </if>
             <if test="notIn != null">
                 and ${notIn}

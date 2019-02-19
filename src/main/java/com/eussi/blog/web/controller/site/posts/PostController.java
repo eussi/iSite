@@ -2,6 +2,7 @@ package com.eussi.blog.web.controller.site.posts;
 
 import com.eussi.blog.base.data.Data;
 import com.eussi.blog.base.lang.Consts;
+import com.eussi.blog.base.utils.DomainUtils;
 import com.eussi.blog.modules.service.ChannelService;
 import com.eussi.blog.modules.service.PostService;
 import com.eussi.blog.modules.vo.AccountProfile;
@@ -71,9 +72,7 @@ public class PostController extends BaseController {
 			postService.update(post);
 		} else {
             //新增
-            //涉及到weight排序，设置weight为默认值0
-            if(post.getWeight()==null)
-                post.setWeight(Consts.DEFAULT_POST_WEIGHT);
+            DomainUtils.fillZero(post);//填充0
 			postService.post(post);
 		}
 		return Views.REDIRECT_USER_POSTS;
