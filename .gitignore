@@ -21,3 +21,5 @@ rebel.xml
 *.log
 *.db
 
+storage/thumbnails/2019
+

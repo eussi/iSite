@@ -7,7 +7,8 @@
             <ul class="footer-nav hidden-xs">
                 <li class="menu-item"><a href="${base}/about">关于作者</a></li>
                 <li class="menu-item"><a href="${base}/joinus">联系作者</a></li>
-                <li class="menu-item"><a href="${base}/faqs">常见问题</a></li>
+                <li class="menu-item"><a href="${base}/disclaimer">免责声明</a></li>
+            <#--<li class="menu-item"><a href="${base}/faqs">常见问题</a></li>-->
                 <li>
                     <script>
                         var _hmt = _hmt || [];
