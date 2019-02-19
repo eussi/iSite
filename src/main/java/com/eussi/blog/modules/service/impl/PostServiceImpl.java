@@ -222,6 +222,10 @@ public class PostServiceImpl implements PostService {
         postAttributeMapper.insert(attr);
     }
 
+    private void updateAttr(PostAttribute attr) {
+        postAttributeMapper.updateByPrimaryKeySelective(attr);
+    }
+
     private void onPushEvent(Post post, int action) {
         PostUpdateEvent event = new PostUpdateEvent(System.currentTimeMillis());
         event.setPostId(post.getId());
@@ -249,10 +253,38 @@ public class PostServiceImpl implements PostService {
         return postVO;
     }
 
+    /**
+     * 文章更新
+     * @param post
+     */
     @Override
-    public void update(PostVO p) {
+    public void update(PostVO post) {
+        Post po = postMapper.selectByPrimaryKey(post.getId());
+        if(po!=null) {
+            po.setTitle(post.getTitle());//标题
+            po.setChannelId(post.getChannelId());
+            po.setThumbnail(post.getThumbnail());
+            // 处理摘要
+            if (StringUtils.isBlank(post.getSummary())) {
+                po.setSummary(trimSummary(post.getContent()));
+            } else {
+                po.setSummary(post.getSummary());
+            }
 
+            po.setTags(post.getTags());
+
+            //更新文章信息
+            postMapper.updateByPrimaryKeySelective(po);
+
+            //更新文章内容
+            PostAttribute attr = new PostAttribute();
+            attr.setContent(post.getContent());
+            attr.setId(po.getId());
+            updateAttr(attr);
+        }
     }
+
+
 
     @Override
     public void updateFeatured(long id, int featured) {
