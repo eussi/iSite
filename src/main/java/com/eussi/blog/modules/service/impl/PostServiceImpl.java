@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import javax.servlet.ServletContext;
 import java.util.*;
@@ -298,11 +299,28 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void delete(long id) {
+        Post po = postMapper.selectByPrimaryKey(id);
+        if(po!=null) {
+            postMapper.deleteByPrimaryKey(id);
+            postAttributeMapper.deleteByPrimaryKey(id);
 
+            onPushEvent(po, PostUpdateEvent.ACTION_DELETE);
+        }
     }
 
     @Override
     public void delete(long id, long authorId) {
+        Post po = postMapper.selectByPrimaryKey(id);
+        if(po!=null) {
+            // 判断文章是否属于当前登录用户
+            Assert.isTrue(po.getAuthorId() == authorId, "认证失败");
+
+            postMapper.deleteByPrimaryKey(id);
+            postAttributeMapper.deleteByPrimaryKey(id);
+
+            onPushEvent(po, PostUpdateEvent.ACTION_DELETE);
+
+        }
 
     }
 
