@@ -32,7 +32,7 @@ public interface Views {
 	String USER_PROFILE = "/user/profile";
 	String USER_EMAIL = "/user/email";
 
-	String USERS_VIEW = "/users/view";
+	String USERS_VIEW = "/user/user_view";
 
 	String TAGS_TAG = "/tag";
 	
