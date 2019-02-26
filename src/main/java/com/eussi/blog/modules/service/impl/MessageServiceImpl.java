@@ -36,13 +36,17 @@ public class MessageServiceImpl implements MessageService{
         Message po = new Message();
         BeanUtils.copyProperties(notify, po);
         po.setCreated(new Date());
+        po.setStatus(Consts.UNREAD);
 
         messageMapper.insert(po);
     }
 
     @Override
     public int unread4Me(long ownId) {
-        return messageMapper.countByOwnIdAndUnread(ownId);
+        Message message = new Message();
+        message.setOwnId(ownId);
+        message.setStatus(Consts.UNREAD);
+        return messageMapper.countByOwnIdAndUnread(message);
     }
 
     @Override

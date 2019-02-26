@@ -115,11 +115,13 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-    <!-- status 0 unread 1 read -->
-    <select id="countByOwnIdAndUnread" parameterType="java.lang.Long" resultType="java.lang.Integer">
+    <select id="countByOwnIdAndUnread" parameterType="com.eussi.blog.modules.po.Message" resultType="java.lang.Integer">
         select
         count(*)
         from blog_message
-        where id = #{id,jdbcType=INTEGER} and status = 0
+        where own_id = #{ownId,jdbcType=INTEGER}
+        <if test="status != null">
+            and status = #{status,jdbcType=INTEGER}
+        </if>
     </select>
 </mapper>

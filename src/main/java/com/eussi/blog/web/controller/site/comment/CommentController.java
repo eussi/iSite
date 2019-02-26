@@ -52,6 +52,7 @@ public class CommentController extends BaseController {
 			data = Data.failure("请先登录在进行操作");
 			return data;
 		}
+        //toId是文章Id
 		if (toId > 0 && StringUtils.isNotEmpty(text)) {
 			AccountProfile up = getProfile();
 			
@@ -63,9 +64,9 @@ public class CommentController extends BaseController {
 			commentService.post(c);
 
             //如果被评论用户不是本用户，发送通知
-            if(toId != up.getId()) {
-			    sendNotify(up.getId(), toId, pid);
-            }
+//            if(toId != up.getId()) {
+			    sendNotify(up.getId(), toId, pid);//未实现功能，回复了某人，某人需要收到通知
+//            }
 			
 			data = Data.success("发表成功!", Data.NOOP);
 		}

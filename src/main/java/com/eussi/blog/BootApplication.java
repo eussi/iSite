@@ -26,7 +26,7 @@ public class BootApplication {
         ApplicationContext context = SpringApplication.run(BootApplication.class, args);
         String serverPort = context.getEnvironment().getProperty("server.port");
         if(log.isInfoEnabled()) {
-            log.info("BlogOfWangxm started at http://{}:{}", CommonUtils.ipToIPv4Str(CommonUtils.getIP()), serverPort);
+            log.info("Wangxueming's site started at http://{}:{}", CommonUtils.ipToIPv4Str(CommonUtils.getIP()), serverPort);
         }
     }
 

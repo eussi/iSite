@@ -16,5 +16,5 @@ public interface MessageMapper {
 
     int updateByPrimaryKey(Message record);
 
-    int countByOwnIdAndUnread(long id);
+    int countByOwnIdAndUnread(Message message);
 }
