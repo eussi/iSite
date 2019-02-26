@@ -3,25 +3,25 @@ package com.eussi.blog.modules.po;
 import java.util.Date;
 
 public class Message {
-    private Integer id;
+    private Long id;
 
     private Date created;
 
     private Integer event;
 
-    private Integer fromId;
+    private Long fromId;
 
-    private Integer ownId;
+    private Long ownId;
 
-    private Integer postId;
+    private Long postId;
 
-    private Integer status;
+    private Long status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -41,35 +41,35 @@ public class Message {
         this.event = event;
     }
 
-    public Integer getFromId() {
+    public Long getFromId() {
         return fromId;
     }
 
-    public void setFromId(Integer fromId) {
+    public void setFromId(Long fromId) {
         this.fromId = fromId;
     }
 
-    public Integer getOwnId() {
+    public Long getOwnId() {
         return ownId;
     }
 
-    public void setOwnId(Integer ownId) {
+    public void setOwnId(Long ownId) {
         this.ownId = ownId;
     }
 
-    public Integer getPostId() {
+    public Long getPostId() {
         return postId;
     }
 
-    public void setPostId(Integer postId) {
+    public void setPostId(Long postId) {
         this.postId = postId;
     }
 
-    public Integer getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 }

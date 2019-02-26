@@ -23,6 +23,10 @@ public interface UserMapper {
     User findByEmail(String email);
 
     List<User> findAllByIdIn(Set<Long> ids);
-
+    //增加或减少文章数
     void updateUserPosts(User upUser);
+    //增加或减少评论数
+    void updateUserComments(User upUser);
+
+    List<User> findAllByQuery(User user);
 }

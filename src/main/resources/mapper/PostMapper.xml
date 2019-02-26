@@ -312,7 +312,7 @@
                 and weight= #{weight,jdbcType=INTEGER}
             </if>
             <if test="isMarkdown != null">
-                is_markdown = #{isMarkdown,jdbcType=INTEGER},
+                is_markdown = #{isMarkdown,jdbcType=INTEGER}
             </if>
             <if test="notIn != null">
                 and ${notIn}
@@ -348,4 +348,10 @@
         #{views,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, #{isMarkdown,jdbcType=INTEGER}
         )
     </insert>
+    <update id="updateComments" parameterType="com.eussi.blog.modules.po.Post">
+        update blog_post
+        set
+        comments = comments + ${steps}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

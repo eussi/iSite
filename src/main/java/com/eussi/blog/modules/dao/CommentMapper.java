@@ -24,4 +24,8 @@ public interface CommentMapper {
     int deleteAllByIdIn(Collection<Long> ids);
 
     List<Comment> findAllByQuery(Comment commentQuery);
+
+    Long getTotalCount(Comment comment);
+    //自增并获得增加后主键
+    void insertAndGetId(Comment po);
 }

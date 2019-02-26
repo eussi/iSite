@@ -339,8 +339,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void identityComments(long id) {
-
+    public void identityComments(long id, boolean addOne) {
+        Post post = new Post();
+        post.setId(id);
+        if(addOne) {
+            post.setSteps(Consts.IDENTITY_STEP);
+        } else {
+            post.setSteps(Consts.DECREASE_STEP);
+        }
+        postMapper.updateComments(post);
     }
 
     @Override

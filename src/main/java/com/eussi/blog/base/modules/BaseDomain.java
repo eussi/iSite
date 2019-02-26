@@ -12,7 +12,7 @@ import java.util.Map;
 public class BaseDomain implements Serializable{
     private String orderBy;
 
-    private String in;
+    private String isIn;
 
     private String notIn;
 
@@ -28,12 +28,12 @@ public class BaseDomain implements Serializable{
         this.orderBy = orderBy;
     }
 
-    public String getIn() {
-        return in;
+    public String getIsIn() {
+        return isIn;
     }
 
-    public void setIn(String in) {
-        this.in = in;
+    public void setIsIn(String isIn) {
+        this.isIn = isIn;
     }
 
     public String getNotIn() {

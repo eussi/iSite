@@ -4,10 +4,7 @@ import com.eussi.blog.modules.po.Comment;
 import com.eussi.blog.modules.po.Favorite;
 import com.eussi.blog.modules.po.Post;
 import com.eussi.blog.modules.po.User;
-import com.eussi.blog.modules.vo.AccountProfile;
-import com.eussi.blog.modules.vo.FavoriteVO;
-import com.eussi.blog.modules.vo.PostVO;
-import com.eussi.blog.modules.vo.UserVO;
+import com.eussi.blog.modules.vo.*;
 import org.springframework.beans.BeanUtils;
 
 /**
@@ -38,6 +35,11 @@ public class BeanMapUtils {
 		return passport;
 	}
 
+    public static CommentVO copy(Comment po) {
+        CommentVO ret = new CommentVO();
+        BeanUtils.copyProperties(po, ret);
+        return ret;
+    }
 
 	public static PostVO copy(Post po) {
 		PostVO d = new PostVO();

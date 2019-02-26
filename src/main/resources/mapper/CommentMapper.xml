@@ -114,31 +114,34 @@
       to_id = #{toId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
-    <select id="findAllByQuery" parameterType="com.eussi.blog.modules.po.Comment" resultMap="BaseResultMap">
+    <select id="getTotalCount" parameterType="com.eussi.blog.modules.po.Comment" resultType="java.lang.Long">
         select
-        <include refid="Base_Column_List" />
+        count(*)
         from blog_comment
         <where>
             <if test="id != null">
-                and id = #{id,jdbcType=BIGINT},
+                and id = #{id,jdbcType=BIGINT}
             </if>
             <if test="authorId != null">
-                and author_id = #{authorId,jdbcType=BIGINT},
+                and author_id = #{authorId,jdbcType=BIGINT}
             </if>
             <if test="content != null">
-                and content = #{content,jdbcType=VARCHAR},
+                and content = #{content,jdbcType=VARCHAR}
             </if>
             <if test="created != null">
-                and created = #{created,jdbcType=TIMESTAMP},
+                and created = #{created,jdbcType=TIMESTAMP}
             </if>
             <if test="pid != null">
-                and pid = #{pid,jdbcType=BIGINT},
+                and pid = #{pid,jdbcType=BIGINT}
             </if>
             <if test="status != null">
-                and status = #{status,jdbcType=INTEGER},
+                and status = #{status,jdbcType=INTEGER}
             </if>
             <if test="toId != null">
-                and to_id = #{toId,jdbcType=BIGINT},
+                and to_id = #{toId,jdbcType=BIGINT}
+            </if>
+            <if test="isIn != null">
+                and ${isIn}
             </if>
         </where>
         <if test="orderBy != null">
@@ -148,4 +151,52 @@
             limit ${limit}
         </if>
     </select>
+    <select id="findAllByQuery" parameterType="com.eussi.blog.modules.po.Comment" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from blog_comment
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="authorId != null">
+                and author_id = #{authorId,jdbcType=BIGINT}
+            </if>
+            <if test="content != null">
+                and content = #{content,jdbcType=VARCHAR}
+            </if>
+            <if test="created != null">
+                and created = #{created,jdbcType=TIMESTAMP}
+            </if>
+            <if test="pid != null">
+                and pid = #{pid,jdbcType=BIGINT}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="toId != null">
+                and to_id = #{toId,jdbcType=BIGINT}
+            </if>
+            <if test="isIn != null">
+                and ${isIn}
+            </if>
+        </where>
+        <if test="orderBy != null">
+            order by ${orderBy}
+        </if>
+        <if test="limit != null">
+            limit ${limit}
+        </if>
+    </select>
+    <insert id="insertAndGetId" parameterType="com.eussi.blog.modules.po.Comment">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into blog_comment (id, author_id, content,
+        created, pid, status,
+        to_id)
+        values (#{id,jdbcType=BIGINT}, #{authorId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR},
+        #{created,jdbcType=TIMESTAMP}, #{pid,jdbcType=BIGINT}, #{status,jdbcType=INTEGER},
+        #{toId,jdbcType=BIGINT})
+    </insert>
 </mapper>

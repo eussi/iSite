@@ -202,14 +202,14 @@ create table blog_message
    primary key (id)
 );
 
-INSERT INTO `blog_channel` VALUES (1, 'banner', 'banner', 0);
-INSERT INTO `blog_channel` VALUES (2, 'blog', '博客', 0);
-INSERT INTO `blog_channel` VALUES (3, 'questions', '问答', 0);
+INSERT INTO `blog_channel` VALUES (1, 'index', '首页', 0);
+INSERT INTO `blog_channel` VALUES (2, 'develop', '开发', 0);
+INSERT INTO `blog_channel` VALUES (3, 'see', '见闻', 0);
 INSERT INTO `blog_channel` VALUES (4, 'share', '分享', 0);
 
-INSERT INTO `blog_options` VALUES ('1', 'site_name', '0', 'BlogOfWangxm');
+INSERT INTO `blog_options` VALUES ('1', 'site_name', '0', 'wangxueming’s site');
 INSERT INTO `blog_options` VALUES ('3', 'site_domain', '0', 'http://eussi.com');
-INSERT INTO `blog_options` VALUES ('4', 'site_keywords', '0', 'BlogOfWangxm,博客');
+INSERT INTO `blog_options` VALUES ('4', 'site_keywords', '0', 'Personal website, 个人博客');
 INSERT INTO `blog_options` VALUES ('5', 'site_description', '0', 'Blog of wangxueming');
 INSERT INTO `blog_options` VALUES ('6', 'site_metas', '0', '');
 INSERT INTO `blog_options` VALUES ('7', 'site_copyright', '0', 'Copyright © 2018 ICP：豫ICP备18034613号');

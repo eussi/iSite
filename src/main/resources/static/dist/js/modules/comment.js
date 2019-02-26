@@ -107,9 +107,9 @@ define(function(require, exports, module) {
 
         	J.getJSON(opts.load_url, {pageSize : opts.pageSize, pn: pn}, function (ret) {
         		
-        		$('#chat_count').html(ret.totalElements);
+        		$('#chat_count').html(ret.totalCount);
         		
-          		jQuery.each(ret.content, function(i, n) {
+          		jQuery.each(ret.data, function(i, n) {
     				var item = opts.onLoad.call(this, i, n);
 
     				html += item;

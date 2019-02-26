@@ -1,7 +1,9 @@
 package com.eussi.blog.modules.service.impl;
 
+import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.lang.EntityStatus;
 import com.eussi.blog.base.modules.Page;
+import com.eussi.blog.base.utils.CommonUtils;
 import com.eussi.blog.base.utils.MD5;
 import com.eussi.blog.modules.dao.UserMapper;
 import com.eussi.blog.modules.po.User;
@@ -41,7 +43,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Map<Long, UserVO> findMapByIds(Set<Long> ids) {
-        return null;
+        User user = new User();
+        user.setIsIn(CommonUtils.concatInQuery("id", ids, Consts.IN));
+
+        List<User> list = userMapper.findAllByQuery(user);
+
+        Map<Long, UserVO> rets = new HashMap<Long, UserVO>();
+        for(User u : list) {
+            UserVO uservo = BeanMapUtils.copy(u);
+            rets.put(u.getId(), uservo);
+        }
+        return rets;
     }
 
     @Override

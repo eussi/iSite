@@ -29,7 +29,14 @@ public class UserEventServiceImpl implements UserEventService {
     }
 
     @Override
-    public void identityComment(Long userId, long commentId, boolean identity) {
-
+    public void identityComment(Long userId, long commentId, boolean addOne) {
+        User upUser = new User();
+        upUser.setId(userId);
+        if(addOne) {
+            upUser.setSteps(Consts.IDENTITY_STEP);
+        } else {
+            upUser.setSteps(Consts.DECREASE_STEP);
+        }
+        userMapper.updateUserComments(upUser);
     }
 }

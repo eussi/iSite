@@ -120,7 +120,7 @@ public interface PostService {
 	 * 自增评论数
 	 * @param id
 	 */
-	void identityComments(long id);
+	void identityComments(long id, boolean addOne);
 
 	/**
 	 * 喜欢文章
