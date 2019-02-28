@@ -1,5 +1,6 @@
 package com.eussi.blog.modules.service.impl;
 
+import com.eussi.blog.base.exception.BlogException;
 import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.lang.EntityStatus;
 import com.eussi.blog.base.modules.Page;
@@ -115,12 +116,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AccountProfile update(UserVO user) {
-        return null;
+        User po = userMapper.selectByPrimaryKey(user.getId());
+        po.setName(user.getName());
+        po.setSignature(user.getSignature());
+
+        userMapper.updateByPrimaryKeySelective(po);
+        return BeanMapUtils.copyPassport(po);
     }
 
     @Override
     public AccountProfile updateEmail(long id, String email) {
-        return null;
+        User po = userMapper.selectByPrimaryKey(id);
+
+        if (email.equals(po.getEmail())) {
+            throw new BlogException("邮箱地址没做更改");
+        }
+
+        User queryEmail = new User();
+        queryEmail.setEmail(email);
+        List<User> check = userMapper.findAllByQuery(queryEmail);
+
+        if (check != null && check.size()>0) {
+            throw new BlogException("该邮箱地址已经被使用了");
+        }
+        po.setEmail(email);
+        userMapper.updateByPrimaryKeySelective(po);
+        return BeanMapUtils.copyPassport(po);
     }
 
     @Override
@@ -142,17 +163,30 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AccountProfile updateAvatar(long id, String path) {
-        return null;
+        User po = userMapper.selectByPrimaryKey(id);
+        po.setAvatar(path);
+        userMapper.updateByPrimaryKeySelective(po);
+        return BeanMapUtils.copyPassport(po);
     }
 
     @Override
     public void updatePassword(long id, String newPassword) {
+        User po = userMapper.selectByPrimaryKey(id);
 
+        Assert.hasLength(newPassword, "密码不能为空!");
+
+        po.setPassword(MD5.md5(newPassword));
+        userMapper.updateByPrimaryKeySelective(po);
     }
 
     @Override
     public void updatePassword(long id, String oldPassword, String newPassword) {
+        User po = userMapper.selectByPrimaryKey(id);
+        Assert.hasLength(newPassword, "密码不能为空!");
 
+        Assert.isTrue(MD5.md5(oldPassword).equals(po.getPassword()), "当前密码不正确");
+        po.setPassword(MD5.md5(newPassword));
+        userMapper.updateByPrimaryKeySelective(po);
     }
 
     @Override
