@@ -2,6 +2,8 @@ package com.eussi.blog.modules.dao;
 
 import com.eussi.blog.modules.po.Favorite;
 
+import java.util.List;
+
 public interface FavoriteMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -23,4 +25,8 @@ public interface FavoriteMapper {
      * @return
      */
     Favorite findByOwnIdAndPostId(long ownId, long postId);
+
+    Long getTotalCount(Favorite query);
+
+    List<Favorite> findAllByQuery(Favorite query);
 }

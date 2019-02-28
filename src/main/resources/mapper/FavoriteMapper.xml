@@ -79,4 +79,60 @@
       post_id = #{postId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="getTotalCount" parameterType="com.eussi.blog.modules.po.Favorite" resultType="java.lang.Long">
+        select
+        count(*)
+        from blog_favorite
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="created != null">
+                and created = #{created,jdbcType=TIMESTAMP}
+            </if>
+            <if test="ownId != null">
+                and own_id = #{ownId,jdbcType=BIGINT}
+            </if>
+            <if test="postId != null">
+                and post_id = #{postId,jdbcType=BIGINT}
+            </if>
+            <if test="isIn != null">
+                and ${isIn}
+            </if>
+        </where>
+        <if test="orderBy != null">
+            order by ${orderBy}
+        </if>
+        <if test="limit != null">
+            limit ${limit}
+        </if>
+    </select>
+    <select id="findAllByQuery" parameterType="com.eussi.blog.modules.po.Favorite" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from blog_favorite
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="created != null">
+                and created = #{created,jdbcType=TIMESTAMP}
+            </if>
+            <if test="ownId != null">
+                and own_id = #{ownId,jdbcType=BIGINT}
+            </if>
+            <if test="postId != null">
+                and post_id = #{postId,jdbcType=BIGINT}
+            </if>
+            <if test="isIn != null">
+                and ${isIn}
+            </if>
+        </where>
+        <if test="orderBy != null">
+            order by ${orderBy}
+        </if>
+        <if test="limit != null">
+            limit ${limit}
+        </if>
+    </select>
 </mapper>

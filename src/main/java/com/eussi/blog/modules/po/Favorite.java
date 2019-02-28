@@ -1,8 +1,10 @@
 package com.eussi.blog.modules.po;
 
+import com.eussi.blog.base.modules.BaseDomain;
+
 import java.util.Date;
 
-public class Favorite {
+public class Favorite extends BaseDomain{
     private Long id;
 
     private Date created;
