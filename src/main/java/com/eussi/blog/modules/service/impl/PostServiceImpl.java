@@ -14,6 +14,7 @@ import com.eussi.blog.modules.po.Post;
 import com.eussi.blog.modules.po.PostAttribute;
 import com.eussi.blog.modules.po.User;
 import com.eussi.blog.modules.service.PostService;
+import com.eussi.blog.modules.service.UserService;
 import com.eussi.blog.modules.utils.BeanMapUtils;
 import com.eussi.blog.modules.vo.PostVO;
 import com.eussi.blog.modules.vo.UserVO;
@@ -48,6 +49,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private ApplicationContext applicationContext;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public Page<PostVO> paging(Page page, int channelId, Set<Integer> excludeChannelIds, String ord) {
@@ -190,7 +194,26 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Map<Long, PostVO> findMapByIds(Set<Long> ids) {
-        return null;
+        if (ids == null || ids.isEmpty()) {
+            return Collections.emptyMap();
+        }
+
+        Post query = new Post();
+        query.setIsIn(CommonUtils.concatInQuery("id", ids, Consts.IN));
+        List<Post> list = postMapper.findAllByQuery(query);
+
+        Map<Long, PostVO> rets = new HashMap<>();
+        HashSet<Long> uids = new HashSet<>();
+
+        for(Post po : list) {
+            rets.put(po.getId(), BeanMapUtils.copy(po));
+            uids.add(po.getAuthorId());
+        }
+
+        // 加载用户信息
+        buildUsers(rets.values(), uids);
+
+        return rets;
     }
 
     @Override
@@ -390,6 +413,14 @@ public class PostServiceImpl implements PostService {
                 postVO.setChannel(channel);
                 break;
             }
+        }
+    }
+
+    //加载用户信息
+    private void buildUsers(Collection<PostVO> posts, Set<Long> uids) {
+        Map<Long, UserVO> userMap = userService.findMapByIds(uids);
+        for(PostVO postVO : posts) {
+            postVO.setAuthor(userMap.get(postVO.getAuthorId()));
         }
     }
 }

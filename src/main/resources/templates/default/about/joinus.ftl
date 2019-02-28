@@ -1,6 +1,6 @@
 <#include "/default/layout/ui.ftl"/>
 
-<@layout "加入我们">
+<@layout "联系作者">
 
 <div class="row main">
     <div class="col-xs-12 col-md-9 side-left topics-show">

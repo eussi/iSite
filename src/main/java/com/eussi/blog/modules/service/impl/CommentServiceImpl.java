@@ -7,6 +7,7 @@ import com.eussi.blog.modules.dao.CommentMapper;
 import com.eussi.blog.modules.po.Comment;
 import com.eussi.blog.modules.po.Post;
 import com.eussi.blog.modules.service.CommentService;
+import com.eussi.blog.modules.service.PostService;
 import com.eussi.blog.modules.service.UserEventService;
 import com.eussi.blog.modules.service.UserService;
 import com.eussi.blog.modules.utils.BeanMapUtils;
@@ -32,6 +33,8 @@ public class CommentServiceImpl implements CommentService {
     private UserEventService userEventService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private PostService postService;
 
     @Override
     public Page<CommentVO> paging4Admin(Page page) {
@@ -40,7 +43,45 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Page<CommentVO> paging4Home(Page page, long authorId) {
-        return null;
+        Comment comment = new Comment();
+        comment.setAuthorId(authorId);
+
+        //查询总记录数
+        //得到总记录数
+        Long totalCount = commentMapper.getTotalCount(comment);
+        page.setTotalCount(totalCount);
+
+        comment.setOrderBy("  created desc");
+        comment.setLimit(page.getStartIndex() + "," + page.getPageSize());
+        List<Comment> comments = commentMapper.findAllByQuery(comment);
+
+        List<CommentVO> rets = new ArrayList<>();
+        Set<Long> parentIds = new HashSet<>();
+        Set<Long> uids = new HashSet<>();
+        Set<Long> postIds = new HashSet<>();
+
+        for(Comment c : comments) {
+            CommentVO cv = BeanMapUtils.copy(c);
+            //找可能包含父节点的评论
+            if (c.getPid() > 0) {
+                parentIds.add(c.getPid());
+            }
+            uids.add(c.getAuthorId());
+            postIds.add(c.getToId());
+            rets.add(cv);
+        }
+
+        // 加载父节点
+        buildParent(rets, parentIds);
+
+        //填充评论作者
+        buildUsers(rets, uids);
+
+        //填充文章
+        buildPosts(rets, postIds);
+
+        page.setData(rets);
+        return page;
     }
 
     @Override
@@ -170,6 +211,13 @@ public class CommentServiceImpl implements CommentService {
         //填充评论的作者
         for(CommentVO cv : comments) {
             cv.setAuthor(userMap.get(cv.getAuthorId()));
+        }
+    }
+
+    private void buildPosts(Collection<CommentVO> comments, Set<Long> postIds) {
+        Map<Long, PostVO> postMap = postService.findMapByIds(postIds);
+        for(CommentVO commentVO : comments) {
+            commentVO.setPost(postMap.get(commentVO.getToId()));
         }
     }
 }
