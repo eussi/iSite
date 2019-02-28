@@ -1,9 +1,6 @@
 package com.eussi.blog.modules.utils;
 
-import com.eussi.blog.modules.po.Comment;
-import com.eussi.blog.modules.po.Favorite;
-import com.eussi.blog.modules.po.Post;
-import com.eussi.blog.modules.po.User;
+import com.eussi.blog.modules.po.*;
 import com.eussi.blog.modules.vo.*;
 import org.springframework.beans.BeanUtils;
 
@@ -54,4 +51,9 @@ public class BeanMapUtils {
 		return ret;
 	}
 
+    public static MessageVO copy(Message po) {
+        MessageVO ret = new MessageVO();
+        BeanUtils.copyProperties(po, ret);
+        return ret;
+    }
 }

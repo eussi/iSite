@@ -3,6 +3,8 @@ package com.eussi.blog.modules.dao;
 
 import com.eussi.blog.modules.po.Message;
 
+import java.util.List;
+
 public interface MessageMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -17,4 +19,10 @@ public interface MessageMapper {
     int updateByPrimaryKey(Message record);
 
     int countByOwnIdAndUnread(Message message);
+
+    Long getTotalCount(Message query);
+
+    List<Message> findAllByQuery(Message query);
+
+    void updateByOwnId(Message update);
 }

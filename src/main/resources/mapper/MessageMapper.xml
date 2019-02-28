@@ -124,4 +124,99 @@
             and status = #{status,jdbcType=INTEGER}
         </if>
     </select>
+    <select id="getTotalCount" parameterType="com.eussi.blog.modules.po.Message" resultType="java.lang.Long">
+        select
+        count(*)
+        from blog_message
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="created != null">
+                and created = #{created,jdbcType=TIMESTAMP}
+            </if>
+            <if test="event != null">
+                and event = #{event,jdbcType=INTEGER}
+            </if>
+            <if test="fromId != null">
+                and from_id = #{fromId,jdbcType=INTEGER}
+            </if>
+            <if test="ownId != null">
+                and own_id = #{ownId,jdbcType=INTEGER}
+            </if>
+            <if test="postId != null">
+                and post_id = #{postId,jdbcType=INTEGER}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="isIn != null">
+                and ${isIn}
+            </if>
+        </where>
+        <if test="orderBy != null">
+            order by ${orderBy}
+        </if>
+        <if test="limit != null">
+            limit ${limit}
+        </if>
+    </select>
+    <select id="findAllByQuery" parameterType="com.eussi.blog.modules.po.Message" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from blog_message
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="created != null">
+                and created = #{created,jdbcType=TIMESTAMP}
+            </if>
+            <if test="event != null">
+                and event = #{event,jdbcType=INTEGER}
+            </if>
+            <if test="fromId != null">
+                and from_id = #{fromId,jdbcType=INTEGER}
+            </if>
+            <if test="ownId != null">
+                and own_id = #{ownId,jdbcType=INTEGER}
+            </if>
+            <if test="postId != null">
+                and post_id = #{postId,jdbcType=INTEGER}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="isIn != null">
+                and ${isIn}
+            </if>
+        </where>
+        <if test="orderBy != null">
+            order by ${orderBy}
+        </if>
+        <if test="limit != null">
+            limit ${limit}
+        </if>
+    </select>
+    <update id="updateByOwnId" parameterType="com.eussi.blog.modules.po.Message">
+        update blog_message
+        <set>
+            <if test="created != null">
+                created = #{created,jdbcType=TIMESTAMP},
+            </if>
+            <if test="event != null">
+                event = #{event,jdbcType=INTEGER},
+            </if>
+            <if test="fromId != null">
+                from_id = #{fromId,jdbcType=INTEGER},
+            </if>
+            <if test="postId != null">
+                post_id = #{postId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+        where own_id = #{ownId,jdbcType=INTEGER}
+    </update>
 </mapper>

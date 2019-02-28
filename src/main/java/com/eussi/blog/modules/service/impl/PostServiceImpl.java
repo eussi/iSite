@@ -5,6 +5,7 @@ import com.eussi.blog.base.lang.EntityStatus;
 import com.eussi.blog.base.modules.Page;
 import com.eussi.blog.base.utils.CommonUtils;
 import com.eussi.blog.base.utils.PreviewTextUtils;
+import com.eussi.blog.modules.dao.ChannelMapper;
 import com.eussi.blog.modules.dao.PostAttributeMapper;
 import com.eussi.blog.modules.dao.PostMapper;
 import com.eussi.blog.modules.dao.UserMapper;
@@ -13,6 +14,7 @@ import com.eussi.blog.modules.po.Channel;
 import com.eussi.blog.modules.po.Post;
 import com.eussi.blog.modules.po.PostAttribute;
 import com.eussi.blog.modules.po.User;
+import com.eussi.blog.modules.service.ChannelService;
 import com.eussi.blog.modules.service.PostService;
 import com.eussi.blog.modules.service.UserService;
 import com.eussi.blog.modules.utils.BeanMapUtils;
@@ -44,14 +46,18 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    private ServletContext servletContext;
+//    @Autowired
+//    private ServletContext servletContext; //service层引用此对象，其他service层对象引用此对象会出现异常
+    //找不到servletContext对象异常
 
     @Autowired
     private ApplicationContext applicationContext;
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ChannelService channelService;
 
     @Override
     public Page<PostVO> paging(Page page, int channelId, Set<Integer> excludeChannelIds, String ord) {
@@ -407,7 +413,8 @@ public class PostServiceImpl implements PostService {
 
         //获取channel
         Integer postChannelId = post.getChannelId();
-        List<Channel> channels = (List<Channel>) servletContext.getAttribute("channels");
+//        List<Channel> channels = (List<Channel>) servletContext.getAttribute("channels");
+        List<Channel> channels = channelService.findAll(Consts.STATUS_NORMAL);
         for(Channel channel : channels) {
             if(channel.getId()==postChannelId) {
                 postVO.setChannel(channel);
