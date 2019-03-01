@@ -188,19 +188,23 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> queryResults = commentMapper.findAllByQuery(commentQuery);
         // 填充对象数据
         List<CommentVO> results = new ArrayList<CommentVO>();
+        Set<Long> uids = new HashSet<>();
         for(Comment comment : queryResults) {
             CommentVO commentVO = new CommentVO();
             BeanUtils.copyProperties(comment, commentVO);
-
+            uids.add(comment.getAuthorId());
             results.add(commentVO);
         }
+
+        //填充对象数据
+        buildUsers(results, uids);
 
         return results;
     }
 
     @Override
     public long count() {
-        return 0;
+        return commentMapper.getTotalCount(new Comment());
     }
 
     //加载父节点

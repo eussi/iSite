@@ -85,4 +85,28 @@
         from blog_channel
         where status = #{status,jdbcType=INTEGER}
     </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from blog_channel
+    </select>
+    <select id="getTotalCount" parameterType="com.eussi.blog.modules.po.Channel" resultType="java.lang.Long">
+        select
+        count(*)
+        from blog_channel
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="key != null">
+                and key_ = #{key,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
 </mapper>

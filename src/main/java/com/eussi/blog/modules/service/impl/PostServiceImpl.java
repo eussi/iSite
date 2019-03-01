@@ -408,7 +408,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public long count() {
-        return 0;
+        return postMapper.getTotalCount(new Post());
     }
 
     /**

@@ -285,4 +285,56 @@
             limit ${limit}
         </if>
     </select>
+    <select id="getTotalCount" parameterType="com.eussi.blog.modules.po.User" resultType="java.lang.Long">
+        select
+        count(*)
+        from blog_user
+        <where>
+            <if test="username != null">
+                and username = #{username,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="avatar != null">
+                and avatar = #{avatar,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null">
+                and email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="password != null">
+                and password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="created != null">
+                and created = #{created,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updated != null">
+                and updated = #{updated,jdbcType=TIMESTAMP}
+            </if>
+            <if test="lastLogin != null">
+                and last_login = #{lastLogin,jdbcType=TIMESTAMP}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender,jdbcType=INTEGER}
+            </if>
+            <if test="roleId != null">
+                and role_id = #{roleId,jdbcType=INTEGER}
+            </if>
+            <if test="comments != null">
+                and comments = #{comments,jdbcType=INTEGER}
+            </if>
+            <if test="posts != null">
+                and posts = #{posts,jdbcType=INTEGER}
+            </if>
+            <if test="signature != null">
+                and signature = #{signature,jdbcType=VARCHAR}
+            </if>
+            <if test="isIn != null">
+                and ${isIn}
+            </if>
+        </where>
+    </select>
 </mapper>

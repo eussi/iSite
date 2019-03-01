@@ -29,4 +29,6 @@ public interface UserMapper {
     void updateUserComments(User upUser);
 
     List<User> findAllByQuery(User user);
+
+    long getTotalCount(User user);
 }

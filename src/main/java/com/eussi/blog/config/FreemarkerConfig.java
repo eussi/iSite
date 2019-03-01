@@ -1,10 +1,7 @@
 package com.eussi.blog.config;
 
 
-import com.eussi.blog.modules.freemarker.directive.AuthorContentsDirective;
-import com.eussi.blog.modules.freemarker.directive.ContentsDirective;
-import com.eussi.blog.modules.freemarker.directive.ControlsDirective;
-import com.eussi.blog.modules.freemarker.directive.ResourceDirective;
+import com.eussi.blog.modules.freemarker.directive.*;
 import com.eussi.blog.modules.freemarker.method.TimeAgoMethod;
 import com.eussi.blog.shiro.ShiroTags;
 import freemarker.template.Configuration;
@@ -31,6 +28,7 @@ public class FreemarkerConfig {
         configuration.setSharedVariable("controls", applicationContext.getBean(ControlsDirective.class));
         configuration.setSharedVariable("resource", applicationContext.getBean(ResourceDirective.class));
         configuration.setSharedVariable("author_contents", applicationContext.getBean(AuthorContentsDirective.class));
+        configuration.setSharedVariable("menus", applicationContext.getBean(MenusDirective.class));
 
         configuration.setSharedVariable("timeAgo", new TimeAgoMethod());
         configuration.setSharedVariable("shiro", new ShiroTags());
