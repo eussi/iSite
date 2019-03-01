@@ -100,12 +100,6 @@
                 and ${isIn}
             </if>
         </where>
-        <if test="orderBy != null">
-            order by ${orderBy}
-        </if>
-        <if test="limit != null">
-            limit ${limit}
-        </if>
     </select>
     <select id="findAllByQuery" parameterType="com.eussi.blog.modules.po.Favorite" resultMap="BaseResultMap">
         select
@@ -135,4 +129,24 @@
             limit ${limit}
         </if>
     </select>
+    <delete id="deleteByQuery" parameterType="com.eussi.blog.modules.po.Favorite">
+        delete from blog_favorite
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="created != null">
+                and created = #{created,jdbcType=TIMESTAMP}
+            </if>
+            <if test="ownId != null">
+                and own_id = #{ownId,jdbcType=BIGINT}
+            </if>
+            <if test="postId != null">
+                and post_id = #{postId,jdbcType=BIGINT}
+            </if>
+            <if test="isIn != null">
+                and ${isIn}
+            </if>
+        </where>
+    </delete>
 </mapper>

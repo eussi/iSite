@@ -14,7 +14,7 @@
             <div class="panel-body">
                 <ul class="list-group">
 					<#list page.data as row>
-                        <li class="list-group-item" id="loop-${target.id}">
+                        <li class="list-group-item" id="loop-${row.id}">
 							<#if row.post??>
                                 <a href="${base}/view/${row.post.id}" class="remove-padding-left">${row.post.title}</a>
 							<#else>
@@ -25,7 +25,7 @@
       						</span>
 
                             <div class="pull-right hidden-xs">
-                                <a class="act" href="javascript:void(0);" data-evt="unfavor" data-id="${target.id}">
+                                <a class="act" href="javascript:void(0);" data-evt="unfavor" data-id="${row.post.id}" favor-id="${row.id}">
                                     <i class="icon icon-close"></i>
 								</a>
                             </div>
@@ -57,6 +57,7 @@
 $(function() {
 	$('a[data-evt=unfavor]').click(function () {
 		var id = $(this).attr('data-id');
+		var favorid = $(this).attr('favor-id');
 
 		layer.confirm('确定删除此项吗?', {
             btn: ['确定','取消'], //按钮
@@ -65,8 +66,8 @@ $(function() {
 			jQuery.getJSON('${base}/user/unfavor', {'id': id}, function (ret) {
 				layer.msg(ret.message, {icon: 1});
 				if (ret.code >=0) {
-					$('#loop-' + id).fadeOut();
-					$('#loop-' + id).remove();
+					$('#loop-' + favorid).fadeOut();
+					$('#loop-' + favorid).remove();
 				}
 			});
 

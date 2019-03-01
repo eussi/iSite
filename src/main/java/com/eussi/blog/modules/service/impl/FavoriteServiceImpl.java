@@ -55,7 +55,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
         Assert.notEmpty(lists, "还没有喜欢过此文章");
 
-        favoriteMapper.deleteByPrimaryKey(query.getId());
+        favoriteMapper.deleteByQuery(query);
     }
 
     @Override

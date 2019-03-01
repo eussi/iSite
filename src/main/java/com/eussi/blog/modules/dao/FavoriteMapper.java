@@ -29,4 +29,6 @@ public interface FavoriteMapper {
     Long getTotalCount(Favorite query);
 
     List<Favorite> findAllByQuery(Favorite query);
+
+    void deleteByQuery(Favorite query);
 }

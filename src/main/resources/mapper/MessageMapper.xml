@@ -154,12 +154,6 @@
                 and ${isIn}
             </if>
         </where>
-        <if test="orderBy != null">
-            order by ${orderBy}
-        </if>
-        <if test="limit != null">
-            limit ${limit}
-        </if>
     </select>
     <select id="findAllByQuery" parameterType="com.eussi.blog.modules.po.Message" resultMap="BaseResultMap">
         select

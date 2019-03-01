@@ -18,6 +18,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.*;
 
@@ -161,7 +162,17 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void delete(long id, long authorId) {
-
+        Comment comment = commentMapper.selectByPrimaryKey(id);
+        if(comment!=null && comment.getAuthorId()==authorId) {
+            // 判断文章是否属于当前登录用户
+            Assert.isTrue(comment.getAuthorId()==authorId, "认证失败");
+            commentMapper.deleteByPrimaryKey(id);
+            long postId = comment.getToId();
+            // 评论数评论数
+            postService.identityComments(postId, false);
+            //用户评论数减1
+            userEventService.identityComment(authorId, id, false);
+        }
     }
 
     @Override
