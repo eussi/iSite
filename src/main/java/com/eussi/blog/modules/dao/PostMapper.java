@@ -45,4 +45,6 @@ public interface PostMapper {
     Long insertAndGetId(Post po);
 
     void updateComments(Post post);
+
+    void updateFavors(Post post);
 }

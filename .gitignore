@@ -22,4 +22,5 @@ rebel.xml
 *.db
 
 storage/thumbnails/2019
+storage/avatars/
 

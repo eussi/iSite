@@ -1,5 +1,6 @@
 package com.eussi.blog.modules.service.impl;
 
+import com.eussi.blog.base.exception.BlogException;
 import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.lang.EntityStatus;
 import com.eussi.blog.base.modules.Page;
@@ -15,6 +16,7 @@ import com.eussi.blog.modules.po.Post;
 import com.eussi.blog.modules.po.PostAttribute;
 import com.eussi.blog.modules.po.User;
 import com.eussi.blog.modules.service.ChannelService;
+import com.eussi.blog.modules.service.FavoriteService;
 import com.eussi.blog.modules.service.PostService;
 import com.eussi.blog.modules.service.UserService;
 import com.eussi.blog.modules.utils.BeanMapUtils;
@@ -58,6 +60,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private ChannelService channelService;
+
+    @Autowired
+    private FavoriteService favoriteService;
 
     @Override
     public Page<PostVO> paging(Page page, int channelId, Set<Integer> excludeChannelIds, String ord) {
@@ -381,12 +386,24 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void favor(long userId, long postId) {
+        Post post = new Post();
+        post.setId(postId);
+        post.setSteps(Consts.IDENTITY_STEP);
 
+        //事务未生效，问题待解决，这里先做添加操作，添加失败，再更新文章
+        favoriteService.add(userId, postId);
+        postMapper.updateFavors(post);
     }
 
     @Override
     public void unfavor(long userId, long postId) {
+        Post post = new Post();
+        post.setId(postId);
+        post.setSteps(Consts.DECREASE_STEP);
 
+        //事务未生效，问题待解决，这里先做添加操作，添加失败，再更新文章
+        favoriteService.delete(userId, postId);
+        postMapper.updateFavors(post);
     }
 
     @Override

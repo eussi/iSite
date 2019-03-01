@@ -354,4 +354,10 @@
         comments = comments + ${steps}
         where id = #{id,jdbcType=BIGINT}
     </update>
+    <update id="updateFavors" parameterType="com.eussi.blog.modules.po.Post">
+        update blog_post
+        set
+        favors = favors + ${steps}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>
