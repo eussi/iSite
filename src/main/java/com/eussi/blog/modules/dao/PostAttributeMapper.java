@@ -1,17 +1,8 @@
 package com.eussi.blog.modules.dao;
 
+import com.eussi.blog.base.modules.BaseMapper;
 import com.eussi.blog.modules.po.PostAttribute;
 
-public interface PostAttributeMapper {
-    int deleteByPrimaryKey(Long id);
+public interface PostAttributeMapper extends BaseMapper<PostAttribute>{
 
-    int insert(PostAttribute record);
-
-    int insertSelective(PostAttribute record);
-
-    PostAttribute selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(PostAttribute record);
-
-    int updateByPrimaryKeyWithBLOBs(PostAttribute record);
 }

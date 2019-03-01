@@ -1,23 +1,10 @@
 package com.eussi.blog.modules.dao;
 
+import com.eussi.blog.base.modules.BaseMapper;
 import com.eussi.blog.modules.po.Options;
 
-import java.util.List;
-
-public interface OptionsMapper {
-    int deleteByPrimaryKey(Long id);
-
-    int insert(Options record);
-
-    int insertSelective(Options record);
-
-    Options selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(Options record);
-
-    int updateByPrimaryKey(Options record);
+public interface OptionsMapper extends BaseMapper<Options>{
 
     Options findByKey(String key);
 
-    List<Options> findAll();
 }

@@ -11,7 +11,4 @@ public interface ChannelMapper extends BaseMapper<Channel>{
     List<Channel> findAllByStatus(int status);
 
     List<Channel> findAllByIdIn(Collection<Integer> id);
-
-    List<Channel> findAll();
-
 }

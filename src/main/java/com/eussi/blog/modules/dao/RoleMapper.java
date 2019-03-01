@@ -1,23 +1,11 @@
 package com.eussi.blog.modules.dao;
 
+import com.eussi.blog.base.modules.BaseMapper;
 import com.eussi.blog.modules.po.Role;
 
 import java.util.List;
-import java.util.Set;
 
-public interface RoleMapper {
-    int deleteByPrimaryKey(Long id);
-
-    int insert(Role record);
-
-    int insertSelective(Role record);
-
-    Role selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(Role record);
-
-    int updateByPrimaryKey(Role record);
-
+public interface RoleMapper extends BaseMapper<Role>{
     /**
      * 根据角色名称查询角色
      *
