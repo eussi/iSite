@@ -36,5 +36,9 @@ A personal blog project
 #### 数据库物理模型：
 ![image](https://github.com/eussi/BlogOfWangxm/blob/master/doc/db_pdm.png)
 
-#### 访问首页如图：
-![image](https://github.com/eussi/BlogOfWangxm/blob/master/doc/index.png)
+#### 首页如图：
+![image](https://github.com/eussi/BlogOfWangxm/blob/master/doc/preview/index.png)
+#### 用户首页如图：
+![image](https://github.com/eussi/BlogOfWangxm/blob/master/doc/preview/user_index.png)
+#### 后台首页如图：
+![image](https://github.com/eussi/BlogOfWangxm/blob/master/doc/preview/back_index.png)

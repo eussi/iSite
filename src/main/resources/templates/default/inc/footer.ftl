@@ -27,7 +27,7 @@
         </div>
         <div class="footer-col footer-col-sns hidden-xs hidden-sm">
             <div class="footer-sns">
-                <span>Powered By <a href="http://eussi.top/?copyright" target="_blank">BlogOfWangxm</a></span>
+                <span>Powered By <a href="http://eussi.top/?copyright" target="_blank">Wangxueming's Site</a></span>
             </div>
         </div>
     </div>
