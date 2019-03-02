@@ -3,6 +3,7 @@ package com.eussi.blog.web.controller.admin;
 import com.eussi.blog.base.data.Data;
 import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.modules.Page;
+import com.eussi.blog.base.utils.DomainUtils;
 import com.eussi.blog.modules.service.ChannelService;
 import com.eussi.blog.modules.service.PostService;
 import com.eussi.blog.modules.vo.AccountProfile;
@@ -13,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -72,29 +74,23 @@ public class PostController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String subUpdate(PostVO post, @RequestParam(value = "file", required=false) MultipartFile file) throws Exception {
-		if (post != null) {
-			/**
-			 * 保存预览图片
-			 */
-			if (file != null && !file.isEmpty()) {
-				String thumbnail = storageFactory.get().storeScale(file, Consts.thumbnailPath, 360, 200);
+	public String subUpdate(PostVO post) throws Exception {
+        Assert.notNull(post, "参数不完整");
+        Assert.state(StringUtils.isNotBlank(post.getTitle()), "标题不能为空");
+        Assert.state(StringUtils.isNotBlank(post.getContent()), "内容不能为空");
 
-				if (StringUtils.isNotBlank(post.getThumbnail())) {
-					storageFactory.get().deleteFile(post.getThumbnail());
-				}
+        if (post.getId() !=null) {
+            PostVO exist = postService.get(post.getId());
+            Assert.notNull(exist, "文章不存在");
+            postService.update(post);
+        } else {
+            AccountProfile profile = getProfile();
+            post.setAuthorId(profile.getId());
+            //新增
+            DomainUtils.fillZero(post);//填充0
+            postService.post(post);
+        }
 
-				post.setThumbnail(thumbnail);
-			}
-
-			if (post.getId() > 0) {
-				postService.update(post);
-			} else {
-				AccountProfile profile = getProfile();
-				post.setAuthorId(profile.getId());
-				postService.post(post);
-			}
-		}
 		return Views.REDIRECT_ADMIN_POST_LIST;
 	}
 

@@ -398,7 +398,11 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void delete(Collection<Long> ids) {
-
+        if(ids!=null && ids.size()>0) {
+            for(long id : ids) {
+                delete(id);
+            }
+        }
     }
 
     @Override
