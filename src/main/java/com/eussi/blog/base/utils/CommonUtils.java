@@ -35,8 +35,16 @@ public class CommonUtils {
             return sb.toString().
                     substring(0, sb.toString().length() - 1).
                     concat(") ");
+        } else {
+            //返回null造成查询条件没有了，结果是查询出所有数据
+            if(type==0) {
+                return field.concat(" in ('')");
+            }
+            else {
+                return field.concat(" not in ('')");
+            }
         }
-        return null;
+//        return null;
     }
 
     public static String getHostName() {

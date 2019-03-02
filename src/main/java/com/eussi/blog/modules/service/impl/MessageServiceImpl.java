@@ -22,7 +22,7 @@ import java.util.*;
  * Created by wangxueming on 2019/2/15.
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class MessageServiceImpl implements MessageService{
     @Autowired
     private MessageMapper messageMapper;

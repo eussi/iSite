@@ -27,7 +27,7 @@ import org.springframework.util.Assert;
 import java.util.*;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 @CacheConfig(cacheNames = "usersCaches")
 public class UserServiceImpl implements UserService {
 
@@ -108,6 +108,7 @@ public class UserServiceImpl implements UserService {
         po.setPassword(MD5.md5(user.getPassword()));
         po.setStatus(EntityStatus.ENABLED);
         po.setCreated(now);
+        //设置初始角色
 
         userMapper.insert(po);
 

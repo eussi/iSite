@@ -72,7 +72,7 @@ public class PostServiceImpl implements PostService {
             postQuery.setChannelId(channelId);
         }
 
-        postQuery.setNotIn(CommonUtils.concatInQuery("channelId", excludeChannelIds, Consts.NOTIN));
+        postQuery.setNotIn(CommonUtils.concatInQuery("channel_id", excludeChannelIds, Consts.NOTIN));
 
         //得到总记录数
         Long totalCount = postMapper.getTotalCount(postQuery);
