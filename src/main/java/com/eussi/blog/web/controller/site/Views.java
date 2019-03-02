@@ -43,4 +43,7 @@ public interface Views {
 	String ROUTE_POST_VIEW = "/channel/view";
 
     String ADMIN_INDEX = "/admin/index";
+    String ADMIN_CHANNEL_LIST = "/admin/channel/list";
+    String ADMIN_CHANNEL_VIEW = "/admin/channel/view";
+    String REDIRECT_ADMIN_CHANNEL_LIST = "redirect:/admin/channel/list";
 }

@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by wangxueming on 2019/2/7.
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class ChannelServiceImpl implements ChannelService {
     @Autowired
     private ChannelMapper channelMapper;
@@ -43,16 +43,21 @@ public class ChannelServiceImpl implements ChannelService {
 
     @Override
     public void update(Channel channel) {
-
+        channelMapper.updateByPrimaryKeySelective(channel);
     }
 
     @Override
     public void delete(int id) {
-
+        channelMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public long count() {
         return channelMapper.getTotalCount(new Channel());
+    }
+
+    @Override
+    public void add(Channel view) {
+        channelMapper.insert(view);
     }
 }

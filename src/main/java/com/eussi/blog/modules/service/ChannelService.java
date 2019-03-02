@@ -21,4 +21,6 @@ public interface ChannelService {
 	void delete(int id);
 
 	long count();
+
+    void add(Channel view);
 }
