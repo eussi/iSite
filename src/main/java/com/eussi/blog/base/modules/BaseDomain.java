@@ -20,6 +20,8 @@ public class BaseDomain implements Serializable{
 
     private Integer steps;
 
+    private String match;
+
     public String getOrderBy() {
         return orderBy;
     }
@@ -58,6 +60,14 @@ public class BaseDomain implements Serializable{
 
     public void setSteps(Integer steps) {
         this.steps = steps;
+    }
+
+    public String getMatch() {
+        return match;
+    }
+
+    public void setMatch(String match) {
+        this.match = match;
     }
 
     public String toString() {

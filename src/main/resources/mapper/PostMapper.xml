@@ -262,6 +262,9 @@
             <if test="notIn != null">
                 and ${notIn}
             </if>
+            <if test="match != null">
+                and ${match}
+            </if>
         </where>
     </select>
     <select id="findAllByQuery" parameterType="com.eussi.blog.modules.po.Post" resultMap="BaseResultMap">
@@ -316,6 +319,9 @@
             </if>
             <if test="notIn != null">
                 and ${notIn}
+            </if>
+            <if test="match != null">
+                and ${match}
             </if>
         </where>
         <if test="orderBy != null">

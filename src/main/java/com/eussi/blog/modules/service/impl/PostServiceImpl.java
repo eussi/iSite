@@ -119,7 +119,45 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Page<PostVO> paging4Admin(Page page, long id, String title, int channelId) {
-        return null;
+        Post query = new Post();
+        if (channelId > Consts.ZERO) {
+            query.setChannelId(channelId);
+        }
+
+        if (StringUtils.isNotBlank(title)) {
+            query.setMatch("title like '%".concat(title).concat("%'"));
+        }
+
+        if (id > Consts.ZERO) {
+            query.setId(id);
+        }
+
+        //得到总记录数
+        Long totalCount = postMapper.getTotalCount(query);
+        page.setTotalCount(totalCount);
+
+        //得到总页数
+        page.setTotalPage(totalCount/page.getPageSize() + 1);
+
+        query.setOrderBy(" weight desc, created desc");
+
+        query.setLimit(page.getStartIndex() + "," + page.getPageSize());
+
+        List<Post> queryResults = postMapper.findAllByQuery(query);
+
+        // 填充对象数据
+        List<PostVO> results = new ArrayList<PostVO>();
+        for(Post post : queryResults) {
+            PostVO postVO = BeanMapUtils.copy(post);
+
+            //文章内容
+            fillPostPO(post, postVO);
+
+            results.add(postVO);
+        }
+
+        page.setData(results);
+        return page;
     }
 
     @Override

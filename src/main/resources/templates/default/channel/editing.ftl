@@ -19,11 +19,11 @@
                     <option value="">请选择栏目</option>
                     <#list channels as row>
                         <option value="${row.id}" <#if (view.channelId == row.id)> selected </#if>>${row.name}</option>
-                    </#list>
+                    </#list>/editor/ueditor.ftl
                 </select>
             </div>
             <div class="form-group">
-                <#include "/default/channel/editor/ueditor.ftl"/>
+                <#include "/editor/ueditor.ftl"/>
             </div>
         </div>
         <div class="col-xs-12 col-md-4">
