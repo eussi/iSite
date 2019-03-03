@@ -51,4 +51,6 @@ public interface Views {
     String ADMIN_POST_LIST = "/admin/post/list";
     String ADMIN_POST_UPDATE = "/admin/post/update";
     String REDIRECT_ADMIN_POST_LIST = "redirect:/admin/post/list";
+
+    String ADMIN_COMMENT_LIST = "/admin/comment/list";
 }

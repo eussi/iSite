@@ -39,7 +39,33 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Page<CommentVO> paging4Admin(Page page) {
-        return null;
+        Comment comment = new Comment();
+
+        //查询总记录数
+        //得到总记录数
+        Long totalCount = commentMapper.getTotalCount(comment);
+        page.setTotalCount(totalCount);
+
+        comment.setOrderBy("  created desc");
+        comment.setLimit(page.getStartIndex() + "," + page.getPageSize());
+        List<Comment> comments = commentMapper.findAllByQuery(comment);
+
+        List<CommentVO> rets = new ArrayList<>();
+        Set<Long> uids = new HashSet<>();
+
+        for(Comment c : comments) {
+            CommentVO cv = BeanMapUtils.copy(c);
+            //找可能包含父节点的评论
+            uids.add(c.getAuthorId());
+            rets.add(cv);
+        }
+
+        //填充评论作者
+        buildUsers(rets, uids);
+
+        //填充文章
+        page.setData(rets);
+        return page;
     }
 
     @Override
@@ -96,6 +122,7 @@ public class CommentServiceImpl implements CommentService {
         page.setTotalCount(totalCount);
 
         comment.setOrderBy("  created desc");
+        comment.setLimit(page.getStartIndex() + "," + page.getPageSize());
         List<Comment> comments = commentMapper.findAllByQuery(comment);
 
         List<CommentVO> rets = new ArrayList<>();
@@ -157,7 +184,19 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void delete(List<Long> ids) {
-
+        if(ids!=null) {
+            for(Long id: ids) {
+                Comment comment = commentMapper.selectByPrimaryKey(id);
+                if(comment!=null) {
+                    commentMapper.deleteByPrimaryKey(id);
+                    long postId = comment.getToId();
+                    // 评论数评论数
+                    postService.identityComments(postId, false);
+                    //用户评论数减1
+                    userEventService.identityComment(comment.getAuthorId(), id, false);
+                }
+            }
+        }
     }
 
     @Override
