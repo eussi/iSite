@@ -94,4 +94,60 @@
         <include refid="Base_Column_List" />
         from shiro_role
     </select>
+    <select id="findAllByQuery" parameterType="com.eussi.blog.modules.po.Role" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from shiro_role
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="description != null">
+                and description = #{description,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="match != null">
+                and ${match}
+            </if>
+        </where>
+        <if test="orderBy != null">
+            order by ${orderBy}
+        </if>
+        <if test="limit != null">
+            limit ${limit}
+        </if>
+    </select>
+    <select id="getTotalCount" parameterType="com.eussi.blog.modules.po.Role" resultType="java.lang.Long">
+        select
+        count(*)
+        from shiro_role
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="description != null">
+                and description = #{description,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="match != null">
+                and ${match}
+            </if>
+        </where>
+        <if test="orderBy != null">
+            order by ${orderBy}
+        </if>
+        <if test="limit != null">
+            limit ${limit}
+        </if>
+    </select>
 </mapper>

@@ -8,6 +8,7 @@ import com.eussi.blog.modules.po.Permission;
 import com.eussi.blog.modules.po.Role;
 import com.eussi.blog.modules.service.RolePermissionService;
 import com.eussi.blog.modules.service.RoleService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,19 @@ public class RoleServiceImpl implements RoleService {
     private RolePermissionService rolePermissionService;
     @Override
     public Page<Role> paging(Page page, String name) {
-        return null;
+        Role query = new Role();
+        if(StringUtils.isNotBlank(name)) {
+            query.setMatch("name like '%".concat(name).concat("%'"));
+        }
+        Long total = roleMapper.getTotalCount(query);
+        page.setTotalCount(total);
+
+        query.setOrderBy(" id desc");
+        query.setLimit(page.getStartIndex() + "," + page.getPageSize());
+        List<Role> list = roleMapper.findAllByQuery(query);
+
+        page.setData(list);
+        return page;
     }
 
     @Override
