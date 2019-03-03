@@ -366,4 +366,9 @@
         favors = favors + ${steps}
         where id = #{id,jdbcType=BIGINT}
     </update>
+    <select id="maxWeight" parameterType="com.eussi.blog.modules.po.Post" resultType="java.lang.Integer">
+        select
+        max(weight)
+        from blog_post
+    </select>
 </mapper>

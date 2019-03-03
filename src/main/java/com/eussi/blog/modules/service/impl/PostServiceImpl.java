@@ -361,12 +361,23 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void updateFeatured(long id, int featured) {
-
+        Post po = postMapper.selectByPrimaryKey(id);
+        int status = Consts.FEATURED_ACTIVE == featured ? Consts.FEATURED_ACTIVE: Consts.FEATURED_DEFAULT;
+        po.setFeatured(status);
+        postMapper.updateByPrimaryKeySelective(po);
     }
 
     @Override
     public void updateWeight(long id, int weight) {
+        Post po = postMapper.selectByPrimaryKey(id);
 
+        int max = weight;
+        //推荐，则将weight置为最大值
+        if (Consts.FEATURED_ACTIVE == weight) {
+            max = postMapper.maxWeight() + 1;
+        }
+        po.setWeight(max);
+        postMapper.updateByPrimaryKeySelective(po);
     }
 
     @Override
