@@ -150,4 +150,13 @@
             limit ${limit}
         </if>
     </select>
+    <insert id="insertAndGetId" parameterType="com.eussi.blog.modules.po.Role">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into shiro_role (id, description, name,
+        status)
+        values (#{id,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{status,jdbcType=INTEGER})
+    </insert>
 </mapper>

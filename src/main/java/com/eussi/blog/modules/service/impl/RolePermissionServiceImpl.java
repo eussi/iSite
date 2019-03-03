@@ -19,7 +19,7 @@ import java.util.Set;
  * Created by wangxueming on 2019/2/7.
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class RolePermissionServiceImpl implements RolePermissionService {
     @Autowired
     private RolePermissionMapper rolePermissionMapper;
@@ -31,7 +31,8 @@ public class RolePermissionServiceImpl implements RolePermissionService {
         if (rps != null && rps.size() > 0) {
             List<Long> permissionIds = new ArrayList<Long>();
             for(RolePermission rolePermission : rps) {
-                permissionIds.add(rolePermission.getId());
+//                permissionIds.add(rolePermission.getId());//初始数据的问题，这个bug刚看出来
+                permissionIds.add(rolePermission.getPermissionId());
             }
             String inQuery = CommonUtils.concatInQuery("id", permissionIds, Consts.IN);
 
@@ -43,11 +44,13 @@ public class RolePermissionServiceImpl implements RolePermissionService {
 
     @Override
     public void deleteByRoleId(long roleId) {
-
+        rolePermissionMapper.deleteByRoleId(roleId);
     }
 
     @Override
     public void add(Set<RolePermission> rolePermissions) {
-
+        for(RolePermission rp : rolePermissions) {
+            rolePermissionMapper.insert(rp);
+        }
     }
 }

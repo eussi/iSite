@@ -6,6 +6,7 @@ import com.eussi.blog.base.utils.CommonUtils;
 import com.eussi.blog.modules.dao.RoleMapper;
 import com.eussi.blog.modules.po.Permission;
 import com.eussi.blog.modules.po.Role;
+import com.eussi.blog.modules.po.RolePermission;
 import com.eussi.blog.modules.service.RolePermissionService;
 import com.eussi.blog.modules.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +21,7 @@ import java.util.*;
  * Created by wangxueming on 2019/2/7.
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleMapper roleMapper;
@@ -68,12 +69,32 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role get(long id) {
-        return null;
+        Role role =  roleMapper.selectByPrimaryKey(id);
+        return toVO(role);
     }
 
     @Override
     public void update(Role r, Set<Permission> permissions) {
+        Role role = roleMapper.selectByPrimaryKey(r.getId());
+        if(role==null) {
+            roleMapper.insertAndGetId(r);
+        } else {
+            roleMapper.updateByPrimaryKeySelective(r);
+        }
 
+        //删除在添加权限
+        rolePermissionService.deleteByRoleId(r.getId());
+        if(permissions!=null && permissions.size()>0) {
+            Set<RolePermission> rps = new HashSet<>();
+            long roleId = r.getId();
+            for(Permission p : permissions) {
+                RolePermission rp = new RolePermission();
+                rp.setRoleId(roleId);
+                rp.setPermissionId(p.getId());
+                rps.add(rp);
+            }
+            rolePermissionService.add(rps);
+        }
     }
 
     @Override

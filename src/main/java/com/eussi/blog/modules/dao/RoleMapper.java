@@ -15,4 +15,6 @@ public interface RoleMapper extends BaseMapper<Role>{
     List<Role> findAllByIdIsIn(String inQuery);
 
     List<Role> findAllByStatusOrderByIdDesc(int status);
+
+    void insertAndGetId(Role r);
 }

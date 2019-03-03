@@ -9,6 +9,9 @@
 			<#if error??>
 				${error}
 			</#if>
+            <#if ! error??>
+                系统处理异常，请重试！
+            </#if>
 		</fieldset>
 	</div><!-- /panel-content -->
 </div><!-- /panel -->

@@ -74,4 +74,8 @@
         from shiro_role_permission
         where role_id = #{roleId,jdbcType=BIGINT}
     </select>
+    <delete id="deleteByRoleId" parameterType="java.lang.Long">
+        delete from shiro_role_permission
+        where role_id = #{roleId,jdbcType=BIGINT}
+    </delete>
 </mapper>

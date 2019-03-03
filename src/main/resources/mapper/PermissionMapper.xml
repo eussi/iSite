@@ -113,4 +113,41 @@
             </if>
         </where>
     </select>
+    <select id="findAllByQuery" parameterType="com.eussi.blog.modules.po.Permission" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from shiro_permission
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="description != null">
+                and description = #{description,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId,jdbcType=BIGINT}
+            </if>
+            <if test="version != null">
+                and version = #{version,jdbcType=INTEGER}
+            </if>
+            <if test="weight != null">
+                and weight = #{weight,jdbcType=INTEGER}
+            </if>
+            <if test="notIn != null">
+                and ${notIn}
+            </if>
+            <if test="match != null">
+                and ${match}
+            </if>
+        </where>
+        <if test="orderBy != null">
+            order by ${orderBy}
+        </if>
+        <if test="limit != null">
+            limit ${limit}
+        </if>
+    </select>
 </mapper>

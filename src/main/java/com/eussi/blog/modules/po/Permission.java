@@ -1,6 +1,8 @@
 package com.eussi.blog.modules.po;
 
-public class Permission {
+import com.eussi.blog.base.modules.BaseDomain;
+
+public class Permission extends BaseDomain{
     private Long id;
 
     private String description;

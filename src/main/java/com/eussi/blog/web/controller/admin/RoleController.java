@@ -57,7 +57,6 @@ public class RoleController extends BaseController {
 
 		HashSet<Permission> permissions = new HashSet<>();
 		if(perms != null && perms.size() > 0){
-
             for(Long pid: perms){
                 Permission p = new Permission();
                 p.setId(pid);
@@ -65,7 +64,7 @@ public class RoleController extends BaseController {
             }
         }
         
-        if (Role.ADMIN_ID == role.getId()) {
+        if (role.getId()!=null && Role.ADMIN_ID == role.getId()) {
 			data = Data.failure("管理员角色不可编辑");
         } else {
             roleService.update(role, permissions);
