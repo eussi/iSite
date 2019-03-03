@@ -18,7 +18,7 @@ import java.util.*;
  * @author wangxm on 2019/1/31
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class UserRoleServiceImpl implements UserRoleService {
     @Autowired
     private UserRoleMapper userRoleMapper;
@@ -71,6 +71,35 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Override
     public void updateRole(long userId, Set<Long> roleIds) {
+        // 判断是否清空已授权角色
+        if (null == roleIds || roleIds.isEmpty()) {
+            userRoleMapper.deleteByUserId(userId);
+        } else {
+            List<UserRole> list = userRoleMapper.findAllByUserId(userId);
+            List<Long> exitIds = new ArrayList<>();
 
+            //多的删除，少的添上
+            if (null != list) {
+                for(UserRole userRole : list) {
+                    if (!roleIds.contains(userRole.getRoleId())) {
+                        userRoleMapper.deleteByPrimaryKey(userRole);
+                    } else {
+                        exitIds.add(userRole.getRoleId());
+                    }
+                }
+
+            }
+
+            for(Long roleId : roleIds) {
+                if(!exitIds.contains(roleId)) {
+                    UserRole po = new UserRole();
+                    po.setUserId(userId);
+                    po.setRoleId(roleId);
+
+                    userRoleMapper.insert(po);
+                }
+
+            }
+        }
     }
 }

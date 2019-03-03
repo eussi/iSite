@@ -46,8 +46,10 @@ public class AccountRealm extends AuthorizingRealm {
                 for(Role role : roles){
                     info.addRole(role.getName());
                     //赋予权限
-                    for(Permission permission : role.getPermissions()) {
-                        info.addStringPermission(permission.getName());
+                    if(role.getPermissions()!=null) {//新添加用户可能权限为null，登录会报错
+                        for(Permission permission : role.getPermissions()) {
+                            info.addStringPermission(permission.getName());
+                        }
                     }
                 }
                 return info;

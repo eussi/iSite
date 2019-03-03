@@ -221,7 +221,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateStatus(long id, int status) {
-
+        User po = userMapper.selectByPrimaryKey(id);
+        po.setStatus(status);
+        userMapper.updateByPrimaryKeySelective(po);
     }
 
     @Override

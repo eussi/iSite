@@ -32,7 +32,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Role> list() {
-        return null;
+        return roleMapper.findAll();
     }
 
     @Override
