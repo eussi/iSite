@@ -27,6 +27,8 @@ public interface RoleService {
 
     Map<Long, Role> findByIds(Set<Long> ids);
 
+    List<Role> findListByIds(Set<Long> ids);
+
     /**
      * 根据角色ID获得角色信息
      * @param id 角色ID

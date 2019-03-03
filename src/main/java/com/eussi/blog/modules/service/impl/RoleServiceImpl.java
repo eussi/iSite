@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by wangxueming on 2019/2/7.
@@ -39,7 +36,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Map<Long, Role> findByIds(Set<Long> roleIds) {
+     public Map<Long, Role> findByIds(Set<Long> roleIds) {
         Map<Long, Role> ret = new LinkedHashMap<>();
         String inQuery = CommonUtils.concatInQuery("id", roleIds, Consts.IN);
         List<Role> roles = roleMapper.findAllByIdIsIn(inQuery);
@@ -48,6 +45,12 @@ public class RoleServiceImpl implements RoleService {
             ret.put(roleVO.getId(), roleVO);
         }
         return ret;
+    }
+
+    @Override
+    public List<Role> findListByIds(Set<Long> roleIds) {
+        String inQuery = CommonUtils.concatInQuery("id", roleIds, Consts.IN);
+        return roleMapper.findAllByIdIsIn(inQuery);
     }
 
     @Override

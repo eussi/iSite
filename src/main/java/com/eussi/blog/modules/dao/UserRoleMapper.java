@@ -10,8 +10,6 @@ public interface UserRoleMapper extends BaseMapper<UserRole>{
 
     List<UserRole> findAllByUserId(long userId);
 
-    List<UserRole> findAllByUserIdIn(Collection<Long> userId);
-
     List<UserRole> findAllByRoleId(long roleId);
 
     /**
@@ -20,4 +18,6 @@ public interface UserRoleMapper extends BaseMapper<UserRole>{
      * @param userId 用户ID
      */
     int deleteByUserId(long userId);
+
+    List<UserRole> findAllByUserIdIn(UserRole query);
 }

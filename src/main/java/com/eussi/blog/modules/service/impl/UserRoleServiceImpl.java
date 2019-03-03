@@ -1,5 +1,7 @@
 package com.eussi.blog.modules.service.impl;
 
+import com.eussi.blog.base.lang.Consts;
+import com.eussi.blog.base.utils.CommonUtils;
 import com.eussi.blog.modules.dao.RoleMapper;
 import com.eussi.blog.modules.dao.UserRoleMapper;
 import com.eussi.blog.modules.po.Role;
@@ -43,7 +45,28 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Override
     public Map<Long, List<Role>> findMapByUserIds(List<Long> userIds) {
-        return null;
+        UserRole query = new UserRole();
+        query.setIsIn(CommonUtils.concatInQuery("user_id", userIds, Consts.IN));
+        List<UserRole> list = userRoleMapper.findAllByUserIdIn(query);
+
+        Map<Long, Set<Long>> userRoleMap = new HashMap<Long, Set<Long>>();
+        for(UserRole userRole : list) {
+            if(userRoleMap.get(userRole.getUserId()) == null) {
+                Set<Long> roleIds = new HashSet<Long>();
+                roleIds.add(userRole.getRoleId());
+                userRoleMap.put(userRole.getUserId(), roleIds);
+            } else {
+                userRoleMap.get(userRole.getUserId()).add(userRole.getRoleId());
+            }
+        }
+
+        Map<Long, List<Role>> rets =  new HashMap<Long, List<Role>>();
+        for(Map.Entry entry : userRoleMap.entrySet()) {
+            Set<Long> roleIds = (Set<Long>) entry.getValue();
+            List<Role> roles = roleService.findListByIds(roleIds);
+            rets.put((Long) entry.getKey(), roles);
+        }
+        return rets;
     }
 
     @Override

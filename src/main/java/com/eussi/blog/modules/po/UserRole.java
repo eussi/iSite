@@ -1,6 +1,8 @@
 package com.eussi.blog.modules.po;
 
-public class UserRole {
+import com.eussi.blog.base.modules.BaseDomain;
+
+public class UserRole extends BaseDomain{
     private Long id;
 
     private Long roleId;

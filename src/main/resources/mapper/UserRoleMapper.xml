@@ -74,4 +74,10 @@
         from shiro_user_role
         where user_id = #{userId,jdbcType=BIGINT}
     </select>
+    <select id="findAllByUserIdIn" parameterType="com.eussi.blog.modules.po.UserRole" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from shiro_user_role
+        where ${isIn}
+    </select>
 </mapper>

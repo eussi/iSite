@@ -277,6 +277,9 @@
             <if test="isIn != null">
                 and ${isIn}
             </if>
+            <if test="match != null">
+                and ${match}
+            </if>
         </where>
         <if test="orderBy != null">
             order by ${orderBy}
@@ -334,6 +337,9 @@
             </if>
             <if test="isIn != null">
                 and ${isIn}
+            </if>
+            <if test="match != null">
+                and ${match}
             </if>
         </where>
     </select>

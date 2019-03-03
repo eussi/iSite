@@ -7,8 +7,10 @@ import com.eussi.blog.base.modules.Page;
 import com.eussi.blog.base.utils.CommonUtils;
 import com.eussi.blog.base.utils.MD5;
 import com.eussi.blog.modules.dao.UserMapper;
+import com.eussi.blog.modules.po.Role;
 import com.eussi.blog.modules.po.User;
 import com.eussi.blog.modules.service.MessageService;
+import com.eussi.blog.modules.service.UserRoleService;
 import com.eussi.blog.modules.service.UserService;
 import com.eussi.blog.modules.utils.BeanMapUtils;
 import com.eussi.blog.modules.vo.AccountProfile;
@@ -37,9 +39,36 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private UserRoleService userRoleService;
+
     @Override
     public Page<UserVO> paging(Page page, String name) {
-        return null;
+        User query = new User();
+        if(StringUtils.isNotBlank(name)) {
+            query.setMatch("name like '%".concat(name).concat("%'"));
+        }
+        Long total = userMapper.getTotalCount(query);
+        page.setTotalCount(total);
+
+        query.setOrderBy(" id desc");
+        List<User> list = userMapper.findAllByQuery(query);
+
+        List<UserVO> rets = new ArrayList<UserVO>();
+        List<Long> userIds = new ArrayList<>();
+
+        for(User user : list) {
+            rets.add(BeanMapUtils.copy(user));
+            userIds.add(user.getId());
+        }
+
+        Map<Long, List<Role>> map = userRoleService.findMapByUserIds(userIds);
+        for(UserVO uv : rets) {
+            uv.setRoles(map.get(uv.getId()));
+        }
+
+        page.setData(rets);
+        return page;
     }
 
     @Override

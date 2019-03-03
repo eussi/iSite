@@ -96,6 +96,9 @@ public class Page<T> implements Serializable {
     }
 
     public long getTotalPage() {
+        if(totalPage==0) {
+            return totalCount/pageSize + 1;
+        }
         return totalPage;
     }
 
