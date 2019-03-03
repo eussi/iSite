@@ -4,9 +4,11 @@ import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.modules.Page;
 import com.eussi.blog.base.utils.CommonUtils;
 import com.eussi.blog.modules.dao.RoleMapper;
+import com.eussi.blog.modules.dao.UserRoleMapper;
 import com.eussi.blog.modules.po.Permission;
 import com.eussi.blog.modules.po.Role;
 import com.eussi.blog.modules.po.RolePermission;
+import com.eussi.blog.modules.po.UserRole;
 import com.eussi.blog.modules.service.RolePermissionService;
 import com.eussi.blog.modules.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +16,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.*;
 
@@ -27,6 +30,9 @@ public class RoleServiceImpl implements RoleService {
     private RoleMapper roleMapper;
     @Autowired
     private RolePermissionService rolePermissionService;
+    @Autowired
+    private UserRoleMapper userRoleMapper;
+
     @Override
     public Page<Role> paging(Page page, String name) {
         Role query = new Role();
@@ -98,8 +104,12 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public boolean delete(long id) {
-        return false;
+    public boolean delete(long roleId) {
+        List<UserRole> urs = userRoleMapper.findAllByRoleId(roleId);
+        Assert.state(urs == null || urs.size() == 0, "该角色已经被使用,不能被删除");
+        roleMapper.deleteByPrimaryKey(roleId);
+        rolePermissionService.deleteByRoleId(roleId);
+        return true;
     }
 
     @Override
