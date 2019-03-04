@@ -62,4 +62,6 @@ public interface Views {
     String ADMIN_ROLE_LIST = "/admin/role/list";
     String ADMIN_ROLE_VIEW = "/admin/role/view";
     String REDIRECT_ADMIN_ROLE_LIST = "redirect:/admin/role/list";
+
+    String ADMIN_OPTIONS_INDEX = "/admin/options/index";
 }

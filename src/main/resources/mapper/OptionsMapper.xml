@@ -84,4 +84,10 @@
         <include refid="Base_Column_List" />
         from blog_options
     </select>
+    <select id="findByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from blog_options
+        where key_ = #{key,jdbcType=VARCHAR}
+    </select>
 </mapper>

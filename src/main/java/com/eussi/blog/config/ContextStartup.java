@@ -74,7 +74,7 @@ public class ContextStartup implements ApplicationRunner, Ordered, ServletContex
 
         if (null == options || options.isEmpty()) {
             try {
-                Resource resource = new ClassPathResource("/config/db/db_mblog.sql");
+                Resource resource = new ClassPathResource("/config/BlogOfWangxm.sql");
                 optionsService.initSettings(resource);
             } catch (Exception e) {
                 if(log.isErrorEnabled()) {
@@ -90,11 +90,10 @@ public class ContextStartup implements ApplicationRunner, Ordered, ServletContex
                 }
             }
         } else {
-            options.forEach(conf -> {
+            for(Options conf : options) {
                 siteOptions.getOptions().put(conf.getKey(), conf.getValue());
                 servletContext.setAttribute(conf.getKey(), conf.getValue());
-            });
-
+            }
             servletContext.setAttribute("options", siteOptions.getOptions());
         }
     }
