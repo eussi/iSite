@@ -14,15 +14,19 @@ define(function(require, exports, module) {
             });
         },
         doPostLogin: function () {
-            var un = $('#ajax_login_username').val();
-            var pw = $('#ajax_login_password').val();
-            jQuery.post(app.base + '/api/login', {'username': un, 'password': pw}, function (ret) {
-                if (ret && ret.code == 0) {
-                    window.location.reload();
-                } else {
-                    $('#ajax_login_message').text(ret.message).show();
-                }
-            });
+            if(validate) {
+                var un = $('#ajax_login_username').val();
+                var pw = $('#ajax_login_password').val();
+                jQuery.post(app.base + '/api/login', {'username': un, 'password': pw}, function (ret) {
+                    if (ret && ret.code == 0) {
+                        window.location.reload();
+                    } else {
+                        $('#ajax_login_message').text(ret.message).show();
+                    }
+                });
+            } else {
+                layer.msg("请拖动滑块验证")
+            }
         }
     };
 

@@ -1,6 +1,5 @@
 <#include "/default/layout/ui.ftl"/>
 <@layout>
-
 <div class="row">
     <div class="col-md-4 col-md-offset-4 floating-box">
         <div class="panel panel-default">
@@ -14,7 +13,7 @@
                         <label class="control-label" for="username">账号</label>
                         <input class="form-control" name="username" type="text" required>
                     </div>
-                    <div class="form-group ">
+                    <div id="validate-insert-after" class="form-group ">
                         <label class="control-label" for="password">密码</label>
                         <input class="form-control" name="password" type="password" required>
                     </div>
@@ -23,7 +22,7 @@
                             <input type="checkbox" name="rememberMe" value="1"> 记住登录？
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-success btn-block">
+                    <button id="btn-submit" type="button" class="btn btn-success btn-block">
                         登录
                     </button>
                     <hr>
@@ -48,6 +47,21 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(function () {
+//        登录弹框和登录界面使用同一个滑动验证码，这里采用移动的方式避免重写
+        $("#validate-add").insertAfter($("#validate-insert-after"));
+        $("#slider").css("width", "320px");//调整宽度
 
+        $("#btn-submit").click(function(e){
+            if(validate) {
+               $("form").submit();
+            } else {
+                layer.msg("请拖动滑块验证")
+            }
+//            alert("Submitted");
+        });
+    })
+</script>
 </@layout>
 

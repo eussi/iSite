@@ -31,6 +31,8 @@ ${options['site_metas']}
         base: '${base}',
         LOGIN_TOKEN: '${profile.id}'
     };
+
+    var validate = false; //验证码是否验证
 </script>
 
 <script type="text/javascript" src="${base}/dist/vendors/seajs/sea.js"></script>
@@ -39,3 +41,7 @@ ${options['site_metas']}
 <!-- Favicons -->
 <link rel="apple-touch-icon-precomposed" href="/dist/images/logo.png"/>
 <link rel="shortcut icon" href="/dist/images/logo.png"/>
+
+<!--滑动验证码插件-->
+<link rel="stylesheet" media='all' href="${base}/dist/vendors/jquery-slide/css/slide-unlock.css">
+<script type="text/javascript" src="${base}/dist/vendors/jquery-slide/js/jquery.slideunlock.js"></script>
