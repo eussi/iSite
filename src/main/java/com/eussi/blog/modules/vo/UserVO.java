@@ -19,6 +19,8 @@ public class UserVO extends User implements Serializable {
 	@JSONField(serialize = false)
 	private List<Role> roles = new ArrayList<Role>();
 
+    private String imagecode;
+
 	public String getPassword() {
 		return password;
 	}
@@ -34,4 +36,12 @@ public class UserVO extends User implements Serializable {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+
+    public String getImagecode() {
+        return imagecode;
+    }
+
+    public void setImagecode(String imagecode) {
+        this.imagecode = imagecode;
+    }
 }

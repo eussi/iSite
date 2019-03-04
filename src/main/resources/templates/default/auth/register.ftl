@@ -24,6 +24,13 @@
                         <label class="control-label" for="username">确认密码</label>
                         <input class="form-control" name="password2" type="password" maxlength="18" placeholder="请再输入一次密码" data-required data-conditional="confirm" data-describedby="message" data-description="confirm">
                     </div>
+                    <div class="form-group ">
+                        <label class="control-label" style="display:block" for="code">验证码</label>
+                        <input class="form-control" name="imagecode" type="text" placeholder="请输入验证码" style="display:inline;width: 200px;"/>
+                        <span class="input-group-addon" style="float:right;width: 125px;padding: 0px 0px;">
+                            <img alt="验证码" src="${base}/register/validate" onclick="change(this)">
+                        </span>
+                    </div>
                     <button type="submit" class="btn btn-success btn-block">
                         提交
                     </button>
