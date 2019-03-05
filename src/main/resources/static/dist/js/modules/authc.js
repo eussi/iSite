@@ -16,7 +16,8 @@ define(function(require, exports, module) {
         doPostLogin: function () {
             var un = $('#ajax_login_username').val();
             var pw = $('#ajax_login_password').val();
-            jQuery.post(app.base + '/api/login', {'username': un, 'password': pw}, function (ret) {
+            var ic = $('#ajax_login_imagecode').val();
+            jQuery.post(app.base + '/api/login', {'username': un, 'password': pw, 'imagecode': ic}, function (ret) {
                 if (ret && ret.code == 0) {
                     window.location.reload();
                 } else {

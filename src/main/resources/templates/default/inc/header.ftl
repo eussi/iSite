@@ -1,6 +1,6 @@
 <!-- Login dialog BEGIN -->
 <div id="login_alert" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document" style="width: 450px;">
+    <div class="modal-dialog" role="document" style="width: 350px;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -15,6 +15,13 @@
                     <div class="form-group ">
                         <label class="control-label" for="password">密码</label>
                         <input class="form-control" id="ajax_login_password" name="password" type="password" required>
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label" style="display:block" for="code">验证码</label>
+                        <input class="form-control" id="ajax_login_imagecode" name="imagecode" type="text" placeholder="请输入验证码" style="display:inline;width: 180px;"/>
+                        <span class="input-group" style="float:right;width: 110px;padding: 0px 0px;">
+                            <img class="img_validate_code" alt="验证码" src="${base}/register/validate"">
+                        </span>
                     </div>
                     <button id="ajax_login_submit" class="btn btn-success btn-block btn-sm" type="button">
                         登录

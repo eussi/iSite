@@ -12,6 +12,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -37,11 +39,16 @@ public class SidebarController extends BaseController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public @ResponseBody
-    Data login(String username, String password, ModelMap model) {
+    Data login(HttpServletRequest request, String username, String password,  String imagecode, ModelMap model) {
 		Data data = Data.failure("操作失败");
 
+        String imagecodeSession = (String) request.getSession().getAttribute("imagecode");
+        if(imagecodeSession == null || !imagecodeSession.equalsIgnoreCase(imagecode)) {
+            return Data.failure("验证码输入错误");
+        }
+
 		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-			return data;
+			return Data.failure("用户名或者密码输入为空");
 		}
 
 		AuthenticationToken token = createToken(username, password);

@@ -18,6 +18,13 @@
                         <input class="form-control" name="password" type="password" required>
                     </div>
                     <div class="form-group ">
+                        <label class="control-label" style="display:block" for="code">验证码</label>
+                        <input class="form-control" name="imagecode" type="text" placeholder="请输入验证码" style="display:inline;width: 180px;"/>
+                        <span class="input-group" style="float:right;width: 110px;padding: 0px 0px;">
+                            <img class="img_validate_code" alt="验证码" src="${base}/register/validate"">
+                        </span>
+                    </div>
+                    <div class="form-group ">
                         <label>
                             <input type="checkbox" name="rememberMe" value="1"> 记住登录？
                         </label>
