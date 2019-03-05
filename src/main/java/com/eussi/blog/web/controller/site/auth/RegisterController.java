@@ -48,7 +48,7 @@ public class RegisterController extends BaseController {
 	public String register(HttpServletRequest request, UserVO post, ModelMap model) {
         String imagecode = (String) request.getSession().getAttribute("imagecode");
 
-        Assert.isTrue(imagecode != null && imagecode.equals(post.getImagecode()), "验证码输入错误");
+        Assert.isTrue(imagecode != null && imagecode.equalsIgnoreCase(post.getImagecode()), "验证码输入错误");
 
 		Data data;
 		String ret = view(Views.REGISTER);

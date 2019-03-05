@@ -11,7 +11,7 @@ public class ValidateCodeUtils {
     public static final int WIDTH = 120;
     public static final int HEIGHT = 32;
     public static final int LINE_NUM = 5;
-    public static final int FONT_SIZE = 20;
+    public static final int FONT_SIZE = 25;
     public static final int FONT_NUM = 4;
 
     public static String drawRandomNum(Graphics2D g) {
@@ -25,7 +25,6 @@ public class ValidateCodeUtils {
         //[\u4e00-\u9fa5]在unicode码表中汉字的范围
         int x = (WIDTH-FONT_SIZE * FONT_NUM)/(FONT_NUM + 1);
         for(int i=0; i<FONT_NUM; i++) {
-
             int degree = new Random().nextInt() % 30; //-30-30
             String ch = base.charAt(new Random().nextInt(base.length())) + "";
             sb.append(ch);
