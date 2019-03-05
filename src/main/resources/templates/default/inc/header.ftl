@@ -16,13 +16,6 @@
                         <label class="control-label" for="password">密码</label>
                         <input class="form-control" id="ajax_login_password" name="password" type="password" required>
                     </div>
-                    <div id="validate-add" class="form-group ">
-                        <label class="control-label" for="password">滑动验证</label>
-                        <div id="slider">
-                            <div id="slider_bg"></div>
-                            <span id="label">>></span> <span id="labelTip">拖动滑块验证</span>
-                        </div>
-                    </div>
                     <button id="ajax_login_submit" class="btn btn-success btn-block btn-sm" type="button">
                         登录
                     </button>
@@ -146,20 +139,9 @@
                 $this.closest('li').addClass("active");
             }
         });
-        var slider = new SliderUnlock("#slider",{
-            successLabelTip : "验证成功"
-        },function(){
-            layer.msg("验证成功,请登录");
-            validate = true;
-//        window.location.href="#";
-//        //以下四行设置恢复初始，不需要可以删除
-//        setTimeout(function(){
-//            $("#labelTip").html("拖动滑块验证");
-//            $("#labelTip").css("color","#787878");
-//        },2000);
-//        slider.init();
+        $(".img_validate_code").click(function(){
+            this.src = this.src + "?" + new Date().getTime();
         });
-        slider.init();
     })
 </script>
 <!-- Header END -->

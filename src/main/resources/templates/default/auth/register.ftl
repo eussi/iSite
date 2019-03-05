@@ -14,7 +14,7 @@
                 <form method="POST" action="register" accept-charset="UTF-8">
                     <div class="form-group ">
                         <label class="control-label" for="username">用户名</label>
-                        <input class="form-control" name="username" type="text" data-required data-conditional="username" data-description="username" data-describedby="message">
+                        <input class="form-control" name="username" type="text" data-required data-conditional="username" placeholder="用户名" data-description="username" data-describedby="message">
                     </div>
                     <div class="form-group ">
                         <label class="control-label" for="username">密码</label>
@@ -26,9 +26,9 @@
                     </div>
                     <div class="form-group ">
                         <label class="control-label" style="display:block" for="code">验证码</label>
-                        <input class="form-control" name="imagecode" type="text" placeholder="请输入验证码" style="display:inline;width: 200px;"/>
-                        <span class="input-group-addon" style="float:right;width: 125px;padding: 0px 0px;">
-                            <img alt="验证码" src="${base}/register/validate" onclick="change(this)">
+                        <input class="form-control" name="imagecode" type="text" placeholder="请输入验证码" style="display:inline;width: 180px;"/>
+                        <span class="input-group" style="float:right;width: 110px;padding: 0px 0px;">
+                            <img class="img_validate_code" alt="验证码" src="${base}/register/validate"">
                         </span>
                     </div>
                     <button type="submit" class="btn btn-success btn-block">

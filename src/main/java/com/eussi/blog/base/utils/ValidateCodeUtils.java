@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class ValidateCodeUtils {
 
-    public static final int WIDTH = 120;
+    public static final int WIDTH = 110;
     public static final int HEIGHT = 32;
     public static final int LINE_NUM = 5;
     public static final int FONT_SIZE = 25;
@@ -54,7 +54,7 @@ public class ValidateCodeUtils {
 
 
     public static void SetBorder(Graphics g) {
-        g.setColor(Color.white);
+        g.setColor(Color.WHITE);
         g.drawRect(1, 1, WIDTH-2, HEIGHT-2);
 
     }
