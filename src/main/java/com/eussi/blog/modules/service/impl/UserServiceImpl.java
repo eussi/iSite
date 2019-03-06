@@ -139,7 +139,7 @@ public class UserServiceImpl implements UserService {
         po.setCreated(now);
         //设置初始角色
 
-        userMapper.insert(po);
+        userMapper.insertAndGetId(po);
 
         return BeanMapUtils.copy(po);
     }
@@ -183,7 +183,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO getByUsername(String username) {
-        return null;
+        User po = userMapper.getByUsername(username);
+        UserVO userVO = BeanMapUtils.copy(po);
+        return userVO;
     }
 
     @Override

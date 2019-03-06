@@ -41,12 +41,6 @@
                         <a class="btn btn-default btn-block" href="${base}/oauth/callback/call_weibo">
                             <i class="fa fa-weibo"></i> 微博帐号登录
                         </a>
-                        <a class="btn btn-default btn-block" href="${base}/oauth/callback/call_qq">
-                            <i class="fa fa-qq"></i> QQ帐号登录
-                        </a>
-                        <a class="btn btn-default btn-block" href="${base}/oauth/callback/call_github">
-                            <i class="fa fa-github"></i> Github帐号登录
-                        </a>
                     </fieldset>
                     </@controls>
                 </form>

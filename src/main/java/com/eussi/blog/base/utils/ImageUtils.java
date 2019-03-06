@@ -40,7 +40,7 @@ public class ImageUtils {
      */
     public static byte[] download(String urlString) throws Exception {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        Thumbnails.of(new URL(urlString)).toOutputStream(output);
+        Thumbnails.of(new URL(urlString)).size(100, 100).toOutputStream(output);
         return output.toByteArray();
     }
 

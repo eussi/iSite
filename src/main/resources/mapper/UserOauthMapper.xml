@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eussi.blog.modules.dao.UserOauthMapper">
+  <resultMap id="BaseResultMap" type="com.eussi.blog.modules.po.UserOauth">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="access_token" jdbcType="VARCHAR" property="accessToken" />
+    <result column="expire_in" jdbcType="VARCHAR" property="expireIn" />
+    <result column="oauth_code" jdbcType="VARCHAR" property="oauthCode" />
+    <result column="oauth_type" jdbcType="INTEGER" property="oauthType" />
+    <result column="oauth_user_id" jdbcType="VARCHAR" property="oauthUserId" />
+    <result column="refresh_token" jdbcType="VARCHAR" property="refreshToken" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, access_token, expire_in, oauth_code, oauth_type, oauth_user_id, refresh_token, 
+    user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_user_oauth
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from blog_user_oauth
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.eussi.blog.modules.po.UserOauth">
+    insert into blog_user_oauth (id, access_token, expire_in, 
+      oauth_code, oauth_type, oauth_user_id, 
+      refresh_token, user_id)
+    values (#{id,jdbcType=BIGINT}, #{accessToken,jdbcType=VARCHAR}, #{expireIn,jdbcType=VARCHAR}, 
+      #{oauthCode,jdbcType=VARCHAR}, #{oauthType,jdbcType=INTEGER}, #{oauthUserId,jdbcType=VARCHAR}, 
+      #{refreshToken,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eussi.blog.modules.po.UserOauth">
+    insert into blog_user_oauth
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accessToken != null">
+        access_token,
+      </if>
+      <if test="expireIn != null">
+        expire_in,
+      </if>
+      <if test="oauthCode != null">
+        oauth_code,
+      </if>
+      <if test="oauthType != null">
+        oauth_type,
+      </if>
+      <if test="oauthUserId != null">
+        oauth_user_id,
+      </if>
+      <if test="refreshToken != null">
+        refresh_token,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accessToken != null">
+        #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="expireIn != null">
+        #{expireIn,jdbcType=VARCHAR},
+      </if>
+      <if test="oauthCode != null">
+        #{oauthCode,jdbcType=VARCHAR},
+      </if>
+      <if test="oauthType != null">
+        #{oauthType,jdbcType=INTEGER},
+      </if>
+      <if test="oauthUserId != null">
+        #{oauthUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshToken != null">
+        #{refreshToken,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eussi.blog.modules.po.UserOauth">
+    update blog_user_oauth
+    <set>
+      <if test="accessToken != null">
+        access_token = #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="expireIn != null">
+        expire_in = #{expireIn,jdbcType=VARCHAR},
+      </if>
+      <if test="oauthCode != null">
+        oauth_code = #{oauthCode,jdbcType=VARCHAR},
+      </if>
+      <if test="oauthType != null">
+        oauth_type = #{oauthType,jdbcType=INTEGER},
+      </if>
+      <if test="oauthUserId != null">
+        oauth_user_id = #{oauthUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshToken != null">
+        refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eussi.blog.modules.po.UserOauth">
+    update blog_user_oauth
+    set access_token = #{accessToken,jdbcType=VARCHAR},
+      expire_in = #{expireIn,jdbcType=VARCHAR},
+      oauth_code = #{oauthCode,jdbcType=VARCHAR},
+      oauth_type = #{oauthType,jdbcType=INTEGER},
+      oauth_user_id = #{oauthUserId,jdbcType=VARCHAR},
+      refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="findByOauthUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from blog_user_oauth
+        where oauth_user_id = #{oauthUserId,jdbcType=VARCHAR}
+    </select>
+</mapper>

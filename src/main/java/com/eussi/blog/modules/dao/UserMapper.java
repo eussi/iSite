@@ -20,4 +20,7 @@ public interface UserMapper extends BaseMapper<User>{
     //增加或减少评论数
     void updateUserComments(User upUser);
 
+    User getByUsername(String username);
+
+    void insertAndGetId(User po);
 }

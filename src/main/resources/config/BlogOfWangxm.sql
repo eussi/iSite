@@ -19,6 +19,10 @@ drop table if exists blog_post;
 
 drop table if exists blog_post_attribute;
 
+drop table if exists blog_security_code;
+
+drop table if exists blog_user_oauth;
+
 drop table if exists blog_user;
 
 drop table if exists shiro_permission;
@@ -201,6 +205,39 @@ create table blog_message
    status               int(11),
    primary key (id)
 );
+
+/*==============================================================*/
+/* Table: blog_security_code                                    */
+/*==============================================================*/
+create table blog_security_code
+(
+   id                   bigint(20) not null,
+   code                 varchar(60),
+   created              datetime,
+   expired              datetime,
+   status               int(11),
+   target               varchar(96),
+   type                 int(11),
+   user_id              bigint(20),
+   primary key (id)
+);
+
+/*==============================================================*/
+/* Table: blog_user_oauth                                       */
+/*==============================================================*/
+create table blog_user_oauth
+(
+   id                   bigint(20) not null,
+   access_token         varchar(255),
+   expire_in            varchar(255),
+   oauth_code           varchar(255),
+   oauth_type           int(11),
+   oauth_user_id        varchar(255),
+   refresh_token        varchar(255),
+   user_id              bigint(20),
+   primary key (id)
+);
+
 
 INSERT INTO `blog_channel` VALUES (1, 'index', '首页', 0);
 INSERT INTO `blog_channel` VALUES (2, 'develop', '开发', 0);
