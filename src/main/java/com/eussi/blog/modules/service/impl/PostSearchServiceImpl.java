@@ -19,7 +19,7 @@ public class PostSearchServiceImpl implements PostSearchService {
     public Page<PostVO> search(Page page, String q) throws Exception {
         List<PostVO> data = new ArrayList<PostVO>();
         //deal 暂时未实现
-
+        page.setTotalCount(0);
 
         page.setData(data);
         return page;
@@ -27,7 +27,12 @@ public class PostSearchServiceImpl implements PostSearchService {
 
     @Override
     public Page<PostVO> searchByTag(Page page, String tag) {
-        return null;
+        List<PostVO> data = new ArrayList<PostVO>();
+        //deal 暂时未实现
+        page.setTotalCount(0);
+
+        page.setData(data);
+        return page;
     }
 
     @Override
