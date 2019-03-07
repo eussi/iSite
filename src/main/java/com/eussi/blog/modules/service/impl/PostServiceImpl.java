@@ -5,6 +5,7 @@ import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.lang.EntityStatus;
 import com.eussi.blog.base.modules.Page;
 import com.eussi.blog.base.utils.CommonUtils;
+import com.eussi.blog.base.utils.DomainUtils;
 import com.eussi.blog.base.utils.PreviewTextUtils;
 import com.eussi.blog.modules.dao.ChannelMapper;
 import com.eussi.blog.modules.dao.PostAttributeMapper;
@@ -267,6 +268,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public long post(PostVO post) {
+
+        //新增
+        DomainUtils.fillZero(post);//填充0
+
         Post po = new Post();
         BeanUtils.copyProperties(post, po);
 

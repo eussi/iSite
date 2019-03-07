@@ -211,7 +211,7 @@ create table blog_message
 /*==============================================================*/
 create table blog_security_code
 (
-   id                   bigint(20) not null,
+   id                   bigint(20) not null auto_increment,
    code                 varchar(60),
    created              datetime,
    expired              datetime,
@@ -227,7 +227,7 @@ create table blog_security_code
 /*==============================================================*/
 create table blog_user_oauth
 (
-   id                   bigint(20) not null,
+   id                   bigint(20) not null auto_increment,
    access_token         varchar(255),
    expire_in            varchar(255),
    oauth_code           varchar(255),

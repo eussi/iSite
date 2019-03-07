@@ -45,23 +45,22 @@ public class RegisterController extends BaseController {
 	}
 	
 	@PostMapping("/register")
-	public String register(HttpServletRequest request, UserVO post, ModelMap model) {
+	public String register(HttpServletRequest request, UserVO userVO, ModelMap model) {
         String imagecode = (String) request.getSession().getAttribute("imagecode");
 
-        Assert.isTrue(imagecode != null && imagecode.equalsIgnoreCase(post.getImagecode()), "验证码输入错误");
+        Assert.isTrue(imagecode != null && imagecode.equalsIgnoreCase(userVO.getImagecode()), "验证码输入错误");
 
 		Data data;
 		String ret = view(Views.REGISTER);
 
 		try {
-			post.setAvatar(Consts.AVATAR);
-            DomainUtils.fillZero(post);
-			userService.register(post);
+			userVO.setAvatar(Consts.AVATAR);
+			userService.register(userVO);
 			data = Data.success("恭喜您! 注册成功", Data.NOOP);
 			data.addLink("login", "前往登录");
 			ret = view(Views.REGISTER_RESULT);
 		} catch (Exception e) {
-            model.addAttribute("post", post);
+            model.addAttribute("post", userVO);
 			data = Data.failure(e.getMessage());
 		}
 		model.put("data", data);

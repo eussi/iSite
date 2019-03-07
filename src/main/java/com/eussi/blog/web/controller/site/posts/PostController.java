@@ -71,8 +71,6 @@ public class PostController extends BaseController {
 			Assert.isTrue(exist.getAuthorId() == profile.getId(), "该文章不属于你");
 			postService.update(post);
 		} else {
-            //新增
-            DomainUtils.fillZero(post);//填充0
 			postService.post(post);
 		}
 		return Views.REDIRECT_USER_POSTS;

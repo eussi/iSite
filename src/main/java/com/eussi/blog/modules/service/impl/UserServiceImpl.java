@@ -5,6 +5,7 @@ import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.lang.EntityStatus;
 import com.eussi.blog.base.modules.Page;
 import com.eussi.blog.base.utils.CommonUtils;
+import com.eussi.blog.base.utils.DomainUtils;
 import com.eussi.blog.base.utils.MD5;
 import com.eussi.blog.modules.dao.UserMapper;
 import com.eussi.blog.modules.po.Role;
@@ -117,6 +118,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO register(UserVO user) {
         Assert.notNull(user, "Parameter user can not be null!");
+
+        //避免数据库中数据为null，这里填写一部分零
+        DomainUtils.fillZero(user);
 
         Assert.hasLength(user.getUsername(), "用户名不能为空!");
         Assert.hasLength(user.getPassword(), "密码不能为空!");

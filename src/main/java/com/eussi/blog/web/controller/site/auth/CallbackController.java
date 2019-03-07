@@ -5,6 +5,7 @@ import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.oauth.*;
 import com.eussi.blog.base.oauth.utils.OpenOauthBean;
 import com.eussi.blog.base.oauth.utils.TokenUtil;
+import com.eussi.blog.base.utils.DomainUtils;
 import com.eussi.blog.base.utils.FilePathUtils;
 import com.eussi.blog.base.utils.ImageUtils;
 import com.eussi.blog.modules.service.OpenOauthService;
@@ -209,6 +210,7 @@ public class CallbackController extends BaseController {
         } else {
             user.setAvatar(Consts.AVATAR);
         }
+
         return user;
     }
 
