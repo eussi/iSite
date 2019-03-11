@@ -27,7 +27,13 @@
         </div>
         <div class="footer-col footer-col-sns hidden-xs hidden-sm">
             <div class="footer-sns">
-                <span>Powered By <a href="http://eussi.top/?copyright" target="_blank">Wangxueming's Site</a></span>
+                <span>
+                    <script type="text/javascript">
+                        var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+                        document.write(unescape("%3Cspan id='cnzz_stat_icon_1276469950'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1276469950%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
+                    </script>
+                </span>
+                <span>Powered by <a href="http://eussi.top/?copyright" target="_blank">Wangxueming</a></span>
             </div>
         </div>
     </div>
