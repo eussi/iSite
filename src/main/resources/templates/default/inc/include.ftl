@@ -21,8 +21,7 @@ ${options['site_metas']}
 
 <script src="${base}/dist/vendors/pace/pace.min.js"></script>
 
-<script type="text/javascript" src="${base}/dist/js/utils.js"></script>
-
+<#--<script type="text/javascript" src="${base}/dist/js/utils.js"></script>--><#--暂时无用-->
 
 <script type="text/javascript">
     var _base_path = '${base}';<!-- sea.config.js用于加载相关模块-->
