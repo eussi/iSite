@@ -74,7 +74,7 @@ public class ContextStartup implements ApplicationRunner, Ordered, ServletContex
 
         if (null == options || options.isEmpty()) {
             try {
-                Resource resource = new ClassPathResource("/config/BlogOfWangxm.sql");
+                Resource resource = new ClassPathResource("/config/iSite.sql");
                 optionsService.initSettings(resource);
             } catch (Exception e) {
                 if(log.isErrorEnabled()) {
