@@ -324,8 +324,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostVO get(long id) {
         Post post = postMapper.selectByPrimaryKey(id);
-        PostVO postVO = BeanMapUtils.copy(post);
+        if(post==null)
+            return null;
 
+        PostVO postVO = BeanMapUtils.copy(post);//post为null,excepiton Source must not be null
         fillPostPO(post, postVO);
 
         return postVO;

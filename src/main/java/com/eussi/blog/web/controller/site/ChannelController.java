@@ -48,7 +48,7 @@ public class ChannelController extends BaseController {
 	public String view(@PathVariable Long id, ModelMap model) {
 		PostVO view = postService.get(id);
 
-		Assert.notNull(view, "该文章已被删除");
+		Assert.notNull(view, "该文章不存在");
 
         if(view.getIsMarkdown()!=null && view.getIsMarkdown()==Consts.MARKDOWN) {
             view.setContent(MarkdownUtils.renderMarkdown(view.getContent()));
