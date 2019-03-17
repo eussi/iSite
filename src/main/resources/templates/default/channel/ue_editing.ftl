@@ -63,13 +63,15 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-md-12">
-        <div class="form-group">
-            <div class="text-center">
-                <button type="button" id="switch-editor" class="btn btn-primary" style="padding-left: 30px; padding-right: 30px;">切换MD编辑器</button>
+    <#if !view.isMarkdown??>
+        <div class="col-xs-12 col-md-12">
+            <div class="form-group">
+                <div class="text-center">
+                    <button type="button" id="switch-editor" class="btn btn-primary" style="padding-left: 30px; padding-right: 30px;">切换MD编辑器</button>
+                </div>
             </div>
         </div>
-    </div>
+    </#if>
 </form>
 <!-- /form-actions -->
 <script type="text/javascript">

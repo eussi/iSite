@@ -38,9 +38,10 @@ public class PostController extends BaseController {
 	@GetMapping("/editing")
 	public String view(Long id, String editor, ModelMap model) {
 		//如果是编辑文章
+        PostVO view = null;
         if (null != id && id > 0) {
 			AccountProfile profile = getProfile();
-			PostVO view = postService.get(id);
+			view = postService.get(id);
 
 			Assert.notNull(view, "该文章已被删除");
 			Assert.isTrue(view.getAuthorId() == profile.getId(), "该文章不属于你");
@@ -49,7 +50,8 @@ public class PostController extends BaseController {
 
         model.put("channels", channelService.findAll(Consts.STATUS_NORMAL));
 
-        if(Consts.UE.equals(editor))
+        if(Consts.UE.equals(editor) //editor参数或者编辑时文档时是UE
+                || (view!=null&&Consts.UEDITOR==view.getIsMarkdown()))
             return view(Views.ROUTE_POST_UE_EDITING);
         else
             return view(Views.ROUTE_POST_MD_EDITING);
