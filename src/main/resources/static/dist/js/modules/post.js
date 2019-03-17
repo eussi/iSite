@@ -1,38 +1,43 @@
 define(function(require, exports, module) {
-	J = jQuery;
-	require('plugins');
+    J = jQuery;
+    require('tagsinput');
 
-	var PostView = function () {};
-	
-	PostView.prototype = {
+    var PostView = function () {};
+
+    PostView.prototype = {
         name : 'PostView',
         init : function () {
-        	this.bindEvents();
+            this.bindEvents();
         },
         defaults: {
-        	type : 'text',
-        	defaultEditor: 'ueditor',
-        	maxFiles : 6,
+            type : 'text',
+            defaultEditor: 'ueditor',
+            maxFiles : 6,
         },
         bindEvents : function () {
-        	var that = this;
+            var that = this;
 
-        	that.bindTagit();
-        	that.bindValidate();
-        	that.bindUpload();
-        },
-        
-        bindTagit : function () {
-        	$('#tags').tagit({
-                singleField: true,
-                singleFieldNode: $('#fieldTags'),
-                tagLimit: 4
+            that.bindTagit();
+            that.bindValidate();
+            that.bindUpload();
+
+            $('button[event="post_submit"]').click(function () {
+                var status = $(this).data('status');
+                $("input[name='status']").val(status);
+                $("#submitForm").submit();
             });
         },
-        
+
+        bindTagit : function () {
+            $('#tags').tagsinput({
+                maxTags: 4,
+                trimValue: true
+            });
+        },
+
         bindUpload : function () {
             $('#upload_btn').change(function(){
-                $(this).upload(app.base + '/post/upload?crop=1&width=360&height=200', function(data){
+                $(this).upload(_MTONS.BASE_PATH + '/post/upload?crop=1', function(data){
                     if (data.status == 200) {
                         var path = data.path;
                         $("#thumbnail_image").css("background", "url(" + path + ") no-repeat scroll center 0 rgba(0, 0, 0, 0)");
@@ -43,31 +48,53 @@ define(function(require, exports, module) {
         },
 
         bindValidate: function () {
-        	$('form').validate({
-                onKeyup: true,
-                onChange: true,
-                eachValidField: function () {
-                    $(this).closest('div').removeClass('has-error').addClass('has-success');
-                },
-                eachInvalidField: function () {
-                    $(this).closest('div').removeClass('has-success').addClass('has-error');
-                },
-                conditional: {
-                    content: function () {
-                        return $(this).val().trim().length > 0;
-                    }
-                },
-                description: {
+            $("#submitForm").submit(function () {
+                if (typeof tinyMCE == "function") {
+                    tinyMCE.triggerSave();
+                }
+            }).validate({
+                ignore: "",
+                rules: {
+                    title: 'required',
+                    channelId: 'required',
                     content: {
-                        required: '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>写点内容吧</div>'
+                        required: true,
+                        check_editor: true
                     }
+                },
+                messages: {
+                    title: '请输入标题',
+                    channelId: '请选择栏目',
+                    content: {
+                        required: '内容不能为空',
+                        check_editor: '内容不能为空'
+                    }
+                },
+                errorElement: "p",
+                errorPlacement: function (error, element) {
+                    error.addClass("help-block");
+                    if (element.prop("type") === "checkbox") {
+                        error.insertAfter(element.parent("label"));
+                    } else if (element.is("textarea")) {
+                        error.insertAfter(element.closest(".form-group"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).closest("div").addClass("has-error").removeClass("has-success");
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).closest("div").addClass("has-success").removeClass("has-error");
                 }
             });
+
         }
     };
-	
-	exports.init = function () {
-		new PostView().init();
-	}
-	
+
+    exports.init = function () {
+        require.async(['validation', 'validation-additional'], function () {
+            new PostView().init();
+        });
+    }
 });

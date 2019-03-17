@@ -24,7 +24,23 @@ seajs.config({
 
         'highlight':'vendors/highlight/highlight.pack',
         "tinymce": "vendors/tinymce/tinymce.min",
-        "form": "vendors/jquery/jquery.form.min"
+        "form": "vendors/jquery/jquery.form.min",
+
+        'codemirror': 'vendors/codemirror/lib/codemirror.js',
+        'codemirror-markdown': 'vendors/codemirror/mode/markdown/markdown',
+        'codemirror-css': 'vendors/codemirror/lib/codemirror.css',
+        'codemirror-theme': 'vendors/codemirror/theme/idea.css',
+        'codemirror-keymap': 'vendors/codemirror/keymap/sublime',
+
+        'markdown': 'dist/js/modules/markdown',
+        'marked': 'vendors/marked/marked.min',
+        'app.markdown': 'dist/js/app.markdown',
+
+        'tagsinput': 'vendors/bootstrap-tagsinput/bootstrap-tagsinput',
+
+        'validation': 'vendors/jquery-validation/jquery.validate.min.js',
+        'validation-additional': 'vendors/jquery-validation/additional-methods.js',
+        'validation-localization': 'vendors/jquery-validation/localization/messages_zh.min.js'
     },
 
     // 路径配置

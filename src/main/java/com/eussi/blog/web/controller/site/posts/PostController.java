@@ -1,6 +1,7 @@
 package com.eussi.blog.web.controller.site.posts;
 
 import com.eussi.blog.base.data.Data;
+import com.eussi.blog.base.exception.BlogException;
 import com.eussi.blog.base.lang.Consts;
 import com.eussi.blog.base.utils.DomainUtils;
 import com.eussi.blog.modules.service.ChannelService;
@@ -47,8 +48,35 @@ public class PostController extends BaseController {
 		}
 
 		model.put("channels", channelService.findAll(Consts.STATUS_NORMAL));
-		return view(Views.ROUTE_POST_EDITING);
+		return view(Views.ROUTE_POST_MD_EDITING);
 	}
+
+    /**
+     * 切换编辑器
+     * @return
+     */
+    @GetMapping("/switch/{id}/{type}")
+    public String switchEditor(@PathVariable("id")Long id, @PathVariable("type")String type, ModelMap model) {
+        Assert.isTrue(type == null || "".equals(type), "参数传递错误！");
+        //如果是编辑文章
+        if (null != id && id > 0) {
+            AccountProfile profile = getProfile();
+            PostVO view = postService.get(id);
+
+            Assert.notNull(view, "该文章已被删除");
+            Assert.isTrue(view.getAuthorId() == profile.getId(), "该文章不属于你");
+            model.put("view", view);
+        }
+
+        model.put("channels", channelService.findAll(Consts.STATUS_NORMAL));
+        if("md".equals(type)) {
+            return view(Views.ROUTE_POST_MD_EDITING);
+        } else if("ue".equals(type)) {
+            return view(Views.ROUTE_POST_UE_EDITING);
+        } else {
+            throw new BlogException("编辑器传入类型错误！");
+        }
+    }
 
 	/**
 	 * 提交发布

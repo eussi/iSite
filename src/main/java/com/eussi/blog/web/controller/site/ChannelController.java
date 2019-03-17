@@ -1,6 +1,7 @@
 package com.eussi.blog.web.controller.site;
 
 import com.eussi.blog.base.lang.Consts;
+import com.eussi.blog.base.utils.MarkdownUtils;
 import com.eussi.blog.modules.po.Channel;
 import com.eussi.blog.modules.service.ChannelService;
 import com.eussi.blog.modules.service.PostService;
@@ -43,14 +44,18 @@ public class ChannelController extends BaseController {
 		return view(Views.ROUTE_POST_INDEX);
 	}
 
-	@RequestMapping("/view/{id}")
+	@RequestMapping("/view/{id:\\d*}")
 	public String view(@PathVariable Long id, ModelMap model) {
 		PostVO view = postService.get(id);
 
 		Assert.notNull(view, "该文章已被删除");
 
+        if(view.getIsMarkdown()!=null && view.getIsMarkdown()==Consts.MARKDOWN) {
+            view.setContent(MarkdownUtils.renderMarkdown(view.getContent()));
+        }
+
 		postService.identityViews(id);
 		model.put("view", view);
-		return view(Views.ROUTE_POST_VIEW);
+		return view(Views.ROUTE_POST_MD_VIEW);
 	}
 }

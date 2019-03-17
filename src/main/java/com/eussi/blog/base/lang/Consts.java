@@ -56,7 +56,11 @@ public interface Consts {
 	/* 状态-锁定 */
 	int STATUS_LOCKED = 1;
 
-	/**
+    //文件语法格式
+    int MARKDOWN = 1;
+    int UEDITOR = 0;
+
+    /**
 	 * 排序
 	 */
 	interface order {

@@ -38,9 +38,11 @@ public interface Views {
 	
 	String BROWSE_SEARCH = "/search";
 
-	String ROUTE_POST_EDITING = "/channel/editing";
+	String ROUTE_POST_MD_EDITING = "/channel/md_editing";
+	String ROUTE_POST_UE_EDITING = "/channel/ue_editing";
 	String ROUTE_POST_INDEX = "/channel/index";
 	String ROUTE_POST_VIEW = "/channel/view";
+	String ROUTE_POST_MD_VIEW = "/channel/md_view";
 
     String ADMIN_INDEX = "/admin/index";
 

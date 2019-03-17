@@ -1675,3 +1675,7 @@ abbr[data-original-title], abbr[title] {
 }
 /* index post list end */
 /*-------------------------------------------------- */
+
+.form-control, .bootstrap-tagsinput {
+    border-radius: 2px;
+}
