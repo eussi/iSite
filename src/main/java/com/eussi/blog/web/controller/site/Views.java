@@ -42,7 +42,7 @@ public interface Views {
 	String ROUTE_POST_UE_EDITING = "/channel/ue_editing";
 	String ROUTE_POST_INDEX = "/channel/index";
 	String ROUTE_POST_VIEW = "/channel/view";
-	String ROUTE_POST_MD_VIEW = "/channel/md_view";
+	String ROUTE_POST_MD_VIEW = "/channel/view";
 
     String ADMIN_INDEX = "/admin/index";
 

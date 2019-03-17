@@ -60,6 +60,10 @@ public interface Consts {
     int MARKDOWN = 1;
     int UEDITOR = 0;
 
+    //前端传入编辑器名称
+    String MD = "md";
+    String UE = "ue";
+
     /**
 	 * 排序
 	 */

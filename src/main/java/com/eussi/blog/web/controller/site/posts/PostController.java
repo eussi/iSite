@@ -36,7 +36,7 @@ public class PostController extends BaseController {
 	 * @return
 	 */
 	@GetMapping("/editing")
-	public String view(Long id, ModelMap model) {
+	public String view(Long id, String editor, ModelMap model) {
 		//如果是编辑文章
         if (null != id && id > 0) {
 			AccountProfile profile = getProfile();
@@ -47,8 +47,12 @@ public class PostController extends BaseController {
 			model.put("view", view);
 		}
 
-		model.put("channels", channelService.findAll(Consts.STATUS_NORMAL));
-		return view(Views.ROUTE_POST_MD_EDITING);
+        model.put("channels", channelService.findAll(Consts.STATUS_NORMAL));
+
+        if(Consts.UE.equals(editor))
+            return view(Views.ROUTE_POST_UE_EDITING);
+        else
+            return view(Views.ROUTE_POST_MD_EDITING);
 	}
 
     /**
