@@ -15,7 +15,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">文章列表</h3>
                     <div class="box-tools">
-                        <a class="btn btn-default btn-sm" href="${base}/admin/post/view">新建</a>
+                        <#--<a class="btn btn-default btn-sm" href="${base}/admin/post/view">新建</a>--><!--去除新建功能，与写文章功能相同-->
                         <a class="btn btn-default btn-sm" href="javascrit:;" data-action="batch_del">批量删除</a>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                                     <td><span class="label label-default">${row.views}</span></td>
                                     <td>
                                         <#if (row.featured > 0)>
-                                            <span class="label label-danger">推荐</span>
+                                            <span class="label label-danger ">推荐</span>
                                         </#if>
                                         <#if (row.weight > 0)>
                                             <span class="label label-warning">置顶</span>
@@ -77,7 +77,7 @@
                                             <a href="javascript:void(0);" class="btn btn-xs btn-warning" data-id="${row.id}" rel="unweight">消顶</a>
                                         </#if>
 
-                                        <a href="${base}/admin/post/view?id=${row.id}" class="btn btn-xs btn-info">修改</a>
+                                        <#--<a href="${base}/admin/post/view?id=${row.id}" class="btn btn-xs btn-info">修改</a>-->
                                         <a href="javascript:void(0);" class="btn btn-xs btn-primary" data-id="${row.id}" rel="delete">删除</a>
                                     </td>
                                 </tr>

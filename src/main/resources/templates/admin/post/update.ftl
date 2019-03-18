@@ -93,8 +93,8 @@ $(function() {
                 var path = data.path;
                 $("#thumbnail_image").css("background", "url(" + path + ") no-repeat scroll center 0 rgba(0, 0, 0, 0)");
                 $("#thumbnail").val(path);
-                alert(path);
-                alert($("#thumbnail").val());
+//                alert(path);
+//                alert($("#thumbnail").val());
             }
         });
     });
